@@ -12,7 +12,7 @@ import CustomCarousel from "../components/Custom/CustomCarousel";
 import { useTheme } from "../context/ThemeContext";
 import "./styles/TravelGuidesCarousel.css";
 
-const guides = [
+const guides1 = [
   {
     name: "Aarav Mehta",
     expertise: "Himalayan Treks",
@@ -65,11 +65,27 @@ const guides = [
       contact: "mei.eastasia@example.com",
     },
   },
+]
+//seperated pet guides and non pet guides with addition of one more pet guide
+const guides = [
+  {
+    name: "Snowy Kat",
+    expertise: "🐾 Mountain Treks & Pet Adventures",
+    bio: "Passionate about guiding pet parents through scenic mountain trails and nature escapes. Specialist in safe trekking experiences for dogs and cats.",
+    image: "https://randomuser.me/api/portraits/men/17.jpg",
+    details: {
+      location: "Manali, India",
+      languages: "English, Hindi, Himachali",
+      certifications: "Certified Pet Adventure Guide (CPAG)",
+      experience: "Led 80+ pet-friendly trekking expeditions",
+      contact: "rohit.petguide@example.com",
+    },
+  },  
   {
     name: "Ayushi Uniyal",
     expertise: "🐾 Pet Travel & Coastal Getaways",
     bio: "Loves helping travelers explore India’s beaches with their furry companions. Expert in pet-friendly accommodations and transport.",
-    image: "https://randomuser.me/api/portraits/women/54.jpg",
+    image: "https://randomuser.me/api/portraits/women/17.jpg",
     details: {
       location: "Goa, India",
       languages: "English, Hindi, Konkani",
@@ -505,7 +521,24 @@ const TravelGuidesCarousel = () => {
         </div>
       ) : (
         // Default Carousel View
-        <CustomCarousel guides={guides} viewprofilehandle={viewProfile} />
+        // seperated pet and non pet guides
+        <>
+        <CustomCarousel guides={guides1} viewprofilehandle={viewProfile} />
+        <p
+          style={{
+            fontSize: "28px",
+            fontWeight: "600",
+            lineHeight: "1.6",
+            marginBottom: "10px",
+            color: isDarkMode ? "#fcfcfc" : "#1f2937",
+            marginBottom:"50px"
+          }}
+        >
+          🐶  Pet Guides  🐱
+        </p>        <CustomCarousel guides={guides} viewprofilehandle={viewProfile} />
+
+        </>
+        
       )}
 
       {selectedGuide && (
