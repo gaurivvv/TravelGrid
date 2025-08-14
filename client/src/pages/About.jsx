@@ -130,7 +130,7 @@ function About() {
       icon: "📱",
       path: '/'
     },
-  
+
   ];
 
   const techStack = [
@@ -554,8 +554,8 @@ function About() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
               className={`rounded-lg p-8 border transition-all duration-300 ${isDarkMode
-                  ? 'bg-gradient-to-br from-gray-800 to-gray-900 border-gray-700 hover:border-pink-400'
-                  : 'bg-gradient-to-br from-white to-pink-200 border-pink-600 hover:border-pink-300 shadow-xl shadow-gray-600'
+                ? 'bg-gradient-to-br from-gray-800 to-gray-900 border-gray-700 hover:border-pink-400'
+                : 'bg-gradient-to-br from-white to-pink-200 border-pink-600 hover:border-pink-300 shadow-xl shadow-gray-600'
                 }`}
             >
               <div className="flex items-center mb-4">
@@ -581,8 +581,8 @@ function About() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
               className={`rounded-lg p-8 border transition-all duration-300 ${isDarkMode
-                  ? 'bg-gradient-to-br from-gray-800 to-gray-900 border-gray-700 hover:border-pink-400'
-                  : 'bg-gradient-to-br from-white to-pink-200 border-pink-600 hover:border-pink-300 shadow-xl shadow-gray-600'
+                ? 'bg-gradient-to-br from-gray-800 to-gray-900 border-gray-700 hover:border-pink-400'
+                : 'bg-gradient-to-br from-white to-pink-200 border-pink-600 hover:border-pink-300 shadow-xl shadow-gray-600'
                 }`}
             >
               <div className="flex items-center mb-4">
@@ -626,35 +626,35 @@ function About() {
             Why Choose <span className="text-pink-400">TravelGrid?</span>
           </motion.h2>
 
-{/*Enhanced UI feature cards */}
+          {/*Enhanced UI feature cards */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
                 whileInView={{ opacity: 1, y: 0 }}
                 initial={{ opacity: 0, y: 50 }}
-                transition={{ duration: 0.8}}
+                transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
 
                 whileHover={{ scale: 1.1 }}
                 className="group relative h-64 cursor-pointer"
-                //onMouseEnter={() => setActiveFeature(index)}
-                //style={{ perspective: '1000px' }}
+              //onMouseEnter={() => setActiveFeature(index)}
+              //style={{ perspective: '1000px' }}
               >
-                  <div className="relative w-full h-full transition-transform duration-700 group-hover:rotate-y-180" 
-                    style={{ transformStyle: 'preserve-3d' }}>
+                <div className="relative w-full h-full transition-transform duration-700 group-hover:rotate-y-180"
+                  style={{ transformStyle: 'preserve-3d' }}>
                   {/* Front */}
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-6 border border-gray-700 group-hover:border-pink-400 transition-all duration-300"
-                      style={{ backfaceVisibility: 'hidden' }}>
+                    style={{ backfaceVisibility: 'hidden' }}>
                     <div className="text-4xl mb-4">{feature.icon}</div>
                     <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
                     <p className="text-gray-300 leading-relaxed">{feature.description}</p>
                   </div>
-                  
+
                   {/* Back */}
                   <div className="absolute inset-0 bg-gradient-to-br from-pink-600 to-purple-700 rounded-lg p-6 border border-pink-400 flex flex-col items-center justify-center text-center hover:from-pink-500 hover:to-purple-600 transition-all duration-300"
-                      style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
-                      onClick={() => handleCardClick(feature.path)}>
+                    style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+                    onClick={() => handleCardClick(feature.path)}>
                     <h3 className="text-7xl mb-4">{feature.icon}</h3>
                     <h3 className="text-xl font-bold text-white mb-3">Explore the Feature</h3>
                   </div>
@@ -727,7 +727,8 @@ function About() {
             initial={{ opacity: 0, y: 50 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold text-white text-center mb-12"
+            className={`text-3xl sm:text-4xl font-bold text-center mb-12 transition-all duration-300 ${isDarkMode ? "text-white" : "text-gray-900"
+              }`}
           >
             Built with Modern <span className="text-pink-400">Technology</span>
           </motion.h2>
@@ -757,7 +758,9 @@ function About() {
             viewport={{ once: true }}
             className="text-center mb-8"
           >
-            <p className="text-gray-300 text-lg mb-6">
+            <p className={`mt-4 text-lg transition-all duration-300 ${isDarkMode ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
               We use cutting-edge technologies to ensure a fast, responsive, and
               modern user experience.
             </p>
@@ -796,23 +799,26 @@ function About() {
         <div className="max-w-4xl mx-auto text-center">
           <motion.h2
             whileInView={{ opacity: 1, y: 0 }}
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold text-white mb-6"
+            className={`text-4xl font-bold mb-4 transition-all duration-300 ${isDarkMode ? "text-white" : "text-gray-900"
+              }`}
           >
             Ready to Start Your <span className="text-pink-400">Journey?</span>
           </motion.h2>
+
           <motion.p
             whileInView={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-xl text-gray-300 mb-8"
+            className={`text-xl mb-8 transition-all duration-300 ${isDarkMode ? "text-gray-300" : "text-gray-600"
+              }`}
           >
-            Join thousands of travelers who trust TravelGrid for their
-            adventures
+            Join thousands of travelers who trust TravelGrid for their adventures
           </motion.p>
+
           <motion.div
             whileInView={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 30 }}
