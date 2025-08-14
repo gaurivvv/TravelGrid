@@ -1,17 +1,14 @@
 import React, { useState } from "react";
+import { useTheme } from "../context/ThemeContext";
 import {
     Brain,
-    Zap,
     Route,
-    DollarSign,
-    TrendingUp,
-    ArrowLeft,
-    Home,
-    Settings,
     BarChart3,
     MessageSquare,
-    Mic,
-    Lightbulb
+    Lightbulb,
+    ArrowLeft,
+    Home,
+    Settings
 } from "lucide-react";
 import AITravelPlannerComponent from "../components/TravelPlanGenerator/AITravelPlanner";
 import AIIteraryBuilder from "../components/TravelPlanGenerator/AIIteraryBuilder";
@@ -20,8 +17,10 @@ import PredictiveAnalytics from "../components/TravelPlanGenerator/PredictiveAna
 import AIPlanningInterface from "../components/TravelPlanGenerator/AIPlanningInterface";
 
 const AITravelPlannerDemo = () => {
-    const [activeTab, setActiveTab] = useState('main');
-    const [demoData, setDemoData] = useState({
+    const [activeTab, setActiveTab] = useState("main");
+    const { isDarkMode } = useTheme();
+
+    const [demoData] = useState({
         destination: "Paris",
         duration: 5,
         budget: 2500,
@@ -31,18 +30,18 @@ const AITravelPlannerDemo = () => {
     });
 
     const tabs = [
-        { id: 'main', label: 'Main Planner', icon: Brain },
-        { id: 'itinerary', label: 'AI Itinerary Builder', icon: Route },
-        { id: 'recommendations', label: 'AI Recommendations', icon: Lightbulb },
-        { id: 'analytics', label: 'Predictive Analytics', icon: BarChart3 },
-        { id: 'interface', label: 'AI Interface', icon: MessageSquare }
+        { id: "main", label: "Main Planner", icon: Brain },
+        { id: "itinerary", label: "AI Itinerary Builder", icon: Route },
+        { id: "recommendations", label: "AI Recommendations", icon: Lightbulb },
+        { id: "analytics", label: "Predictive Analytics", icon: BarChart3 },
+        { id: "interface", label: "AI Interface", icon: MessageSquare }
     ];
 
     const renderActiveTab = () => {
         switch (activeTab) {
-            case 'main':
+            case "main":
                 return <AITravelPlannerComponent />;
-            case 'itinerary':
+            case "itinerary":
                 return (
                     <AIIteraryBuilder
                         itinerary={[
@@ -75,7 +74,7 @@ const AITravelPlannerDemo = () => {
                         travelStyle={demoData.travelStyle}
                     />
                 );
-            case 'recommendations':
+            case "recommendations":
                 return (
                     <AIRecommendationEngine
                         destination={demoData.destination}
@@ -86,7 +85,7 @@ const AITravelPlannerDemo = () => {
                         onRecommendationSelect={(item, category) => console.log("Selected:", item, category)}
                     />
                 );
-            case 'analytics':
+            case "analytics":
                 return (
                     <PredictiveAnalytics
                         destination={demoData.destination}
@@ -95,7 +94,7 @@ const AITravelPlannerDemo = () => {
                         budget={demoData.budget}
                     />
                 );
-            case 'interface':
+            case "interface":
                 return (
                     <AIPlanningInterface
                         destination={demoData.destination}
@@ -109,15 +108,27 @@ const AITravelPlannerDemo = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
+        <div
+            className={`min-h-screen transition-all duration-300 ${
+                isDarkMode
+                    ? "bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white"
+                    : "bg-gradient-to-br from-rose-300 via-blue-200 to-gray-300 text-gray-900"
+            }`}
+        >
             {/* Header */}
-            <div className="bg-gray-900/50 backdrop-blur-sm border-b border-gray-700">
+            <div
+                className={`backdrop-blur-sm border-b ${
+                    isDarkMode ? "bg-gray-900/50 border-gray-700" : "bg-white/50 border-gray-300"
+                }`}
+            >
                 <div className="container mx-auto px-4 py-4">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
                             <button
                                 onClick={() => window.history.back()}
-                                className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
+                                className={`p-2 rounded-lg transition-colors ${
+                                    isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-200"
+                                }`}
                             >
                                 <ArrowLeft className="w-5 h-5" />
                             </button>
@@ -125,22 +136,32 @@ const AITravelPlannerDemo = () => {
                                 <Brain className="w-8 h-8 text-purple-400" />
                                 <div>
                                     <h1 className="text-2xl font-bold">AI Travel Planner Demo</h1>
-                                    <p className="text-sm text-gray-400">Experience the future of travel planning</p>
+                                    <p
+                                        className={`text-sm ${
+                                            isDarkMode ? "text-gray-400" : "text-gray-600"
+                                        }`}
+                                    >
+                                        Experience the future of travel planning
+                                    </p>
                                 </div>
                             </div>
                         </div>
 
                         <div className="flex items-center space-x-2">
                             <button
-                                onClick={() => window.location.href = '/'}
-                                className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
+                                onClick={() => (window.location.href = "/")}
+                                className={`p-2 rounded-lg transition-colors ${
+                                    isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-200"
+                                }`}
                                 title="Go Home"
                             >
                                 <Home className="w-5 h-5" />
                             </button>
                             <button
-                                onClick={() => setActiveTab('main')}
-                                className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
+                                onClick={() => setActiveTab("main")}
+                                className={`p-2 rounded-lg transition-colors ${
+                                    isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-200"
+                                }`}
                                 title="Reset to Main"
                             >
                                 <Settings className="w-5 h-5" />
@@ -151,48 +172,99 @@ const AITravelPlannerDemo = () => {
             </div>
 
             {/* Demo Info */}
-            <div className="bg-gradient-to-r from-blue-900/50 to-purple-900/50 backdrop-blur-sm border-b border-blue-700">
+            <div
+                className={`backdrop-blur-sm border-b ${
+                    isDarkMode
+                        ? "bg-gradient-to-r from-blue-900/50 to-purple-900/50 border-blue-700"
+                        : "bg-gradient-to-r from-blue-200/50 to-purple-200/50 border-blue-300"
+                }`}
+            >
                 <div className="container mx-auto px-4 py-4">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
                             <div className="text-center">
-                                <div className="text-sm text-gray-400">Destination</div>
-                                <div className="font-semibold text-blue-300">{demoData.destination}</div>
+                                <div
+                                    className={`text-sm ${
+                                        isDarkMode ? "text-gray-400" : "text-gray-600"
+                                    }`}
+                                >
+                                    Destination
+                                </div>
+                                <div className="font-semibold text-blue-500">
+                                    {demoData.destination}
+                                </div>
                             </div>
                             <div className="text-center">
-                                <div className="text-sm text-gray-400">Duration</div>
-                                <div className="font-semibold text-green-300">{demoData.duration} days</div>
+                                <div
+                                    className={`text-sm ${
+                                        isDarkMode ? "text-gray-400" : "text-gray-600"
+                                    }`}
+                                >
+                                    Duration
+                                </div>
+                                <div className="font-semibold text-green-500">
+                                    {demoData.duration} days
+                                </div>
                             </div>
                             <div className="text-center">
-                                <div className="text-sm text-gray-400">Budget</div>
-                                <div className="font-semibold text-yellow-300">${demoData.budget.toLocaleString()}</div>
+                                <div
+                                    className={`text-sm ${
+                                        isDarkMode ? "text-gray-400" : "text-gray-600"
+                                    }`}
+                                >
+                                    Budget
+                                </div>
+                                <div className="font-semibold text-yellow-500">
+                                    ${demoData.budget.toLocaleString()}
+                                </div>
                             </div>
                             <div className="text-center">
-                                <div className="text-sm text-gray-400">Interests</div>
-                                <div className="font-semibold text-purple-300">{demoData.interests.join(', ')}</div>
+                                <div
+                                    className={`text-sm ${
+                                        isDarkMode ? "text-gray-400" : "text-gray-600"
+                                    }`}
+                                >
+                                    Interests
+                                </div>
+                                <div className="font-semibold text-purple-500">
+                                    {demoData.interests.join(", ")}
+                                </div>
                             </div>
                         </div>
 
                         <div className="text-right">
-                            <div className="text-sm text-gray-400">AI Version</div>
-                            <div className="font-semibold text-purple-300">2.0.1</div>
+                            <div
+                                className={`text-sm ${
+                                    isDarkMode ? "text-gray-400" : "text-gray-600"
+                                }`}
+                            >
+                                AI Version
+                            </div>
+                            <div className="font-semibold text-purple-500">2.0.1</div>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* Navigation Tabs */}
-            <div className="bg-gray-900/50 backdrop-blur-sm border-b border-gray-700">
+            <div
+                className={`backdrop-blur-sm border-b ${
+                    isDarkMode ? "bg-gray-900/50 border-gray-700" : "bg-white/50 border-gray-300"
+                }`}
+            >
                 <div className="container mx-auto px-4">
                     <div className="flex space-x-1 overflow-x-auto">
                         {tabs.map((tab) => (
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
-                                className={`flex items-center space-x-2 px-4 py-3 whitespace-nowrap transition-all ${activeTab === tab.id
-                                    ? 'bg-purple-600 text-white border-b-2 border-purple-400'
-                                    : 'text-gray-400 hover:text-gray-300 hover:bg-gray-800'
-                                    }`}
+                                className={`flex items-center space-x-2 px-4 py-3 whitespace-nowrap transition-all ${
+                                    activeTab === tab.id
+                                        ? "bg-purple-600 text-white border-b-2 border-purple-400"
+                                        : isDarkMode
+                                        ? "text-gray-400 hover:text-gray-300 hover:bg-gray-800"
+                                        : "text-gray-600 hover:text-gray-800 hover:bg-gray-200"
+                                }`}
                             >
                                 <tab.icon className="w-4 h-4" />
                                 <span>{tab.label}</span>
@@ -203,22 +275,33 @@ const AITravelPlannerDemo = () => {
             </div>
 
             {/* Main Content */}
-            <div className="container mx-auto px-4 py-8">
-                {renderActiveTab()}
-            </div>
+            <div className="container mx-auto px-4 py-8">{renderActiveTab()}</div>
 
             {/* Footer */}
-            <div className="bg-gray-900/50 backdrop-blur-sm border-t border-gray-700 mt-16">
+            <div
+                className={`backdrop-blur-sm border-t mt-16 ${
+                    isDarkMode ? "bg-gray-900/50 border-gray-700" : "bg-white/50 border-gray-300"
+                }`}
+            >
                 <div className="container mx-auto px-4 py-6">
                     <div className="text-center">
                         <div className="flex items-center justify-center space-x-2 mb-2">
                             <Brain className="w-5 h-5 text-purple-400" />
                             <span className="text-lg font-semibold">AI Travel Planner</span>
                         </div>
-                        <p className="text-gray-400 text-sm">
-                            Advanced AI-powered travel planning with intelligent recommendations, predictive analytics, and natural language interface.
+                        <p
+                            className={`text-sm ${
+                                isDarkMode ? "text-gray-400" : "text-gray-600"
+                            }`}
+                        >
+                            Advanced AI-powered travel planning with intelligent recommendations,
+                            predictive analytics, and natural language interface.
                         </p>
-                        <div className="flex items-center justify-center space-x-4 mt-4 text-xs text-gray-500">
+                        <div
+                            className={`flex items-center justify-center space-x-4 mt-4 text-xs ${
+                                isDarkMode ? "text-gray-500" : "text-gray-700"
+                            }`}
+                        >
                             <span>Machine Learning</span>
                             <span>•</span>
                             <span>Predictive Analytics</span>
