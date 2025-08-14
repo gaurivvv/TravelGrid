@@ -40,6 +40,7 @@ const Navbar = () => {
         { label: t('navigation.guide'), path: "/guides" },
         { label: t('navigation.contact'), path: "/contact" },
         { label: t('navigation.reviewSummarizer'), path: "/Summarizer" },
+        {label:t('Visa'),path:"/visa-checker"},
       ],
     },
     {
