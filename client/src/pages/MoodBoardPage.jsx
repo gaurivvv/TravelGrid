@@ -32,7 +32,7 @@ const MoodBoardPage = () => {
                 </div>
             </main>
 
-            <Footer />
+            
         </div>
     );
 };

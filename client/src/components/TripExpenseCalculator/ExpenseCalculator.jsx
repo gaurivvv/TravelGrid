@@ -109,8 +109,8 @@ const handleDownloadPDF = () => {
     };
 
     return (
-    <div className="bg-white/10 backdrop-blur-md  rounded-2xl shadow-2xl p-8 border-white/20 max-w-xl mx-auto my-8 mt-20 text-white">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
+<div className="bg-gradient-to-b from-black to-[#621639] backdrop-blur-md rounded-2xl p-8 border-white/20 max-w-xl mx-auto my-8 mt-30 text-white shadow-[0_0_15px_5px_#621639]">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-[#501834] to-[#945072]">
             Trip Expense Calculator
         </h2>
 
@@ -122,7 +122,7 @@ const handleDownloadPDF = () => {
               onClick={() => setMode(option)}
               className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
                 mode === option
-                  ? "bg-gradient-to-r from-pink-400 to-rose-500 text-white shadow-md"
+                  ? "bg-gradient-to-r from-[#501834] to-rose-500 text-white shadow-md"
                   : "text-pink-600"
               }`}
             >
@@ -138,13 +138,13 @@ const handleDownloadPDF = () => {
             label={category}
             value={expense[category]}
             onChange={(val) => handleChange(category, val)}
-            inputClassName="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-400 focus:ring-4 focus:ring-pink-100 transition-all outline-none bg-slate-800"
+inputClassName="w-full px-4 py-3 border-b-2 border-b-[#7e3b5c] rounded-xl transition-all outline-none focus:border-b-white"
             />
         ))}
 
         {mode === "group" && (
         <div className="flex items-center gap-4 mt-6">
-            <label className="text-sm font-semibold text-gray-700">
+            <label className="text-sm font-semibold text-white">
                 Number of People:
             </label>
             <input

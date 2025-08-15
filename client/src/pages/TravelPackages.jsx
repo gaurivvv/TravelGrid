@@ -196,7 +196,7 @@ const TravelPackages = () => {
 								id="minRating"
 								value={minRating}
 								onChange={(e) => setMinRating(Number(e.target.value))}
-								className="w-full bg-pink-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink-400 text-center md:text-left">
+								className="w-full bg-gradient-to-r from-[#380720] to-pink rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink-400 text-center md:text-left">
 								<option value={0}>All</option>
 								<option value={1}>1 Star & Up</option>
 								<option value={2}>2 Stars & Up</option>
@@ -214,7 +214,7 @@ const TravelPackages = () => {
 							<select
 								value={selectedContinent}
 								onChange={(e) => setSelectedContinent(e.target.value)}
-								className="w-full bg-pink-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink-400 text-center md:text-left">
+className="w-full bg-gradient-to-r from-[#380720] to-pink rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink-400 text-center md:text-left">
 								<option value="All">All</option>
 								{continentOptions.map((continent) => (
 									<option key={continent} value={continent}>
@@ -232,7 +232,7 @@ const TravelPackages = () => {
 							<select
 								value={selectedCountry}
 								onChange={(e) => setSelectedCountry(e.target.value)}
-								className="w-full bg-pink-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink-400 text-center md:text-left">
+								className="w-full bg-gradient-to-r from-[#380720] to-pink rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink-400 text-center md:text-left">
 								<option value="All">All</option>
 								{countryOptions.map((country) => (
 									<option key={country} value={country}>
@@ -250,7 +250,7 @@ const TravelPackages = () => {
 							<select
 								value={selectedSeason}
 								onChange={(e) => setSelectedSeason(e.target.value)}
-								className="w-full bg-pink-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink-400 text-center md:text-left">
+								className="w-full bg-gradient-to-r from-[#380720] to-pink rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink-400 text-center md:text-left">
 								<option value="All">All</option>
 								{seasonOptions.map((season) => (
 									<option key={season} value={season}>
@@ -269,7 +269,7 @@ const TravelPackages = () => {
 								id="duration"
 								value={selectedDuration}
 								onChange={(e) => setSelectedDuration(e.target.value)}
-								className="w-full bg-pink-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink-400 text-center md:text-left">
+								className="w-full bg-gradient-to-r from-[#380720] to-pink rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink-400 text-center md:text-left">
 								<option value="All">All</option>
 								{durationOptions.map((duration) => (
 									<option key={duration} value={duration}>
@@ -295,7 +295,7 @@ const TravelPackages = () => {
 								id="maxPrice"
 								placeholder="No limit"
 								onChange={handlePriceChange}
-								className="w-full bg-pink-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink-400 text-center md:text-left"
+								className="w-full bg-gradient-to-r from-[#380720] to-pink rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink-400 text-center md:text-left"
 								min="0"
 							/>
 						</div>
