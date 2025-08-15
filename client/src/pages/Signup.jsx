@@ -89,18 +89,14 @@ const Signup = () => {
       <Navbar />
       <div className="pt-24 min-h-screen bg-gradient-to-br from-black to-pink-900 flex items-center justify-center p-4">
         <div className="max-w-md w-full">
-          <div className="flex justify-end mb-4">
-            <LanguageSelector />
-          </div>
-
           {/* Header */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-8 mt-4">
             <h1 className="text-3xl font-bold text-white mb-2">{t("signup.title")}</h1>
             <p className="text-gray-300">{t("signup.subtitle")}</p>
           </div>
 
           {/* Signup Form */}
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 mb-8 border border-white/20">
             <form onSubmit={handleSubmit} className="space-y-6">
               {error && (
                 <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 flex items-center gap-3">
