@@ -196,7 +196,7 @@ function TicketBooking() {
           className="absolute inset-0 w-full h-full object-cover opacity-30 z-0"
         />
         <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2 mt-8">
             Book Your <span className="text-pink-400">Perfect Trip</span>
           </h1>
           <p className="text-pink-200 text-sm md:text-base">
@@ -247,7 +247,7 @@ function TicketBooking() {
             className="space-y-6 sm:space-y-8 px-4 sm:px-6 md:px-10 max-w-5xl mx-auto"
           >
             {/* Core search panel */}
-            <div className="grid gap-4 md:grid-cols-5 md:items-end">
+            <div className=" grid gap-4 md:grid-cols-5 md:items-end">
               {/* From */}
               <div className="relative col-span-2 md:col-span-1">
                  <HiLocationMarker className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 text-xl" />
