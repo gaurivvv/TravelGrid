@@ -300,17 +300,32 @@ const [bookingData, setBookingData] = useState({
 
               {/* Guests */}
               <div>
-                <label className="block text-lg font-semibold mb-2">Number of Guests</label>
-                <select
-                  name="guests"
-                  value={bookingData.guests}
-                  onChange={handleInputChange}
-                  className="w-full p-3 rounded-lg bg-white/10 border border-gray-400 text-white"
-                >
-                  {[1, 2, 3, 4, 5, 6].map(num => (
-                    <option key={num} value={num} className="bg-gray-800">{num} Guest{num > 1 ? 's' : ''}</option>
-                  ))}
-                </select>
+                <label className="block mb-1 font-semibold">Number of Guests</label>
+                <div className="flex items-center gap-2 bg-gradient-to-r from-gray-800 to-gray-900 text-white p-2 rounded-lg border border-gray-700 w-fit">
+                  <button
+                    type="button"
+                    onClick={() => setBookingData(prev => ({
+                      ...prev,
+                      guests: Math.max(1, prev.guests - 1)
+                    }))}
+                    className="px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded-lg text-lg font-bold"
+                  >
+                    –
+                  </button>
+
+                  <span className="w-10 text-center">{bookingData.guests}</span>
+
+                  <button
+                    type="button"
+                    onClick={() => setBookingData(prev => ({
+                      ...prev,
+                      guests: Math.min(20, prev.guests + 1) // max 20 guests
+                    }))}
+                    className="px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded-lg text-lg font-bold"
+                  >
+                    +
+                  </button>
+                </div>
               </div>
 
               {/* Guest Name */}
