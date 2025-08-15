@@ -97,7 +97,7 @@ const FeaturedPackages = () => {
             unforgettable experiences.
           </p>
         </motion.div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 items-stretch">
           {packages.map((pkg, i) => (
             <motion.div
               key={i}
@@ -105,7 +105,7 @@ const FeaturedPackages = () => {
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
-          className={`group relative backdrop-blur-md rounded-2xl overflow-hidden border transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 ${isDarkMode
+          className={`group relative backdrop-blur-md rounded-2xl overflow-hidden border transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 h-full ${isDarkMode
                   ? 'bg-gradient-r from-black to-zinc-600 border-white/50 hover:border-white/40 shadow-xl shadow-white/20'
                   : 'bg-white/80 border-gray-200 hover:border-pink-300'
                 }`}

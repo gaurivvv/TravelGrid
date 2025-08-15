@@ -7,7 +7,7 @@ function DiscoverCard({ index, place, handleBookNowClick }) {
 
     return (
         <div
-            className={`group  hover:scale-105 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-1 flex flex-col min-h-[310px] max-w-xs
+            className={`group  hover:scale-105 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-1 flex flex-col min-h-[310px] max-w-xs h-full
                 ${
                     isDarkMode
                         ? // 🌙 Dark Mode (your existing styles)
