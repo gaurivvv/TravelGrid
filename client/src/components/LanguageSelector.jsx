@@ -74,6 +74,7 @@ const LanguageSelector = () => {
                     <div className="py-1">
                         {languages.map((language) => (
                             <button
+                                aria-label="Search"
                                 key={language.code}
                                 onClick={() =>
                                     handleLanguageChange(language.code)

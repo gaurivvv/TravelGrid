@@ -111,7 +111,10 @@ function Hotels() {
               <img
                 src={hotel.image}
                 alt={hotel.name}
-                className="w-full h-56 object-cover object-center rounded-t-2xl"
+
+                loading="lazy" 
+                className="w-full h-56 object-cover object-center"
+
               />
               <div className="p-6 flex-1 flex flex-col">
                 <div className="flex items-center gap-2 mb-1">

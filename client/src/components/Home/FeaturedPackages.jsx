@@ -114,10 +114,11 @@ const FeaturedPackages = () => {
                 <img
                   src={pkg.image}
                   alt={pkg.name}
+                  loading="lazy" 
                   className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 {/*wishlist button */}
-                <button
+                <button aria-label="Search"
                   onClick={() => {
                     isWishlisted(pkg.id)
                       ? removeFromWishlist(pkg.id)

@@ -88,7 +88,7 @@ const Wishlist = () => {
                   <h2 className="text-xl font-semibold" style={{ color: 'var(--text-primary)' }}>
                     Saved Destinations ({wishlist.length})
                   </h2>
-                  <button 
+                  <button aria-label="Search"
                     onClick={handleNavigateToTrending}
                     className="text-sm flex items-center text-pink-600 dark:text-pink-400 hover:underline"
                   >
@@ -112,7 +112,7 @@ const Wishlist = () => {
                 {/* Pagination */}
                 {totalPages > 1 && (
                   <div className="flex justify-center items-center gap-4 mt-10">
-                    <button
+                    <button aria-label="Search"
                       className="px-4 py-2 rounded-full bg-white dark:bg-gray-800 text-pink-600 dark:text-pink-400 shadow-md hover:shadow-lg disabled:opacity-50 disabled:shadow-none transition-shadow flex items-center"
                       onClick={() => setPage(page - 1)}
                       disabled={page === 1}
@@ -123,7 +123,7 @@ const Wishlist = () => {
                     <span className="text-sm font-medium px-4 py-2 rounded-full bg-white dark:bg-gray-800 shadow-md" style={{ color: 'var(--text-primary)' }}>
                       Page {page} of {totalPages}
                     </span>
-                    <button
+                    <button aria-label="Search"
                       className="px-4 py-2 rounded-full bg-white dark:bg-gray-800 text-pink-600 dark:text-pink-400 shadow-md hover:shadow-lg disabled:opacity-50 disabled:shadow-none transition-shadow flex items-center"
                       onClick={() => setPage(page + 1)}
                       disabled={page === totalPages}

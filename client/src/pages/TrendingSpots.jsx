@@ -320,6 +320,7 @@ const navigate = useNavigate();
           <img
             src="https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3000&q=80"
             alt="World travel destinations"
+            loading="lazy" 
             className="w-full h-full object-cover object-center brightness-100"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-pink-900/40 to-black/30" />
@@ -346,7 +347,7 @@ const navigate = useNavigate();
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-start md:justify-center space-x-2 md:space-x-4 py-3 md:py-4 overflow-x-auto scrollbar-hide">
             {categories.map((category) => (
-              <button
+              <button aria-label="Search"
                 key={category.key}
                 onClick={() => setFilter(category.key)}
                 className={`flex items-center space-x-1 md:space-x-2 px-3 md:px-4 py-2 rounded-full whitespace-nowrap transition-all duration-200 cursor-pointer text-sm md:text-base ${filter === category.key
@@ -404,6 +405,7 @@ const navigate = useNavigate();
                 <img
                   src={spot.image}
                   alt={spot.name}
+                  loading ="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute top-3 left-3">
@@ -413,7 +415,7 @@ const navigate = useNavigate();
                   </div>
                 </div>
                 <div className="absolute top-3 right-3 flex space-x-2">
-                  <button
+                  <button aria-label="Search"
                     onClick={() => toggleFavorite(spot.id)}
                     className="p-1.5 md:p-2 rounded-full transition-all cursor-pointer hover:scale-110"
                     style={{
@@ -432,7 +434,7 @@ const navigate = useNavigate();
                       <Heart className="h-3 w-3 md:h-4 md:w-4" />
                     )}
                   </button>
-                  <button className="p-1.5 md:p-2 rounded-full transition-all cursor-pointer hover:scale-110" style={{ background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--border-primary)' }}>
+                  <button aria-label="Search" className="p-1.5 md:p-2 rounded-full transition-all cursor-pointer hover:scale-110" style={{ background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--border-primary)' }}>
                     <Share2 className="h-3 w-3 md:h-4 md:w-4" />
                   </button>
                 </div>
@@ -508,7 +510,7 @@ const navigate = useNavigate();
                 </div>
 
                 {/* CTA Button */}
-                <button className="w-full mt-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white py-3 px-6 rounded-lg font-semibold transition-all transform hover:scale-105 cursor-pointer duration-200"
+                <button aria-label="Search" className="w-full mt-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white py-3 px-6 rounded-lg font-semibold transition-all transform hover:scale-105 cursor-pointer duration-200"
                   onClick={() => handleExploreLocation(spot.id)}>
                   Explore {spot.name}
                 </button>
@@ -527,7 +529,7 @@ const navigate = useNavigate();
         {/* Load More Button */}
         {visibleCount < filteredSpots.length && (
           <div className="text-center mt-8 md:mt-12">
-            <button
+            <button aria-label="Search"
               onClick={handleLoadMoreSpots}
               className="bg-gradient-to-r from-pink-600 to-pink-500 shadow-md hover:shadow-lg text-white px-6 md:px-8 py-2 md:py-3 rounded-lg font-semibold transition-all transform hover:scale-105 duration-200 cursor-pointer text-sm md:text-base"
             >

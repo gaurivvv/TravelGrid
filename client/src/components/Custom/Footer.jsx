@@ -65,6 +65,7 @@ const Footer = () => {
     <img
       src="/favicon.ico"
       alt="TravelGrid Logo"
+      loading="lazy" 
       className="w-10 h-10"
     />
     <h3 className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-pink-300 bg-clip-text text-transparent">
@@ -231,7 +232,7 @@ const Footer = () => {
                       {/* Envelope icon */}
                     </div>
                   </div>
-                  <button
+                  <button aria-label="Search"
                     type="submit"
                     className="w-full bg-gradient-to-r from-pink-500 to-purple-700 hover:from-pink-600 hover:to-pink-700 text-white py-3 px-4 rounded-lg text-sm font-medium flex items-center justify-center space-x-2 transition-all duration-300"
                   >
@@ -330,7 +331,7 @@ const Footer = () => {
                 {toast.message}
               </p>
             </div>
-            <button
+            <button aria-label="Search"
               onClick={hideToast}
               className="text-gray-400 hover:text-gray-600 transition-colors"
             >

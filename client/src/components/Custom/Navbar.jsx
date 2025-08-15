@@ -47,8 +47,10 @@ const Navbar = () => {
       name: t('navigation.tools'),
       subitems: [
         { label: t('navigation.tripCalculator'), path: "/trip-calculator" },
-        { label: t('navigation.packingChecklist'), path: "/packing-checklist" },
-        { label: t('navigation.travelRecommendations'), path: "/recommendation" },
+       { label: t('navigation.packingChecklist'), path: "/packing-checklist" },
+       { label: "Destination Packing List", path: "/destination-packing" },
+ 
+       { label: t('navigation.travelRecommendations'), path: "/recommendation" },
         { label: t('navigation.feedback'), path: "/feedback" },
         { label: "AI Mood Board", path: "/mood-board" },
         { label: "AI Travel Planner", path: "/ai-travel-planner" },
@@ -165,6 +167,7 @@ const Navbar = () => {
             <img
               src="/favicon.ico"
               alt="TravelGrid Logo"
+              loading="lazy" 
               className="w-10 h-10 rounded-full border border-pink-300 shadow-md"
             />
             TravelGrid
@@ -179,7 +182,7 @@ const Navbar = () => {
             {navLinks.map((link) =>
               link.subitems ? (
                 <div className="relative group" key={link.name}>
-                  <button
+                  <button aria-label="Search"
 
                     className={`py-1.5 px-4 text-sm font-medium rounded-sm transition-all duration-300 flex items-center gap-1 break-words ${activeParentTab === link.name
                       ? "bg-gradient-to-r from-pink-700 to-pink-500 shadow-md text-white"
@@ -259,6 +262,7 @@ const Navbar = () => {
                     <img
                       src={user.picture}
                       alt="User Avatar"
+                      loading="lazy" 
                       className="w-6 h-6 rounded-full object-cover"
                     />
                   ) : user?.name ? (
@@ -270,7 +274,7 @@ const Navbar = () => {
                   )}
                   {t('navigation.dashboard')}
                 </NavLink>
-                <button
+                <button aria-label="Search"
                   onClick={handleLogout}
                   className="hover:text-pink-500 flex items-center gap-1 transition-colors"
                 >
@@ -299,7 +303,7 @@ const Navbar = () => {
           <div className="md:hidden flex items-center gap-2">
             <LanguageSelector />
             <ThemeToggle />
-            <button
+            <button aria-label="Search"
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
               className="text-pink-400 hover:text-pink-500 transition-colors duration-200 p-1 rounded-md hover:bg-pink-500/20 cursor-pointer"
@@ -329,7 +333,7 @@ const Navbar = () => {
             className={`flex justify-end mb-6 border-b ${isDarkMode ? "border-gray-600" : "border-gray-300"
               }`}
           >
-            <button
+            <button aria-label="Search"
               onClick={() => setIsSidebarOpen(false)}
               className="text-pink-500 hover:text-pink-400 p-1 rounded-md hover:bg-pink-500/10"
               aria-label="Close menu"
@@ -343,7 +347,7 @@ const Navbar = () => {
             {navLinks.map((link) =>
               link.subitems ? (
                 <div key={link.name} className="flex flex-col">
-                  <button
+                  <button aria-label="Search"
                     onClick={() => toggleGroup(link.name)}
                     className="py-2 px-3 w-full flex justify-between items-center rounded hover:bg-pink-500 transition-all duration-200"
                   >
@@ -399,7 +403,7 @@ const Navbar = () => {
                 >
                   <User size={18} /> {t('navigation.dashboard')}
                 </NavLink>
-                <button
+                <button aria-label="Search"
                   onClick={handleLogout}
                   className="flex gap-2 items-center text-red-400 py-2 px-3 hover:bg-red-500/10"
                 >

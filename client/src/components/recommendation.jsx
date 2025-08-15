@@ -125,7 +125,7 @@ Provide the suggestions in plain text (no markdown) with bullet points and short
           </div>
 
           <div className="mt-6 flex flex-col sm:flex-row gap-4">
-            <button
+            <button aria-label="Search"
               onClick={handleSubmit}
               disabled={loading}
               className="flex-shrink-0 bg-gradient-to-br from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 disabled:opacity-60 shadow-lg hover:shadow-xl"
