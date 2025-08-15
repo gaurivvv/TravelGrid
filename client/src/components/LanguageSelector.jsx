@@ -64,7 +64,7 @@ const LanguageSelector = () => {
         >
           <div className="py-1">
             {languages.map((language) => (
-              <button
+              <button aria-label="Search"
                 key={language.code}
                 onClick={() => handleLanguageChange(language.code)}
                 className={`w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-pink-500 hover:text-white transition-colors duration-200 ${

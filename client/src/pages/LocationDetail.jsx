@@ -388,6 +388,7 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
           <img
             src={location.image}
             alt={location.name}
+            loading="lazy" 
             className="w-full h-full object-cover"
           />       
         <div className="absolute inset-0 bg-black bg-opacity-40 z-10" />

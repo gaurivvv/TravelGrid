@@ -89,7 +89,7 @@ Input:
           />
 
           <div className="mt-4 flex flex-col sm:flex-row gap-4">
-            <button
+            <button aria-label="Search"
               onClick={handleSummarize}
               disabled={loading}
               className="flex-shrink-0 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-xl transition-all disabled:opacity-60"

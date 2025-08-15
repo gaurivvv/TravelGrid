@@ -157,7 +157,7 @@ const SocialSharing = ({ trip, countdownData }) => {
                         <h4>Preview:</h4>
                         <div className="preview-card">
                             <div className="preview-image">
-                                <img src={previewImage.url} alt={previewImage.alt} />
+                                <img src={previewImage.url} alt={previewImage.alt} loading="lazy"  />
                                 <div className="preview-overlay">
                                     <span className="countdown-preview">
                                         {countdownData.daysUntil === 0

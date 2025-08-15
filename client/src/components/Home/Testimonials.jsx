@@ -109,6 +109,7 @@ const Testimonials = () => {
               <img
                 src={t.avatar}
                 alt={t.name}
+                loading="lazy" 
                 className="w-16 h-16 rounded-full mb-4 object-cover border-2 border-pink-400 group-hover:border-pink-300 transition-colors duration-300"
               />
               <h3

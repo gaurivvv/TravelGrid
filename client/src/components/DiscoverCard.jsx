@@ -51,7 +51,7 @@ function DiscoverCard({ index, place, handleBookNowClick }) {
 
          {/* Button */}
             <div className="px-4 pb-4 pt-2">
-                <button
+                <button aria-label="Search"
                     onClick={handleBookNowClick}
                     className={`w-full font-semibold py-2.5 rounded-xl transition-all duration-300 transform hover:scale-105 cursor-pointer shadow-md hover:shadow-xl text-sm
                         ${

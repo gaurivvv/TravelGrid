@@ -25,7 +25,7 @@ const ScrollToTop = () => {
   };
 
   return (
-    <button
+    <button aria-label="Search"
       className={`
         fixed bottom-24 right-6 w-12 h-12 rounded-full
         bg-blue-600 dark:bg-dark-700

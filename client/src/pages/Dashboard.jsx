@@ -167,6 +167,7 @@ const Dashboard = () => {
                                 <img
                                     src={selectedImage ? URL.createObjectURL(selectedImage) : user.picture || defaultAvatar}
                                     alt={user.name}
+                                    loading="lazy" 
                                     className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-4 border-pink-400 object-cover"
                                     onError={(e) => {
                                         e.target.src = defaultAvatar;

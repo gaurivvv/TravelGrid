@@ -99,7 +99,7 @@ const Chatbot = () => {
   return (
     <div className="fixed bottom-24 right-6 z-50">
       {!open && (
-        <button
+        <button 
           onClick={toggleChat}
           className="group relative bg-gradient-to-br from-pink-500 via-pink-600 to-rose-600 p-4 rounded-full text-white shadow-2xl hover:shadow-pink-500/25 transform hover:scale-110 transition-all duration-300 ease-out"
           aria-label="Open travel chat"
