@@ -258,7 +258,7 @@ function TicketBooking() {
                   required
                   value={form.from}
                   onChange={handleChange}
-                  className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white':'bg-white/90'} text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30 `}
+                  className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white':'bg-white/90'} text-white-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30 `}
                 />
               </div>
 
@@ -293,7 +293,7 @@ function TicketBooking() {
                   required
                   value={form.to}
                   onChange={handleChange}
-                  className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white':'bg-white/90'} text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
+                  className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white':'bg-white/90'} text-white-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
                 />
               </div>
               
