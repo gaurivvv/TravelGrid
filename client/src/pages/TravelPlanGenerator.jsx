@@ -6,6 +6,7 @@ import { generateTravelPlanPDF } from "../utils/pdfGenerator";
 import { fastTravelPlanner } from "../utils/fastTravelPlanner";
 import { useTheme } from "../context/ThemeContext";
 import { config } from "../config";
+import WeatherSection from "../Weather/WeatherSection";
 
 const TravelPlanGenerator = () => {
   const { isDarkMode } = useTheme();
@@ -429,6 +430,10 @@ const TravelPlanGenerator = () => {
                 }`}>
                 Your Travel Plan
               </h2>
+
+              {formData.destination && (
+                <WeatherSection city={formData.destination} />
+              )}
 
               {generatedPlan ? (
                 <div className="space-y-6">
