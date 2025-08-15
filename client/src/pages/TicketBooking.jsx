@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import html2canvas from "html2canvas";
+import { HiUser } from 'react-icons/hi';         
+import { HiLocationMarker, HiArrowRight } from 'react-icons/hi'; 
+
 import jsPDF from "jspdf";
 import Navbar from "../components/Custom/Navbar";
 import { useTheme } from "../context/ThemeContext";
@@ -247,10 +250,7 @@ function TicketBooking() {
             <div className="grid gap-4 md:grid-cols-5 md:items-end">
               {/* From */}
               <div className="relative col-span-2 md:col-span-1">
-                <MapPin
-                  className="absolute top-3 left-3 text-pink-400"
-                  size={18}
-                />
+                 <HiLocationMarker className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 text-xl" />
                 <input
                   type="text"
                   name="from"
@@ -282,10 +282,7 @@ function TicketBooking() {
 
               {/* To */}
               <div className="relative col-span-2 md:col-span-1">
-                <MapPin
-                  className="absolute top-3 left-3 text-pink-400"
-                  size={18}
-                />
+                 <HiUser className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 text-xl" />
                 <input
                   type="text"
                   name="to"
@@ -305,6 +302,7 @@ function TicketBooking() {
                 />
                 <input
                   type="date"
+                   placeholder="Departure Date"
                   name="depart"
                   required
                   value={form.depart}
@@ -324,6 +322,7 @@ function TicketBooking() {
                     <input
                       type="date"
                       name="return"
+                      placeholder="Return Date"
                       required
                       value={form.return}
                       min={form.depart}
