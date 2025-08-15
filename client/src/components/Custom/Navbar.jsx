@@ -47,8 +47,10 @@ const Navbar = () => {
       name: t('navigation.tools'),
       subitems: [
         { label: t('navigation.tripCalculator'), path: "/trip-calculator" },
-        { label: t('navigation.packingChecklist'), path: "/packing-checklist" },
-        { label: t('navigation.travelRecommendations'), path: "/recommendation" },
+       { label: t('navigation.packingChecklist'), path: "/packing-checklist" },
+       { label: "Destination Packing List", path: "/destination-packing" },
+ 
+       { label: t('navigation.travelRecommendations'), path: "/recommendation" },
         { label: t('navigation.feedback'), path: "/feedback" },
         { label: "AI Mood Board", path: "/mood-board" },
         { label: "AI Travel Planner", path: "/ai-travel-planner" },
