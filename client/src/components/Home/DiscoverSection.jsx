@@ -134,7 +134,7 @@ const filteredDestinations = destinations
   variants={container}
   initial="hidden"
   animate="show"
-  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch"
 >
   {filteredDestinations.length > 0 ? (
     filteredDestinations.map((place) => (
