@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import html2canvas from "html2canvas";
+import { HiUser } from 'react-icons/hi';         
+import { HiLocationMarker, HiArrowRight } from 'react-icons/hi'; 
+
 import jsPDF from "jspdf";
 import Navbar from "../components/Custom/Navbar";
 import { useTheme } from "../context/ThemeContext";
@@ -194,7 +197,7 @@ function TicketBooking() {
           className="absolute inset-0 w-full h-full object-cover opacity-30 z-0"
         />
         <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2 mt-8">
             Book Your <span className="text-pink-400">Perfect Trip</span>
           </h1>
           <p className="text-pink-200 text-sm md:text-base">
@@ -245,13 +248,10 @@ function TicketBooking() {
             className="space-y-6 sm:space-y-8 px-4 sm:px-6 md:px-10 max-w-5xl mx-auto"
           >
             {/* Core search panel */}
-            <div className="grid gap-4 md:grid-cols-5 md:items-end">
+            <div className=" grid gap-4 md:grid-cols-5 md:items-end">
               {/* From */}
               <div className="relative col-span-2 md:col-span-1">
-                <MapPin
-                  className="absolute top-3 left-3 text-pink-400"
-                  size={18}
-                />
+                 <HiLocationMarker className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 text-xl" />
                 <input
                   type="text"
                   name="from"
@@ -259,7 +259,7 @@ function TicketBooking() {
                   required
                   value={form.from}
                   onChange={handleChange}
-                  className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white':'bg-white/90'} text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30 `}
+                  className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white':'bg-white/90'} text-white-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30 `}
                 />
               </div>
 
@@ -283,10 +283,7 @@ function TicketBooking() {
 
               {/* To */}
               <div className="relative col-span-2 md:col-span-1">
-                <MapPin
-                  className="absolute top-3 left-3 text-pink-400"
-                  size={18}
-                />
+                 <HiUser className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 text-xl" />
                 <input
                   type="text"
                   name="to"
@@ -294,7 +291,7 @@ function TicketBooking() {
                   required
                   value={form.to}
                   onChange={handleChange}
-                  className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white':'bg-white/90'} text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
+                  className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white':'bg-white/90'} text-white-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
                 />
               </div>
               
@@ -306,6 +303,7 @@ function TicketBooking() {
                 />
                 <input
                   type="date"
+                   placeholder="Departure Date"
                   name="depart"
                   required
                   value={form.depart}
@@ -325,6 +323,7 @@ function TicketBooking() {
                     <input
                       type="date"
                       name="return"
+                      placeholder="Return Date"
                       required
                       value={form.return}
                       min={form.depart}
