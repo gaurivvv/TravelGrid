@@ -359,6 +359,7 @@ const TravelGuidesCarousel = () => {
                     <img
                       src={guide.image}
                       alt={guide.name}
+                      loading="lazy" 
                       style={{
                         width: "70px",
                         height: "70px",
@@ -568,6 +569,7 @@ const TravelGuidesCarousel = () => {
                   <img
                     src={selectedGuide.image}
                     alt="Profile"
+                    loading="lazy" 
                     className={`w-28 h-28 rounded-full object-cover border-4 ${isDarkMode ? 'border-gray-800' : 'border-white'
                       }`}
                   />

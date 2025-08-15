@@ -313,6 +313,7 @@ className="w-full bg-gradient-to-r from-[#380720] to-pink rounded-md px-3 py-2 t
 								<img
 									src={pkg.image}
 									alt={pkg.title}
+									loading="lazy" 
 									className="w-full h-56 object-cover"
 								/>
 								<div className="p-6 flex-1 flex flex-col">

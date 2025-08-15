@@ -117,6 +117,7 @@ const [qrDataUrl, setQrDataUrl] = useState('');
               <img
                 src={hotel.image}
                 alt={hotel.name}
+                loading="lazy" 
                 className="w-full h-full object-cover object-center"
               />
               <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center px-4">
