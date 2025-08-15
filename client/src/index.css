@@ -318,3 +318,27 @@ main,
   position: relative;
 }
 
+select {
+  background-color: #f0f0f0; /* light gray instead of white */
+  color: #000; /* black text */
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+select option {
+  background-color: #fff; /* options background */
+  color: #000; /* options text color */
+}
+
+.dark select {
+  background-color: #333; /* dark mode dropdown */
+  color: #fff;
+}
+
+.dark select option {
+  background-color: #444;
+  color: #fff;
+}
+
+
