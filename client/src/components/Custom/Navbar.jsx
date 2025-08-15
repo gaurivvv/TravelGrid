@@ -40,18 +40,24 @@ const Navbar = () => {
         { label: t('navigation.guide'), path: "/guides" },
         { label: t('navigation.contact'), path: "/contact" },
         { label: t('navigation.reviewSummarizer'), path: "/Summarizer" },
+        {label:t('Visa'),path:"/visa-checker"},
       ],
     },
     {
       name: t('navigation.tools'),
       subitems: [
         { label: t('navigation.tripCalculator'), path: "/trip-calculator" },
-        { label: t('navigation.packingChecklist'), path: "/packing-checklist" },
-        { label: t('navigation.travelRecommendations'), path: "/recommendation" },
+       { label: t('navigation.packingChecklist'), path: "/packing-checklist" },
+       { label: "Destination Packing List", path: "/destination-packing" },
+ 
+       { label: t('navigation.travelRecommendations'), path: "/recommendation" },
         { label: t('navigation.feedback'), path: "/feedback" },
         { label: "AI Mood Board", path: "/mood-board" },
         { label: "AI Travel Planner", path: "/ai-travel-planner" },
         { label: "Travel Countdown Timer", path: "/countdown-demo" },
+        { label: "Music", path: "/music" },
+        {label:"Map",path:"/itinerary-map"},
+
         { label: t('navigation.petTravelGuide'), path: "/pettravel" },
         { label: "Enhanced Currency Converter", path: "/enhanced-currency" }
       ],
@@ -96,10 +102,6 @@ const Navbar = () => {
     }
     setIsSidebarOpen(false);
   };
-
-  useEffect(() => {
-    setIsSidebarOpen(false);
-  }, [location.pathname]);
 
   useEffect(() => {
     document.body.style.overflow = isSidebarOpen ? "hidden" : "auto";

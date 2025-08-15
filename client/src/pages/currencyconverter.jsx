@@ -151,11 +151,11 @@ const CurrencyConverter = () => {
   const sortedCurrencies = Object.keys(EXCHANGE_RATES).sort();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 to-purple-100 p-4 font-inter">
-      <div className="max-w-md w-full p-8 bg-white rounded-2xl shadow-xl transform transition-all duration-300 hover:shadow-2xl">
+    <div className="h-auto mt-12 flex items-center justify-center bg-gray-100 p-14 font-inter">
+      <div className="h-full max-w-md w-full px-8 py-4 bg-white rounded-2xl shadow-xl transform transition-all duration-300 hover:shadow-2xl">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-extrabold text-gray-800 mb-2">Travel Wallet</h1>
-          <p className="text-gray-600">Convert currencies instantly - Works offline!</p>
+          <h1 className="text-3xl font-extrabold text-gray-700 mb-2">Travel Wallet</h1>
+          <p className="text-gray-700">Convert currencies instantly - Works offline!</p>
 
           {/* Enhanced Version Link */}
           <div className="mt-4">
@@ -178,7 +178,7 @@ const CurrencyConverter = () => {
             onChange={(e) => setAmount(Number(e.target.value))}
             min="0"
             step="0.01"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-400 focus:border-transparent outline-none transition-all duration-200 text-lg"
+            className="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent outline-none transition-all duration-200 text-lg bg-gray-100"
             placeholder="Enter amount"
           />
         </div>
@@ -189,7 +189,7 @@ const CurrencyConverter = () => {
             id="fromCurrency"
             value={fromCurrency}
             onChange={(e) => setFromCurrency(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-400 focus:border-transparent outline-none appearance-none bg-white pr-8 text-lg"
+            className="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent outline-none appearance-none bg-gray-100 pr-8 text-lg"
           >
             {sortedCurrencies.map((code) => (
               <option key={code} value={code}>
@@ -205,7 +205,7 @@ const CurrencyConverter = () => {
             id="toCurrency"
             value={toCurrency}
             onChange={(e) => setToCurrency(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-400 focus:border-transparent outline-none appearance-none bg-white pr-8 text-lg"
+            className="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent outline-none appearance-none bg-gray-100 pr-8 text-lg"
           >
             {sortedCurrencies.map((code) => (
               <option key={code} value={code}>
@@ -215,21 +215,21 @@ const CurrencyConverter = () => {
           </select>
         </div>
 
-        <div className="text-center bg-gradient-to-r from-pink-50 to-purple-50 p-6 rounded-xl shadow-inner border border-pink-100">
+        <div className="text-center bg-gray-100 p-6 rounded-xl shadow-xl border border-gray-400">
           {error ? (
             <p className="text-red-600 text-lg font-medium">{error}</p>
           ) : (
             convertedAmount !== null && (
               <>
-                <div className="text-3xl font-bold text-pink-700 mb-3">
+                <div className="text-3xl font-bold text-pink-500 mb-3">
                   {formatCurrency(amount, fromCurrency)} {fromCurrency} = {formatCurrency(convertedAmount, toCurrency)} {toCurrency}
                 </div>
                 {conversionRate && (
-                  <div className="text-lg text-purple-600 mb-2">
+                  <div className="text-lg text-purple-400 mb-2">
                     1 {fromCurrency} = {conversionRate.toFixed(4)} {toCurrency}
                   </div>
                 )}
-                <div className="text-sm text-gray-500 italic">
+                <div className="text-md text-gray-700 italic">
                   {isOffline ? 'Using offline rates' : 'Real-time rates'}
                 </div>
               </>
@@ -239,10 +239,10 @@ const CurrencyConverter = () => {
 
         {/* Currency count and offline indicator */}
         <div className="mt-6 text-center">
-          <div className="text-sm text-gray-600 mb-2">
-            <span className="font-semibold">{sortedCurrencies.length}+ currencies</span> available
+          <div className="text-md text-gray-700 mb-2">
+            <span className="font-semibold italic">{sortedCurrencies.length}+ currencies</span> available
           </div>
-          <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+          <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-green-500 shadow-xl">
             <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
             Offline Mode
           </div>

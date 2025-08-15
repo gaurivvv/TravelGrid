@@ -22,12 +22,31 @@ const guides = [
     bio: "Wildlife expert and safari guide, specializing in Kenya and Tanzania national parks.",
     image: "https://randomuser.me/api/portraits/men/34.jpg",
   },
+  // added all 3 pet guides for home page
+  {
+    name: "Snowy Kat",
+    expertise: "🐾 Mountain Treks & Pet Adventures",
+    bio: "Passionate about guiding pet parents through scenic mountain trails and nature escapes. Specialist in safe trekking experiences for dogs and cats.",
+    image: "https://randomuser.me/api/portraits/men/17.jpg",
+  },
   {
     name: "Mei Lin",
     expertise: "East Asia Tours",
     bio: "Licensed guide for Japan, China, and South Korea. Loves sharing local traditions and cuisine.",
     image: "https://randomuser.me/api/portraits/women/43.jpg",
   },
+  {
+    name: "Ayushi Uniyal",
+    expertise: "🐾 Pet Travel & Coastal Getaways",
+    bio: "Loves helping travelers explore India’s beaches with their furry companions. Expert in pet-friendly accommodations and transport.",
+    image: "https://randomuser.me/api/portraits/women/17.jpg",
+  },
+  {
+    name: "Weddy Brown",
+    expertise: "🐾 Urban Travel with Pets",
+    bio: "Amsterdam-based guide specializing in navigating cities with pets. Knows every pet-friendly park, café, and stay in the area.",
+    image: "https://randomuser.me/api/portraits/men/74.jpg"
+  }
 ];
 
 const TravelGuides = () => {

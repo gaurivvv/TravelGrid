@@ -127,47 +127,14 @@ const filteredDestinations = destinations
             just for you.
           </motion.p>
         </div>
-{/* Search + Filters */}
-<div className="flex flex-col md:flex-row gap-4 mb-6">
-  {/* Search */}
-  <input
-    type="text"
-    placeholder="Search destinations..."
-    value={searchTerm}
-    onChange={(e) => setSearchTerm(e.target.value)}
-    className="border rounded px-4 py-2 flex-1"
-  />
 
-  {/* Category Filter */}
-  <select
-    value={category}
-    onChange={(e) => setCategory(e.target.value)}
-    className="border rounded px-4 py-2"
-  >
-    <option value="All">All Categories</option>
-    <option value="Beach">Beach</option>
-    <option value="Mountain">Mountain</option>
-    <option value="Historical">Historical</option>
-  </select>
-
-  {/* Sort By */}
-  <select
-    value={sortBy}
-    onChange={(e) => setSortBy(e.target.value)}
-    className="border rounded px-4 py-2"
-  >
-    <option value="popularity">Sort by Popularity</option>
-    <option value="rating">Sort by Rating</option>
-    <option value="price">Sort by Price</option>
-  </select>
-</div>
 
       {/* Cards */}
 <motion.div
   variants={container}
   initial="hidden"
   animate="show"
-  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
 >
   {filteredDestinations.length > 0 ? (
     filteredDestinations.map((place) => (

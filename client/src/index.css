@@ -1,8 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-
+/* 
 @tailwind base;
-@tailwind components;
+@tailwind components; */
 @tailwind utilities;
 
 /* CSS Variables for Theme Colors */
@@ -28,6 +28,7 @@
   --input-bg: #ffffff;
   --input-border: #d1d5db;
   --input-focus: #ec4899;
+  --input-text:#ffc5e3;
   --button-primary: #ec4899;
   --button-hover: #be185d;
   --success-color: #10b981;
@@ -283,4 +284,59 @@ main,
 .animate-on-scroll.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Fix Leaflet routing panel text color for dark themes */
+.leaflet-routing-container {
+  background-color: #1f2937 !important; /* dark gray background */
+  color: #ffffff !important; /* white text */
+  font-size: 0.9rem;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.leaflet-routing-container a {
+  color: #60a5fa !important; /* light blue links */
+}
+
+.leaflet-routing-container h2,
+.leaflet-routing-container h3 {
+  color: #ffffff !important;
+}
+
+
+/* Make sure map is always on top */
+.leaflet-container {
+  z-index: 1;
+  position: relative;
+}
+
+/* Make sure routing control box is above map tiles */
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 1000 !important;
+  position: relative;
+}
+
+select {
+  background-color: #f0f0f0; /* light gray instead of white */
+  color: #000; /* black text */
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+select option {
+  background-color: #fff; /* options background */
+  color: #000; /* options text color */
+}
+
+.dark select {
+  background-color: #333; /* dark mode dropdown */
+  color: #fff;
+}
+
+.dark select option {
+  background-color: #444;
+  color: #fff;
 }

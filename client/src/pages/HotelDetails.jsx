@@ -2,7 +2,7 @@ import React,{useState,useContext} from 'react';
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Custom/Navbar';
-import Footer from '../components/Custom/Footer';
+
 import hotels from '../data/hotels';
 import BookingModal from './BookingModal';
 import { AuthProvider,useAuth } from '../context/AuthContext';
@@ -85,7 +85,7 @@ const [qrDataUrl, setQrDataUrl] = useState('');
             Back to Hotels
           </button>
         </main>
-        {/* <Footer /> */}
+       
       </div>
     );
   }
@@ -160,7 +160,7 @@ const [qrDataUrl, setQrDataUrl] = useState('');
           )}
             </section>
           </main>
-          {/* <Footer /> */}
+          
         </div>
       </motion.div>
     )}
