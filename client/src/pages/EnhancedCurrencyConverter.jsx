@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { toast } from 'react-hot-toast';
 import { currencyService } from '../services/currencyService';
+import { useTheme } from '../context/ThemeContext';
 import {
     TrendingUp,
     TrendingDown,
@@ -18,6 +19,8 @@ import {
 } from 'lucide-react';
 
 const EnhancedCurrencyConverter = () => {
+    const { isDarkMode } = useTheme();
+    
     const [amount, setAmount] = useState(1);
     const [fromCurrency, setFromCurrency] = useState('USD');
     const [toCurrency, setToCurrency] = useState('EUR');
@@ -269,23 +272,37 @@ const EnhancedCurrencyConverter = () => {
     }, {});
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 pt-24 font-inter">
+        <div className={`min-h-screen p-4 pt-24 font-inter transition-all duration-300 ${
+            isDarkMode
+                ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'
+                : 'bg-gradient-to-br from-blue-50 to-indigo-100'
+        }`}>
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-8">
-                    <h1 className="text-4xl font-extrabold text-gray-800 mb-2 flex items-center justify-center gap-3">
+                    <h1 className={`text-4xl font-extrabold mb-2 flex items-center justify-center gap-3 transition-all duration-300 ${
+                        isDarkMode ? 'text-white' : 'text-gray-800'
+                    }`}>
                         <DollarSign className="text-green-500" />
                         Enhanced Travel Wallet
                     </h1>
-                    <p className="text-gray-600 text-lg">Real-time currency conversion, expense tracking, and smart travel insights</p>
+                    <p className={`text-lg transition-all duration-300 ${
+                        isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                    }`}>Real-time currency conversion, expense tracking, and smart travel insights</p>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Main Converter */}
                     <div className="lg:col-span-2">
-                        <div className="bg-white rounded-2xl shadow-xl p-6 mb-6">
+                        <div className={`rounded-2xl shadow-xl p-6 mb-6 transition-all duration-300 ${
+                            isDarkMode
+                                ? 'bg-white/10 border border-white/20'
+                                : 'bg-white'
+                        }`}>
                             <div className="flex items-center justify-between mb-6">
-                                <h2 className="text-2xl font-bold text-gray-800">Currency Converter</h2>
+                                <h2 className={`text-2xl font-bold transition-all duration-300 ${
+                                    isDarkMode ? 'text-white' : 'text-gray-800'
+                                }`}>Currency Converter</h2>
                                 <div className="flex items-center gap-2">
                                     <button
                                         onClick={fetchExchangeRates}
@@ -299,7 +316,9 @@ const EnhancedCurrencyConverter = () => {
                                         onClick={toggleFavorite}
                                         className={`p-2 rounded-lg transition-colors ${favoritePairs.includes(`${fromCurrency}-${toCurrency}`)
                                             ? 'bg-red-100 text-red-600'
-                                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                            : isDarkMode 
+                                                ? 'bg-white/20 text-white hover:bg-white/30' 
+                                                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                                             }`}
                                     >
                                         ❤️
@@ -308,16 +327,24 @@ const EnhancedCurrencyConverter = () => {
                             </div>
 
                             {/* Status Indicator */}
-                            <div className="flex items-center justify-between mb-6 p-3 bg-gray-50 rounded-lg">
+                            <div className={`flex items-center justify-between mb-6 p-3 rounded-lg transition-all duration-300 ${
+                                isDarkMode
+                                    ? 'bg-white/10 border border-white/20'
+                                    : 'bg-gray-50'
+                            }`}>
                                 <div className="flex items-center gap-2">
                                     <div className={`w-3 h-3 rounded-full ${isOffline ? 'bg-yellow-400' : 'bg-green-400'}`}></div>
-                                    <span className="text-sm font-medium">
+                                    <span className={`text-sm font-medium transition-all duration-300 ${
+                                        isDarkMode ? 'text-white' : 'text-gray-800'
+                                    }`}>
                                         {isOffline ? 'Offline Mode' : 'Real-time Rates (Updates every 10 min)'}
                                     </span>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     {lastUpdated && (
-                                        <div className="text-xs text-gray-500 space-y-1">
+                                        <div className={`text-xs space-y-1 transition-all duration-300 ${
+                                            isDarkMode ? 'text-gray-300' : 'text-gray-500'
+                                        }`}>
                                             <div>Last updated: {new Date(lastUpdated).toLocaleTimeString()}</div>
                                             <div className={`flex items-center gap-1 ${nextUpdateCountdown <= 60 ? 'text-orange-600 font-semibold' : ''}`}>
                                                 <Clock className="w-3 h-3" />
@@ -340,27 +367,39 @@ const EnhancedCurrencyConverter = () => {
                             {/* Converter Form */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                                 <div>
-                                    <label className="block text-sm font-semibold text-gray-700 mb-2">Amount</label>
+                                    <label className={`block text-sm font-semibold mb-2 transition-all duration-300 ${
+                                        isDarkMode ? 'text-white' : 'text-gray-700'
+                                    }`}>Amount</label>
                                     <input
                                         type="number"
                                         value={amount}
                                         onChange={(e) => setAmount(Number(e.target.value))}
                                         min="0"
                                         step="0.01"
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition-all duration-200 text-lg"
+                                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none transition-all duration-200 text-lg ${
+                                            isDarkMode
+                                                ? 'bg-white/20 border-white/20 text-white placeholder-gray-300 focus:border-white/40'
+                                                : 'border-gray-300 bg-white'
+                                        }`}
                                         placeholder="Enter amount"
                                     />
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-semibold text-gray-700 mb-2">From</label>
+                                    <label className={`block text-sm font-semibold mb-2 transition-all duration-300 ${
+                                        isDarkMode ? 'text-white' : 'text-gray-700'
+                                    }`}>From</label>
                                     <select
                                         value={fromCurrency}
                                         onChange={(e) => setFromCurrency(e.target.value)}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none appearance-none bg-white pr-8 text-lg"
+                                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none appearance-none pr-8 text-lg transition-all duration-300 ${
+                                            isDarkMode
+                                                ? 'bg-white/20 border-white/20 text-white focus:border-white/40'
+                                                : 'border-gray-300 bg-white'
+                                        }`}
                                     >
                                         {Object.keys(CURRENCY_INFO).sort().map((code) => (
-                                            <option key={code} value={code}>
+                                            <option key={code} value={code} className={isDarkMode ? 'bg-slate-800 text-white' : 'bg-white text-gray-900'}>
                                                 {CURRENCY_INFO[code].flag} {code} - {CURRENCY_INFO[code].name}
                                             </option>
                                         ))}
@@ -368,14 +407,20 @@ const EnhancedCurrencyConverter = () => {
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-semibold text-gray-700 mb-2">To</label>
+                                    <label className={`block text-sm font-semibold mb-2 transition-all duration-300 ${
+                                        isDarkMode ? 'text-white' : 'text-gray-700'
+                                    }`}>To</label>
                                     <select
                                         value={toCurrency}
                                         onChange={(e) => setToCurrency(e.target.value)}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none appearance-none bg-white pr-8 text-lg"
+                                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none appearance-none pr-8 text-lg transition-all duration-300 ${
+                                            isDarkMode
+                                                ? 'bg-white/20 border-white/20 text-white focus:border-white/40'
+                                                : 'border-gray-300 bg-white'
+                                        }`}
                                     >
                                         {Object.keys(CURRENCY_INFO).sort().map((code) => (
-                                            <option key={code} value={code}>
+                                            <option key={code} value={code} className={isDarkMode ? 'bg-slate-800 text-white' : 'bg-white text-gray-900'}>
                                                 {CURRENCY_INFO[code].flag} {code} - {CURRENCY_INFO[code].name}
                                             </option>
                                         ))}
@@ -385,7 +430,11 @@ const EnhancedCurrencyConverter = () => {
 
                             {/* Conversion Result */}
                             {convertedAmount !== null && (
-                                <div className="text-center bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-100">
+                                <div className={`text-center p-6 rounded-xl border transition-all duration-300 ${
+                                    isDarkMode
+                                        ? 'bg-gradient-to-r from-blue-900/30 to-indigo-900/30 border-blue-700/50'
+                                        : 'bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-100'
+                                }`}>
                                     <div className="text-4xl font-bold text-blue-700 mb-3">
                                         {formatCurrency(amount, fromCurrency)} {fromCurrency} = {formatCurrency(convertedAmount, toCurrency)} {toCurrency}
                                     </div>
@@ -394,7 +443,9 @@ const EnhancedCurrencyConverter = () => {
                                             1 {fromCurrency} = {conversionRate.toFixed(4)} {toCurrency}
                                         </div>
                                     )}
-                                    <div className="text-sm text-gray-500">
+                                    <div className={`text-sm transition-all duration-300 ${
+                                        isDarkMode ? 'text-gray-300' : 'text-gray-500'
+                                    }`}>
                                         {isOffline ? 'Using offline rates' : 'Real-time exchange rate'}
                                     </div>
                                 </div>
@@ -402,9 +453,15 @@ const EnhancedCurrencyConverter = () => {
                         </div>
 
                         {/* Historical Chart */}
-                        <div className="bg-white rounded-2xl shadow-xl p-6 mb-6">
+                        <div className={`rounded-2xl shadow-xl p-6 mb-6 transition-all duration-300 ${
+                            isDarkMode
+                                ? 'bg-white/10 border border-white/20'
+                                : 'bg-white'
+                        }`}>
                             <div className="flex items-center justify-between mb-6">
-                                <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+                                <h3 className={`text-xl font-bold flex items-center gap-2 transition-all duration-300 ${
+                                    isDarkMode ? 'text-white' : 'text-gray-800'
+                                }`}>
                                     <History className="text-purple-500" />
                                     Historical Trends
                                 </h3>
@@ -419,17 +476,30 @@ const EnhancedCurrencyConverter = () => {
                             {showHistorical && historicalData.length > 0 && (
                                 <ResponsiveContainer width="100%" height={300}>
                                     <LineChart data={historicalData}>
-                                        <CartesianGrid strokeDasharray="3 3" />
-                                        <XAxis dataKey="date" />
-                                        <YAxis />
-                                        <Tooltip />
+                                        <CartesianGrid strokeDasharray="3 3" stroke={isDarkMode ? '#475569' : '#e2e8f0'} />
+                                        <XAxis
+                                            dataKey="date"
+                                            tick={{ fill: isDarkMode ? '#cbd5e1' : '#475569' }}
+                                        />
+                                        <YAxis
+                                            tick={{ fill: isDarkMode ? '#cbd5e1' : '#475569' }}
+                                        />
+                                        <Tooltip
+                                            contentStyle={{
+                                                backgroundColor: isDarkMode ? '#1e293b' : '#ffffff',
+                                                border: isDarkMode ? '1px solid #475569' : '1px solid #e2e8f0',
+                                                color: isDarkMode ? '#f8fafc' : '#1e293b'
+                                            }}
+                                        />
                                         <Line type="monotone" dataKey="rate" stroke="#6366f1" strokeWidth={2} />
                                     </LineChart>
                                 </ResponsiveContainer>
                             )}
 
                             {showHistorical && historicalData.length === 0 && (
-                                <div className="text-center py-8 text-gray-500">
+                                <div className={`text-center py-8 transition-all duration-300 ${
+                                    isDarkMode ? 'text-gray-300' : 'text-gray-500'
+                                }`}>
                                     <History className="w-12 h-12 mx-auto mb-2 text-gray-300" />
                                     <p>Historical data not available</p>
                                 </div>
@@ -437,49 +507,87 @@ const EnhancedCurrencyConverter = () => {
                         </div>
 
                         {/* Smart Recommendations */}
-                        <div className="bg-white rounded-2xl shadow-xl p-6">
-                            <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                        <div className={`rounded-2xl shadow-xl p-6 transition-all duration-300 ${
+                            isDarkMode
+                                ? 'bg-white/10 border border-white/20'
+                                : 'bg-white'
+                        }`}>
+                            <h3 className={`text-xl font-bold mb-4 flex items-center gap-2 transition-all duration-300 ${
+                                isDarkMode ? 'text-white' : 'text-gray-800'
+                            }`}>
                                 <AlertTriangle className="text-orange-500" />
                                 Travel Tips & Recommendations
                             </h3>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="p-4 bg-orange-50 rounded-lg border border-orange-200">
-                                    <h4 className="font-semibold text-orange-800 mb-2 flex items-center gap-2">
+                                <div className={`p-4 rounded-lg border transition-all duration-300 ${
+                                    isDarkMode
+                                        ? 'bg-orange-900/20 border-orange-700/50'
+                                        : 'bg-orange-50 border-orange-200'
+                                }`}>
+                                    <h4 className={`font-semibold mb-2 flex items-center gap-2 transition-all duration-300 ${
+                                        isDarkMode ? 'text-orange-200' : 'text-orange-800'
+                                    }`}>
                                         <CreditCard className="w-4 h-4" />
                                         Payment Methods
                                     </h4>
-                                    <p className="text-sm text-orange-700">
+                                    <p className={`text-sm transition-all duration-300 ${
+                                        isDarkMode ? 'text-orange-100' : 'text-orange-700'
+                                    }`}>
                                         Use credit cards with no foreign transaction fees. Consider local ATMs for better rates than exchange offices.
                                     </p>
                                 </div>
 
-                                <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                                    <h4 className="font-semibold text-blue-800 mb-2 flex items-center gap-2">
+                                <div className={`p-4 rounded-lg border transition-all duration-300 ${
+                                    isDarkMode
+                                        ? 'bg-blue-900/20 border-blue-700/50'
+                                        : 'bg-blue-50 border-blue-200'
+                                }`}>
+                                    <h4 className={`font-semibold mb-2 flex items-center gap-2 transition-all duration-300 ${
+                                        isDarkMode ? 'text-blue-200' : 'text-blue-800'
+                                    }`}>
                                         <MapPin className="w-4 h-4" />
                                         Exchange Tips
                                     </h4>
-                                    <p className="text-sm text-blue-700">
+                                    <p className={`text-sm transition-all duration-300 ${
+                                        isDarkMode ? 'text-blue-100' : 'text-blue-700'
+                                    }`}>
                                         Avoid airport exchanges - they typically have the worst rates. Use local banks or ATMs for better deals.
                                     </p>
                                 </div>
 
-                                <div className="p-4 bg-green-50 rounded-lg border border-green-200">
-                                    <h4 className="font-semibold text-green-800 mb-2 flex items-center gap-2">
+                                <div className={`p-4 rounded-lg border transition-all duration-300 ${
+                                    isDarkMode
+                                        ? 'bg-green-900/20 border-green-700/50'
+                                        : 'bg-green-50 border-green-200'
+                                }`}>
+                                    <h4 className={`font-semibold mb-2 flex items-center gap-2 transition-all duration-300 ${
+                                        isDarkMode ? 'text-green-200' : 'text-green-800'
+                                    }`}>
                                         <Clock className="w-4 h-4" />
                                         Best Time to Exchange
                                     </h4>
-                                    <p className="text-sm text-green-700">
+                                    <p className={`text-sm transition-all duration-300 ${
+                                        isDarkMode ? 'text-green-100' : 'text-green-700'
+                                    }`}>
                                         Exchange rates fluctuate throughout the day. Monitor trends and exchange when rates are favorable.
                                     </p>
                                 </div>
 
-                                <div className="p-4 bg-purple-50 rounded-lg border border-purple-200">
-                                    <h4 className="font-semibold text-purple-800 mb-2 flex items-center gap-2">
+                                <div className={`p-4 rounded-lg border transition-all duration-300 ${
+                                    isDarkMode
+                                        ? 'bg-purple-900/20 border-purple-700/50'
+                                        : 'bg-purple-50 border-purple-200'
+                                }`}>
+                                    <h4 className={`font-semibold mb-2 flex items-center gap-2 transition-all duration-300 ${
+                                        isDarkMode ? 'text-purple-200' : 'text-purple-800'
+                                    }`}>
                                         <Calculator className="w-4 h-4" />
                                         Fee Calculator
                                     </h4>
-                                    <p className="text-sm text-purple-700">
+                                    <p className={`text-sm transition-all duration-300 ${
+                                        isDarkMode ? 'text-purple-100' : 'text-purple-700'
+                                    }`}>
                                         Credit cards typically charge 1-3% foreign transaction fees. Factor this into your budget planning.
                                     </p>
                                 </div>
@@ -490,9 +598,15 @@ const EnhancedCurrencyConverter = () => {
                     {/* Sidebar */}
                     <div className="space-y-6">
                         {/* Expense Tracker */}
-                        <div className="bg-white rounded-2xl shadow-xl p-6">
+                        <div className={`rounded-2xl shadow-xl p-6 transition-all duration-300 ${
+                            isDarkMode 
+                                ? 'bg-white/10 border border-white/20' 
+                                : 'bg-white'
+                        }`}>
                             <div className="flex items-center justify-between mb-4">
-                                <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+                                <h3 className={`text-xl font-bold flex items-center gap-2 transition-all duration-300 ${
+                                    isDarkMode ? 'text-white' : 'text-gray-800'
+                                }`}>
                                     <PieChart className="text-green-500" />
                                     Expense Tracker
                                 </h3>
@@ -506,21 +620,33 @@ const EnhancedCurrencyConverter = () => {
 
                             {/* Add Expense Form */}
                             {showExpenseForm && (
-                                <div className="mb-4 p-4 bg-gray-50 rounded-lg">
+                                <div className={`mb-4 p-4 rounded-lg transition-all duration-300 ${
+                                    isDarkMode 
+                                        ? 'bg-white/10 border border-white/20' 
+                                        : 'bg-gray-50'
+                                }`}>
                                     <input
                                         type="number"
                                         placeholder="Amount"
                                         value={newExpense.amount}
                                         onChange={(e) => setNewExpense({ ...newExpense, amount: e.target.value })}
-                                        className="w-full mb-2 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none"
+                                        className={`w-full mb-2 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none transition-all duration-300 ${
+                                            isDarkMode 
+                                                ? 'bg-white/20 border-white/20 text-white placeholder-gray-300 focus:border-white/40' 
+                                                : 'border-gray-300'
+                                        }`}
                                     />
                                     <select
                                         value={newExpense.currency}
                                         onChange={(e) => setNewExpense({ ...newExpense, currency: e.target.value })}
-                                        className="w-full mb-2 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none"
+                                        className={`w-full mb-2 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none transition-all duration-300 ${
+                                            isDarkMode 
+                                                ? 'bg-white/20 border-white/20 text-white focus:border-white/40' 
+                                                : 'border-gray-300'
+                                        }`}
                                     >
                                         {Object.keys(CURRENCY_INFO).map(code => (
-                                            <option key={code} value={code}>{code}</option>
+                                            <option key={code} value={code} className={isDarkMode ? 'bg-slate-800 text-white' : 'bg-white text-gray-900'}>{code}</option>
                                         ))}
                                     </select>
                                     <input
@@ -528,15 +654,23 @@ const EnhancedCurrencyConverter = () => {
                                         placeholder="Description"
                                         value={newExpense.description}
                                         onChange={(e) => setNewExpense({ ...newExpense, description: e.target.value })}
-                                        className="w-full mb-2 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none"
+                                        className={`w-full mb-2 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none transition-all duration-300 ${
+                                            isDarkMode 
+                                                ? 'bg-white/20 border-white/20 text-white placeholder-gray-300 focus:border-white/40' 
+                                                : 'border-gray-300'
+                                        }`}
                                     />
                                     <select
                                         value={newExpense.category}
                                         onChange={(e) => setNewExpense({ ...newExpense, category: e.target.value })}
-                                        className="w-full mb-2 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none"
+                                        className={`w-full mb-2 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none transition-all duration-300 ${
+                                            isDarkMode 
+                                                ? 'bg-white/20 border-white/20 text-white focus:border-white/40' 
+                                                : 'border-gray-300'
+                                        }`}
                                     >
                                         {EXPENSE_CATEGORIES.map(cat => (
-                                            <option key={cat.value} value={cat.value}>
+                                            <option key={cat.value} value={cat.value} className={isDarkMode ? 'bg-slate-800 text-white' : 'bg-white text-gray-900'}>
                                                 {cat.icon} {cat.label}
                                             </option>
                                         ))}
@@ -551,7 +685,11 @@ const EnhancedCurrencyConverter = () => {
                             )}
 
                             {/* Total Expenses */}
-                            <div className="mb-4 p-3 bg-blue-50 rounded-lg">
+                            <div className={`mb-4 p-3 rounded-lg transition-all duration-300 ${
+                                isDarkMode 
+                                    ? 'bg-blue-900/20 border border-blue-700/50' 
+                                    : 'bg-blue-50'
+                            }`}>
                                 <div className="text-center">
                                     <div className="text-2xl font-bold text-blue-700">${totalExpensesUSD.toFixed(2)}</div>
                                     <div className="text-sm text-blue-600">Total Expenses (USD)</div>
@@ -572,10 +710,18 @@ const EnhancedCurrencyConverter = () => {
                             {/* Expenses List */}
                             <div className="space-y-2 max-h-64 overflow-y-auto">
                                 {expenses.map(expense => (
-                                    <div key={expense.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <div key={expense.id} className={`flex items-center justify-between p-3 rounded-lg transition-all duration-300 ${
+                                        isDarkMode 
+                                            ? 'bg-white/10 border border-white/20' 
+                                            : 'bg-gray-50'
+                                    }`}>
                                         <div className="flex-1">
-                                            <div className="font-medium text-gray-800">{expense.description}</div>
-                                            <div className="text-sm text-gray-600">
+                                            <div className={`font-medium transition-all duration-300 ${
+                                                isDarkMode ? 'text-white' : 'text-gray-800'
+                                            }`}>{expense.description}</div>
+                                            <div className={`text-sm transition-all duration-300 ${
+                                                isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                                            }`}>
                                                 {expense.amount} {expense.currency} • {EXPENSE_CATEGORIES.find(c => c.value === expense.category)?.icon}
                                             </div>
                                         </div>
@@ -588,7 +734,9 @@ const EnhancedCurrencyConverter = () => {
                                     </div>
                                 ))}
                                 {expenses.length === 0 && (
-                                    <div className="text-center py-4 text-gray-500">
+                                    <div className={`text-center py-4 transition-all duration-300 ${
+                                        isDarkMode ? 'text-gray-300' : 'text-gray-500'
+                                    }`}>
                                         <PieChart className="w-8 h-8 mx-auto mb-2 text-gray-300" />
                                         <p className="text-sm">No expenses yet</p>
                                     </div>
@@ -598,16 +746,28 @@ const EnhancedCurrencyConverter = () => {
 
                         {/* Favorite Pairs */}
                         {favoritePairs.length > 0 && (
-                            <div className="bg-white rounded-2xl shadow-xl p-6">
-                                <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                            <div className={`rounded-2xl shadow-xl p-6 transition-all duration-300 ${
+                                isDarkMode 
+                                    ? 'bg-white/10 border border-white/20' 
+                                    : 'bg-white'
+                            }`}>
+                                <h3 className={`text-xl font-bold mb-4 flex items-center gap-2 transition-all duration-300 ${
+                                    isDarkMode ? 'text-white' : 'text-gray-800'
+                                }`}>
                                     ❤️ Favorite Pairs
                                 </h3>
                                 <div className="space-y-2">
                                     {favoritePairs.map(pair => {
                                         const [from, to] = pair.split('-');
                                         return (
-                                            <div key={pair} className="p-3 bg-pink-50 rounded-lg border border-pink-200">
-                                                <div className="font-medium text-pink-800">
+                                            <div key={pair} className={`p-3 rounded-lg border transition-all duration-300 ${
+                                                isDarkMode 
+                                                    ? 'bg-pink-900/20 border-pink-700/50' 
+                                                    : 'bg-pink-50 border-pink-200'
+                                            }`}>
+                                                <div className={`font-medium transition-all duration-300 ${
+                                                    isDarkMode ? 'text-pink-200' : 'text-pink-800'
+                                                }`}>
                                                     {CURRENCY_INFO[from]?.flag} {from} → {CURRENCY_INFO[to]?.flag} {to}
                                                 </div>
                                             </div>
@@ -618,28 +778,40 @@ const EnhancedCurrencyConverter = () => {
                         )}
 
                         {/* Currency Strength */}
-                        <div className="bg-white rounded-2xl shadow-xl p-6">
-                            <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                        <div className={`rounded-2xl shadow-xl p-6 transition-all duration-300 ${
+                            isDarkMode 
+                                ? 'bg-white/10 border border-white/20' 
+                                : 'bg-white'
+                        }`}>
+                            <h3 className={`text-xl font-bold mb-4 flex items-center gap-2 transition-all duration-300 ${
+                                isDarkMode ? 'text-white' : 'text-gray-800'
+                            }`}>
                                 <TrendingUp className="text-green-500" />
                                 Currency Strength
                             </h3>
                             <div className="space-y-3">
                                 <div className="flex items-center justify-between">
-                                    <span className="text-sm text-gray-600">USD</span>
+                                    <span className={`text-sm transition-all duration-300 ${
+                                        isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                                    }`}>USD</span>
                                     <div className="flex items-center gap-1">
                                         <TrendingUp className="w-4 h-4 text-green-500" />
                                         <span className="text-sm font-medium text-green-600">Strong</span>
                                     </div>
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-sm text-gray-600">EUR</span>
+                                    <span className={`text-sm transition-all duration-300 ${
+                                        isDarkMode ? 'text-gray-300' : 'text-gray-800'
+                                    }`}>EUR</span>
                                     <div className="flex items-center gap-1">
                                         <TrendingDown className="w-4 h-4 text-red-500" />
                                         <span className="text-sm font-medium text-red-600">Weak</span>
                                     </div>
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-sm text-gray-600">JPY</span>
+                                    <span className={`text-sm transition-all duration-300 ${
+                                        isDarkMode ? 'text-gray-300' : 'text-gray-800'
+                                    }`}>JPY</span>
                                     <div className="flex items-center gap-1">
                                         <TrendingDown className="w-4 h-4 text-red-500" />
                                         <span className="text-sm font-medium text-red-600">Weak</span>
