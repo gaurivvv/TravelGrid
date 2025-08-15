@@ -93,7 +93,7 @@ function Hotels() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search by hotel or destination..."
-              className="w-full px-6 py-4 rounded-xl bg-white border-2 border-pink-200 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30 focus:border-pink-500 shadow-lg transition-all"
+              className="w-full px-6 py-4 rounded-xl bg-white border-2 border-pink-200 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30 focus:border-pink-500 shadow-lg transition-all"
             />
           </div>
         </section>
