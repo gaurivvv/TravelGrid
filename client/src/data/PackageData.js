@@ -108,20 +108,19 @@ export const packages = [
 			{
 				name: "Alice",
 				rating: 5,
-				comment: "Loved the Tropical Paradise - Maldives! Highly recommend.",
+				comment: "The Maldives was breathtaking! The overwater villa and snorkeling tours were unforgettable.",
 				date: "2 weeks ago",
 			},
 			{
 				name: "Bob",
-				rating: 3,
-				comment: "Great experience, would book again.",
+				rating: 4,
+				comment: "Loved the seaplane transfer and the spa treatments. Perfect tropical getaway.",
 				date: "1 month ago",
 			},
 			{
 				name: "Sarah",
-				rating: 4,
-				comment:
-					"Beautiful location and excellent service. The overwater villa was amazing!",
+				rating: 5,
+				comment: "Crystal-clear waters and luxury everywhere. Highly recommend for couples!",
 				date: "3 weeks ago",
 			},
 		],
@@ -307,22 +306,19 @@ export const packages = [
 			{
 				name: "Alice",
 				rating: 5,
-				comment:
-					"Absolutely magical! From the Colosseum to the Eiffel Tower, every moment was unforgettable.",
+				comment: "Exploring Rome and Paris in one trip was magical! Loved the Colosseum and Eiffel Tower tours.",
 				date: "2 weeks ago",
 			},
 			{
 				name: "Bob",
 				rating: 4,
-				comment:
-					"Great itinerary and guides. Hotels were comfortable and well-located.",
+				comment: "Great guides and comfortable hotels. The wine tasting in Tuscany was a highlight.",
 				date: "1 month ago",
 			},
 			{
 				name: "Sarah",
 				rating: 4,
-				comment:
-					"Beautiful destinations and amazing food. Would recommend to anyone visiting Europe for the first time.",
+				comment: "Beautiful cities and amazing food. The Seine River cruise in Paris was unforgettable.",
 				date: "3 weeks ago",
 			},
 		],
@@ -481,19 +477,19 @@ export const packages = [
 			{
 				name: "Rita",
 				rating: 5,
-				comment: "The desert dinner was magical! The whole trip was beyond expectations.",
+				comment: "The desert dinner under the stars was magical! Loved the dune bashing and luxury resort.",
 				date: "2 weeks ago",
 			},
 			{
 				name: "Derek",
 				rating: 5,
-				comment: "Loved the dune bashing and the luxury stay. Definitely worth every penny.",
+				comment: "Dubai's desert adventures were thrilling. The spa and private beach were perfect for relaxation.",
 				date: "1 month ago",
 			},
 			{
 				name: "Sarah",
 				rating: 4,
-				comment: "Beautiful desert scenery and very comfortable accommodations.",
+				comment: "Beautiful desert scenery and very comfortable accommodations. Highly recommend!",
 				date: "3 weeks ago",
 			},
 		],
@@ -666,19 +662,19 @@ export const packages = [
 			{
 				name: "Ram",
 				rating: 5,
-				comment: "The perfect blend of adventure and relaxation. Loved the paragliding!",
+				comment: "The adventure activities in Manali were thrilling! Paragliding and river rafting were my favorites.",
 				date: "2 weeks ago",
 			},
 			{
 				name: "Bob",
 				rating: 5,
-				comment: "Manali is breathtaking. The resort was cozy and the itinerary well planned.",
+				comment: "Manali's mountain views and cozy resort made for a perfect getaway.",
 				date: "1 month ago",
 			},
 			{
 				name: "Prince",
 				rating: 4,
-				comment: "Great activities, though I wish we had more time at Rohtang Pass.",
+				comment: "Loved the trekking and bonfire evenings. Wish we had more time at Rohtang Pass.",
 				date: "3 weeks ago",
 			},
 		],
@@ -830,19 +826,19 @@ export const packages = [
 			{
 				name: "Alia",
 				rating: 5,
-				comment: "Loved the experience of being so close to nature in Himachal. Will totally recommend it!",
+				comment: "The snow adventures in Solang Valley were amazing! Loved the bonfire and mountain views.",
 				date: "2 weeks ago"
 			},
 			{
 				name: "Chris",
-				rating: 3,
-				comment: "Good trip overall, would book again.",
+				rating: 4,
+				comment: "Great trip for families. The temple visits and Mall Road shopping were fun.",
 				date: "1 month ago"
 			},
 			{
 				name: "Sarah",
-				rating: 4,
-				comment: "Beautiful location and excellent service. The resort was amazing!",
+				rating: 5,
+				comment: "Beautiful Himachal scenery and excellent service at the resort.",
 				date: "3 weeks ago"
 			}
 		],
@@ -1001,19 +997,19 @@ export const packages = [
 			{
 				name: "Ravi",
 				rating: 5,
-				comment: "A perfect blend of culture and comfort.",
+				comment: "Jaipur's forts and palaces were stunning. The cultural evening was a highlight!",
 				date: "3 weeks ago"
 			},
 			{
 				name: "Anusha",
-				rating: 3,
-				comment: "Great experience, would book again.",
+				rating: 4,
+				comment: "Loved the Blue City of Jodhpur and the camel ride in Jaisalmer.",
 				date: "1 month ago"
 			},
 			{
 				name: "Sarah",
-				rating: 4,
-				comment: "Beautiful location and excellent service. An unforgettable royal getaway!",
+				rating: 5,
+				comment: "A royal experience in Rajasthan! The professional photoshoot was a nice touch.",
 				date: "3 weeks ago"
 			}
 		],
@@ -1188,19 +1184,19 @@ export const packages = [
 			{
 				name: "Alyssa",
 				rating: 5,
-				comment: "An unforgettable beach holiday! Everything was well-organized and the private beach was heavenly.",
+				comment: "Goa's beaches and water sports were fantastic! Loved the private resort and nightlife tour.",
 				date: "2 weeks ago"
 			},
 			{
 				name: "Puleng",
-				rating: 3,
-				comment: "Loved the cultural day and South Goa's calm beaches. Would have liked more time at the spice plantation though.",
+				rating: 4,
+				comment: "The spice plantation and South Goa's calm beaches were my favorite parts.",
 				date: "1 month ago"
 			},
 			{
 				name: "June",
-				rating: 4,
-				comment: "Perfect romantic escape! From candlelight dinners to the spa sessions - everything was magical.",
+				rating: 5,
+				comment: "Perfect romantic escape! The candlelight dinner and spa session were magical.",
 				date: "3 weeks ago"
 			}
 		],
@@ -1322,19 +1318,19 @@ export const packages = [
 			{
 				name: "Kim",
 				rating: 5,
-				comment: "Peaceful and adventurous! Loved the yoga, rafting, and vibe of Rishikesh. Would definitely recommend.",
+				comment: "The Ganga Aarti and yoga sessions in Rishikesh were so peaceful. Rafting was a thrill!",
 				date: "2 weeks ago"
 			},
 			{
 				name: "Kate",
-				rating: 3,
-				comment: "The bonfire night and riverside view were magical. Rafting was a bit intense for beginners though!",
+				rating: 4,
+				comment: "Loved the riverside cottage and bonfire night. Rafting was a bit intense for beginners.",
 				date: "1 month ago"
 			},
 			{
 				name: "Donald",
-				rating: 4,
-				comment: "A perfect quick getaway. The spiritual aura and friendly guides made it special.",
+				rating: 5,
+				comment: "A perfect spiritual and adventure getaway. The guides were very friendly.",
 				date: "3 weeks ago"
 			}
 		],
@@ -1605,13 +1601,13 @@ export const packages = [
 			{
 				name: "Vincent",
 				rating: 5,
-				comment: "Perfect winter escape! Loved the train ride.",
+				comment: "The Glacier Express ride through the Alps was unforgettable! Loved the skiing and fondue dinner.",
 				date: "1 week ago",
 			},
 			{
 				name: "Sophia",
 				rating: 4,
-				comment: "Chalet stay was cozy, and skiing was thrilling. Highly recommend!",
+				comment: "Cozy chalet stay and amazing snow sports. Highly recommend for winter lovers!",
 				date: "2 weeks ago",
 			},
 		],
@@ -1733,13 +1729,13 @@ export const packages = [
 			{
 				name: "Noah",
 				rating: 5,
-				comment: "Unforgettable! Saw lions up close!",
+				comment: "Saw lions and elephants up close in Maasai Mara! The campfire dinner was a unique experience.",
 				date: "3 weeks ago",
 			},
 			{
 				name: "Aisha",
 				rating: 4,
-				comment: "Amazing safari experience with knowledgeable guides. Truly a once-in-a-lifetime trip.",
+				comment: "The guides were knowledgeable and the safari tent was luxurious. Loved the game drives.",
 				date: "1 month ago",
 			},
 		],
@@ -1923,4 +1919,3 @@ export const packages = [
 		],
 	}
 ];
-
