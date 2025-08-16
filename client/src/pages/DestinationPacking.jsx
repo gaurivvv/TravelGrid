@@ -4,7 +4,9 @@ import { MdTravelExplore } from "react-icons/md";
 import { FiPlus, FiTrash2 } from "react-icons/fi";
 
 const API_KEY =
-  import.meta.env.VITE_OPENWEATHER_KEY || import.meta.env.VITE_OPENWEATHER_API_KEY || "";
+  import.meta.env.VITE_OPENWEATHER_KEY ||
+  import.meta.env.VITE_OPENWEATHER_API_KEY ||
+  "";
 
 async function geocodeCity(city) {
   const url = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(
@@ -16,7 +18,7 @@ async function geocodeCity(city) {
     throw new Error(`Geocoding failed: ${res.status} ${res.statusText} ${txt}`);
   }
   const arr = await res.json();
-  return arr?.[0] || null; 
+  return arr?.[0] || null;
 }
 
 async function fetchWeather(lat, lon) {
@@ -24,14 +26,16 @@ async function fetchWeather(lat, lon) {
   const res = await fetch(url);
   if (!res.ok) {
     const txt = await res.text().catch(() => "");
-    throw new Error(`Weather fetch failed: ${res.status} ${res.statusText} ${txt}`);
+    throw new Error(
+      `Weather fetch failed: ${res.status} ${res.statusText} ${txt}`
+    );
   }
-  return await res.json(); 
+  return await res.json();
 }
 
 function buildPacking(weather) {
   const list = {
-    Clothing: [ "Socks", "T-shirts"],
+    Clothing: ["Socks", "T-shirts"],
     Footwear: ["Comfortable walking shoes"],
     Accessories: [],
     Toiletries: ["Toothbrush", "Toothpaste", "Deodorant"],
@@ -41,7 +45,7 @@ function buildPacking(weather) {
     Misc: ["Reusable water bottle", "Small daypack"],
   };
 
-  const temp = weather?.main?.temp; 
+  const temp = weather?.main?.temp;
   const wMain = (weather?.weather?.[0]?.main || "").toLowerCase();
   const wDesc = weather?.weather?.[0]?.description || "";
   const humidity = weather?.main?.humidity ?? null;
@@ -66,7 +70,11 @@ function buildPacking(weather) {
       list.Clothing.push("Light jacket", "Breathable shirts");
       list.Footwear.push("Sneakers");
     } else {
-      list.Clothing.push("Shorts", "Light cotton/linen", "Swimwear (if applicable)");
+      list.Clothing.push(
+        "Shorts",
+        "Light cotton/linen",
+        "Swimwear (if applicable)"
+      );
       list.Footwear.push("Sandals/Flip-flops");
       list.Accessories.push("Sunglasses", "Sun hat/cap");
       list.Toiletries.push("High-SPF sunscreen", "After-sun lotion");
@@ -75,7 +83,6 @@ function buildPacking(weather) {
   } else {
     list.Clothing.push("Layerable clothes");
   }
-
 
   if (wMain.includes("rain") || /rain|drizzle|thunder/i.test(wDesc)) {
     list.Accessories.push("Umbrella", "Compact raincoat");
@@ -90,11 +97,16 @@ function buildPacking(weather) {
     list.Accessories.push("Windbreaker");
   }
 
- 
   Object.keys(list).forEach((k) => (list[k] = Array.from(new Set(list[k]))));
-  return { temp, wMain: weather?.weather?.[0]?.main, wDesc, humidity, wind, list };
+  return {
+    temp,
+    wMain: weather?.weather?.[0]?.main,
+    wDesc,
+    humidity,
+    wind,
+    list,
+  };
 }
-
 
 function AddCustom({ onAdd }) {
   const [val, setVal] = useState("");
@@ -126,18 +138,18 @@ export default function DestinationPacking() {
   const [city, setCity] = useState("");
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
-  const [meta, setMeta] = useState(null); 
-  const [packs, setPacks] = useState({}); 
-  const [checked, setChecked] = useState({}); 
-  const [custom, setCustom] = useState({}); 
+  const [meta, setMeta] = useState(null);
+  const [packs, setPacks] = useState({});
+  const [checked, setChecked] = useState({});
+  const [custom, setCustom] = useState({});
 
-  
   const storageKey = (placeName, country) =>
-    `packing_${(placeName || "global").toLowerCase().replace(/\s+/g, "_")}_${(country || "")
+    `packing_${(placeName || "global").toLowerCase().replace(/\s+/g, "_")}_${(
+      country || ""
+    )
       .toLowerCase()
       .replace(/\s+/g, "_")}`;
 
-  
   useEffect(() => {
     if (!meta) return;
     const raw = localStorage.getItem(storageKey(meta.name, meta.country));
@@ -151,7 +163,7 @@ export default function DestinationPacking() {
         console.warn("Failed to parse saved packing data:", e);
       }
     }
-    
+
     if (packs && Object.keys(packs).length) {
       const ck = {};
       Object.entries(packs).forEach(([cat, arr]) =>
@@ -162,8 +174,7 @@ export default function DestinationPacking() {
       setChecked({});
     }
     setCustom({});
-  }, [meta]); 
-
+  }, [meta]);
 
   useEffect(() => {
     if (!meta) return;
@@ -180,8 +191,14 @@ export default function DestinationPacking() {
   async function handleGet() {
     try {
       setErr("");
-      if (!API_KEY) throw new Error("OpenWeather API key missing. Add VITE_OPENWEATHER_KEY to .env.local");
-      if (!city || !city.trim()) throw new Error("Please enter a city (you can add ',countryCode' for disambiguation, e.g. 'Paris,FR')");
+      if (!API_KEY)
+        throw new Error(
+          "OpenWeather API key missing. Add VITE_OPENWEATHER_KEY to .env.local"
+        );
+      if (!city || !city.trim())
+        throw new Error(
+          "Please enter a city (you can add ',countryCode' for disambiguation, e.g. 'Paris,FR')"
+        );
 
       setLoading(true);
       setPacks({});
@@ -189,15 +206,15 @@ export default function DestinationPacking() {
       setCustom({});
       setMeta(null);
 
-      
       const place = await geocodeCity(city.trim());
-      if (!place) throw new Error("City not found. Try adding a country code (e.g., 'Springfield,US') for better accuracy.");
+      if (!place)
+        throw new Error(
+          "City not found. Try adding a country code (e.g., 'Springfield,US') for better accuracy."
+        );
 
-  
       const weather = await fetchWeather(place.lat, place.lon);
       const built = buildPacking(weather);
 
-    
       const ck = {};
       Object.entries(built.list).forEach(([cat, arr]) =>
         arr.forEach((it) => (ck[`${cat}|${it}`] = false))
@@ -258,7 +275,9 @@ export default function DestinationPacking() {
   function exportTxt() {
     if (!meta) return;
     let out = `Packing Checklist — ${meta.name}, ${meta.country}\n`;
-    out += `Weather: ${meta.desc} • ${meta.temp}°C • Humidity ${meta.humidity ?? "?"}% • Wind ${meta.wind ?? "?"} m/s\n\n`;
+    out += `Weather: ${meta.desc} • ${meta.temp}°C • Humidity ${
+      meta.humidity ?? "?"
+    }% • Wind ${meta.wind ?? "?"} m/s\n\n`;
     Object.keys(packs).forEach((cat) => {
       out += `== ${cat} ==\n`;
       packs[cat].forEach((it) => {
@@ -287,7 +306,9 @@ export default function DestinationPacking() {
     doc.text(`Packing — ${meta.name}, ${meta.country}`, 10, 10);
     doc.setFontSize(11);
     doc.text(
-      `Weather: ${meta.desc} • ${meta.temp}°C • Humidity ${meta.humidity ?? "?"}% • Wind ${meta.wind ?? "?"} m/s`,
+      `Weather: ${meta.desc} • ${meta.temp}°C • Humidity ${
+        meta.humidity ?? "?"
+      }% • Wind ${meta.wind ?? "?"} m/s`,
       10,
       18
     );
@@ -327,103 +348,184 @@ export default function DestinationPacking() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <div className="bg-white rounded-2xl shadow p-6">
-        <header className="flex items-center gap-2 mb-4">
-          <MdTravelExplore className="text-2xl text-indigo-600" />
-          <h1 className="text-xl font-semibold">Destination-Specific Packing</h1>
-        </header>
+    <div className="max-w-4xl mx-auto mt-20 p-6">
+  <div className="relative rounded-3xl shadow-2xl overflow-hidden"
+       style={{
+         background: "var(--card-bg)",
+         border: "1px solid var(--card-border)",
+         boxShadow: "0 10px 25px var(--shadow-primary)"
+       }}>
+    
+    {/* Gradient Header Bar */}
+    <div className="absolute top-0 left-0 w-full h-2" 
+         style={{ background: "var(--gradient-primary)" }}></div>
 
-        <div className="flex gap-2 mb-3">
-          <input
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            placeholder="Enter city (e.g., Goa or 'Paris,FR')"
-            className="flex-1 border px-3 py-2 rounded"
-          />
-          <button
-            type="button"
-            onClick={handleGet}
-            disabled={loading}
-            className="px-4 py-2 rounded bg-indigo-600 hover:bg-indigo-700 text-white disabled:opacity-60"
-          >
-            {loading ? "Fetching..." : "Get Suggestions"}
-          </button>
-        </div>
+    {/* Main Content */}
+    <div className="p-6 space-y-6 text-[var(--text-primary)]">
 
-        {err && <div className="text-red-600 mb-3">{err}</div>}
+      {/* Header */}
+      <header className="flex items-center justify-center gap-3 mb-4">
+  <MdTravelExplore className="text-3xl text-[var(--accent-primary)] drop-shadow" />
+  <h1 className="text-2xl font-bold bg-gradient-to-r from-[var(--accent-primary)] to-[var(--button-hover)] bg-clip-text text-transparent">
+    Destination-Specific Packing
+  </h1>
+</header>
 
-        {meta && (
-          <div className="text-sm text-gray-600 mb-4">
-            <div>
-              <strong>Location:</strong> {meta.name}, {meta.country}
-            </div>
-            <div>
-              <strong>Weather:</strong> {meta.desc} • {meta.temp}°C • Humidity {meta.humidity ?? "?"}% • Wind{" "}
-              {meta.wind ?? "?"} m/s
-            </div>
-          </div>
-        )}
 
-        {Object.keys(packs).length > 0 ? (
-          <>
-            <div className="flex items-center gap-2 mb-3">
-              <button onClick={exportTxt} className="px-3 py-1 border rounded text-sm">
-                Export .txt
-              </button>
-              <button onClick={exportPdf} className="px-3 py-1 bg-indigo-600 text-white rounded text-sm">
-                Export PDF
-              </button>
-            </div>
-
-            <div className="space-y-4">
-              {Object.keys(packs).map((cat) => (
-                <div key={cat} className="border rounded-lg p-3">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-semibold">{cat}</h3>
-                    <AddCustom onAdd={(txt) => addCustom(cat, txt)} />
-                  </div>
-
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {packs[cat].map((it) => {
-                      const key = formatKey(cat, it);
-                      const isChecked = !!checked[key];
-                      return (
-                        <li key={key} className="flex items-center gap-2">
-                          <input type="checkbox" checked={isChecked} onChange={() => toggle(cat, it)} />
-                          <span className={isChecked ? "line-through text-gray-500" : ""}>{it}</span>
-                        </li>
-                      );
-                    })}
-                    {(custom[cat] || []).map((it) => {
-                      const key = formatKey(cat, it);
-                      const isChecked = !!checked[key];
-                      return (
-                        <li key={key} className="flex items-center gap-2">
-                          <input type="checkbox" checked={isChecked} onChange={() => toggle(cat, it)} />
-                          <span className={isChecked ? "line-through text-gray-500" : ""}>
-                            {it} <span className="text-xs text-gray-400">(custom)</span>
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() => removeCustom(cat, it)}
-                            className="ml-auto text-red-600 hover:text-red-700"
-                            title="Remove"
-                          >
-                            <FiTrash2 />
-                          </button>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </>
-        ) : (
-          <div className="text-gray-500">Enter a city and click “Get Suggestions”.</div>
-        )}
+      {/* Input + Button */}
+      <div className="flex gap-2 mb-4">
+        <input
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          placeholder="Enter city (e.g., Goa or 'Paris,FR')"
+          className="flex-1 px-4 py-2 rounded-xl outline-none"
+          style={{
+            background: "var(--input-bg)",
+            border: "1px solid var(--input-border)",
+            color: "var(--text-primary)",
+          }}
+          onFocus={(e) => e.target.style.borderColor = "var(--input-focus)"}
+          onBlur={(e) => e.target.style.borderColor = "var(--input-border)"}
+        />
+        <button
+          type="button"
+          onClick={handleGet}
+          disabled={loading}
+          className="px-5 py-2 rounded-xl font-medium text-white shadow transition-all"
+          style={{
+            background: "var(--button-primary)",
+            color: "var(--text-primary)"
+          }}
+          onMouseOver={(e) => e.currentTarget.style.background = "var(--button-hover)"}
+          onMouseOut={(e) => e.currentTarget.style.background = "var(--button-primary)"}
+        >
+          {loading ? "Fetching..." : "Get Suggestions"}
+        </button>
       </div>
+
+      {/* Error */}
+      {err && <div style={{ color: "var(--error-color)", fontWeight: "500" }}>{err}</div>}
+
+      {/* Meta Info */}
+      {meta && (
+        <div className="p-3 rounded-lg shadow-sm"
+             style={{ background: "var(--card-bg)", color: "var(--text-secondary)" }}>
+          <div>
+            <strong style={{ color: "var(--accent-primary)" }}>Location:</strong>{" "}
+            {meta.name}, {meta.country}
+          </div>
+          <div>
+            <strong style={{ color: "var(--accent-primary)" }}>Weather:</strong>{" "}
+            {meta.desc} • {meta.temp}°C • Humidity {meta.humidity ?? "?"}% •
+            Wind {meta.wind ?? "?"} m/s
+          </div>
+        </div>
+      )}
+
+      {/* Packing List */}
+      {Object.keys(packs).length > 0 ? (
+        <>
+          {/* Export Buttons */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={exportTxt}
+              className="px-4 py-2 rounded-lg text-sm font-medium transition-all"
+              style={{
+                border: "1px solid var(--input-border)",
+                color: "var(--accent-primary)",
+                background: "var(--card-bg)"
+              }}
+            >
+              Export .txt
+            </button>
+            <button
+              onClick={exportPdf}
+              className="px-4 py-2 rounded-lg text-sm font-medium shadow transition-all"
+              style={{ background: "var(--gradient-primary)", color: "var(--text-primary)" }}
+            >
+              Export PDF
+            </button>
+          </div>
+
+          {/* Categories */}
+          <div className="space-y-5 mt-4">
+            {Object.keys(packs).map((cat) => (
+              <div key={cat} className="rounded-xl p-4 shadow-md"
+                   style={{
+                     background: "var(--card-bg)",
+                     border: "1px solid var(--card-border)"
+                   }}>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 style={{ color: "var(--accent-primary)", fontWeight: "600" }}>{cat}</h3>
+                  <AddCustom onAdd={(txt) => addCustom(cat, txt)} />
+                </div>
+
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {packs[cat].map((it) => {
+                    const key = formatKey(cat, it);
+                    const isChecked = !!checked[key];
+                    return (
+                      <li key={key} className="flex items-center gap-2 px-2 py-1 rounded transition"
+                          style={{ backgroundColor: isChecked ? "var(--bg-tertiary)" : "transparent" }}>
+                        <input
+                          type="checkbox"
+                          checked={isChecked}
+                          onChange={() => toggle(cat, it)}
+                          className="accent-[var(--accent-primary)]"
+                        />
+                        <span style={{
+                          textDecoration: isChecked ? "line-through" : "none",
+                          color: isChecked ? "var(--text-muted)" : "var(--text-primary)"
+                        }}>
+                          {it}
+                        </span>
+                      </li>
+                    );
+                  })}
+                  {(custom[cat] || []).map((it) => {
+                    const key = formatKey(cat, it);
+                    const isChecked = !!checked[key];
+                    return (
+                      <li key={key} className="flex items-center gap-2 px-2 py-1 rounded transition">
+                        <input
+                          type="checkbox"
+                          checked={isChecked}
+                          onChange={() => toggle(cat, it)}
+                          className="accent-[var(--accent-secondary)]"
+                        />
+                        <span style={{
+                          textDecoration: isChecked ? "line-through" : "none",
+                          color: isChecked ? "var(--text-muted)" : "var(--text-primary)"
+                        }}>
+                          {it} <span style={{ fontSize: "0.7rem", color: "var(--text-muted)" }}>(custom)</span>
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => removeCustom(cat, it)}
+                          style={{ marginLeft: "auto", color: "var(--error-color)" }}
+                          title="Remove"
+                        >
+                          <FiTrash2 />
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </>
+      ) : (
+        <div style={{ color: "var(--text-muted)", textAlign: "center", marginTop: "1.5rem" }}>
+          Enter a city and click{" "}
+          <span style={{ fontWeight: "600", color: "var(--accent-primary)" }}>
+            “Get Suggestions”
+          </span>.
+        </div>
+      )}
     </div>
+  </div>
+</div>
+
   );
 }
