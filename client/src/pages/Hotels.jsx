@@ -101,10 +101,10 @@ function Hotels() {
                   )}
                 </div>
 
-                <span className="text-pink-600 dark:text-pink-400 font-medium mb-3">
+                <span className="text-black dark:text-black font-medium mb-3">
                   {hotel.location}
                 </span>
-                <p className={`text-sm text-gray-700 line-clamp-3 flex-1 ${isDarkMode ? "dark:text-gray-300" : "text-gray-950"}`}>
+                <p className={`text-sm text-black line-clamp-3 flex-1 ${isDarkMode ? "dark:text-black" : "text-black"}`}>
                   {hotel.description}
                 </p>
                 <button
@@ -115,7 +115,7 @@ function Hotels() {
                 </button>
                 <button
                   onClick={() => handleLike(hotel)}
-                  className={`mt-2 px-4 py-2 rounded-lg text-sm font-semibold transition cursor-pointer ${isDarkMode ? "bg-pink-100 dark:bg-pink-900/30 hover:bg-pink-200 dark:hover:bg-pink-900/50 text-pink-600 dark:text-pink-400" : "bg-pink-400 darl:bg-pink-900/10 hover:bg-pink-500 dark:hover:bg-pink-900/30 text-white"}`}
+                  className={`mt-2 px-4 py-2 rounded-lg text-sm font-semibold transition cursor-pointer ${isDarkMode ? "bg-pink-100 dark:bg-pink-900/30 hover:bg-pink-200 dark:hover:bg-pink-900/50 text-black dark:text-black" : "bg-pink-400 darl:bg-pink-900/10 hover:bg-pink-500 dark:hover:bg-pink-900/30 text-black"}`}
                 >
                   ❤️ Save to Dashboard
                 </button>
