@@ -4,8 +4,10 @@ import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { useTheme } from "../../context/ThemeContext";
 
 const PackingChecklist = () => {
+  const { isDarkMode } = useTheme();
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState("");
   const [showAddForm, setShowAddForm] = useState(false);
@@ -321,21 +323,27 @@ const PackingChecklist = () => {
     <div className="max-w-6xl mx-auto p-6">
       {/* Header */}
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-white mb-4">
+        <h1 className={`text-4xl font-bold mb-4 ${
+          isDarkMode ? 'text-white' : 'text-gray-900'
+        }`}>
           Travel Packing Checklist
         </h1>
-        <p className="text-gray-300 text-lg mb-6">
+        <p className={`text-lg mb-6 ${
+          isDarkMode ? 'text-gray-300' : 'text-gray-600'
+        }`}>
           Stay organized and never forget essential items for your trip
         </p>
         
         {/* Overall Progress Bar */}
-        <div className="bg-gray-700 rounded-full h-4 mb-4">
+        <div className={`rounded-full h-4 mb-4 ${
+          isDarkMode ? 'bg-gray-700' : 'bg-gray-200'
+        }`}>
           <div 
             className="bg-gradient-to-r from-pink-500 to-pink-600 h-4 rounded-full transition-all duration-300"
             style={{ width: `${progressPercentage}%` }}
           ></div>
         </div>
-        <p className="text-gray-300">
+        <p className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>
           {packedCount} of {totalCount} items packed ({Math.round(progressPercentage)}%)
         </p>
       </div>
@@ -419,15 +427,23 @@ const PackingChecklist = () => {
 
       {/* Add Item Form */}
       {showAddForm && (
-        <div className="bg-gray-800 rounded-lg p-6 mb-8">
-          <h3 className="text-xl font-semibold text-white mb-4">Add New Item</h3>
+        <div className={`rounded-lg p-6 mb-8 ${
+          isDarkMode ? 'bg-gray-800' : 'bg-white border border-gray-200'
+        }`}>
+          <h3 className={`text-xl font-semibold mb-4 ${
+            isDarkMode ? 'text-white' : 'text-gray-900'
+          }`}>Add New Item</h3>
           <div className="flex gap-3">
             <input
               type="text"
               value={newItem}
               onChange={(e) => setNewItem(e.target.value)}
               placeholder="Enter item name..."
-              className="flex-1 bg-gray-700 text-white px-4 py-2 rounded-lg border border-gray-600 focus:border-pink-500 focus:outline-none"
+              className={`flex-1 px-4 py-2 rounded-lg border focus:border-pink-500 focus:outline-none ${
+                isDarkMode 
+                  ? 'bg-gray-700 text-white border-gray-600' 
+                  : 'bg-gray-50 text-gray-900 border-gray-300'
+              }`}
               onKeyPress={(e) => e.key === 'Enter' && addItem()}
             />
             <button
@@ -438,7 +454,11 @@ const PackingChecklist = () => {
             </button>
             <button
               onClick={() => setShowAddForm(false)}
-              className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg transition-colors"
+              className={`px-6 py-2 rounded-lg transition-colors ${
+                isDarkMode 
+                  ? 'bg-gray-600 hover:bg-gray-700 text-white' 
+                  : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+              }`}
             >
               Cancel
             </button>
@@ -448,15 +468,23 @@ const PackingChecklist = () => {
 
       {/* Add Section Form */}
       {showAddSectionForm && (
-        <div className="bg-gray-800 rounded-lg p-6 mb-8">
-          <h3 className="text-xl font-semibold text-white mb-4">Add New Section</h3>
+        <div className={`rounded-lg p-6 mb-8 ${
+          isDarkMode ? 'bg-gray-800' : 'bg-white border border-gray-200'
+        }`}>
+          <h3 className={`text-xl font-semibold mb-4 ${
+            isDarkMode ? 'text-white' : 'text-gray-900'
+          }`}>Add New Section</h3>
           <div className="flex gap-3">
             <input
               type="text"
               value={newSection}
               onChange={(e) => setNewSection(e.target.value)}
               placeholder="Enter section name (e.g., 🎵 Music Gear)"
-              className="flex-1 bg-gray-700 text-white px-4 py-2 rounded-lg border border-gray-600 focus:border-indigo-500 focus:outline-none"
+              className={`flex-1 px-4 py-2 rounded-lg border focus:border-indigo-500 focus:outline-none ${
+                isDarkMode 
+                  ? 'bg-gray-700 text-white border-gray-600' 
+                  : 'bg-gray-50 text-gray-900 border-gray-300'
+              }`}
               onKeyPress={(e) => e.key === 'Enter' && addSection()}
             />
             <button
@@ -467,7 +495,11 @@ const PackingChecklist = () => {
             </button>
             <button
               onClick={() => setShowAddSectionForm(false)}
-              className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg transition-colors"
+              className={`px-6 py-2 rounded-lg transition-colors ${
+                isDarkMode 
+                  ? 'bg-gray-600 hover:bg-gray-700 text-white' 
+                  : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+              }`}
             >
               Cancel
             </button>
