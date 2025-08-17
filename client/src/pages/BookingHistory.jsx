@@ -125,7 +125,7 @@ const BookingHistory = () => {
             {loading ? (
                 <p className='text-sm sm:text-lg mb-8 opacity-80 text-center'> Loading Booking History....</p>
             ) : (
-                <div className="flex flex-col lg:flex-row gap-8 justify-center items-stretch my-2 px-2 w-full max-w-6xl mx-auto">
+                <div className="flex flex-col lg:flex-row gap-8 justify-center items-stretch my-2 px-2 w-full max-w-6xl z-1 mx-auto">
                     <TripsCard isDarkMode={isDarkMode} title="upcoming trips" tripsData={upcomingTrips} />
                     <TripsCard isDarkMode={isDarkMode} title="past trips" tripsData={pastTrips} />
                 </div>
