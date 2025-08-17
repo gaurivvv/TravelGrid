@@ -12,7 +12,7 @@ const LanguageSelector = () => {
     } = useLanguage();
     const { isDarkMode } = useTheme();
     const [isOpen, setIsOpen] = useState(false);
-    const dropdownRef = useRef(null);
+    const dropdownRef = useRef(null); 
 
     const currentLangInfo = getCurrentLanguageInfo();
 
