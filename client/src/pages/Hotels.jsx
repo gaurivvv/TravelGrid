@@ -102,7 +102,7 @@ function Hotels() {
           {filteredHotels.map((hotel) => (
             <div
               key={hotel.id}
-              className={`flex flex-col rounded-2xl shadow-xl transition-all duration-300 hover:shadow-2xl cursor-pointer ${
+              className={`flex flex-col rounded-2xl shadow-xl transition-all duration-300 hover:shadow-2xl z-1 cursor-pointer ${
                 isDarkMode
                   ? 'bg-gray-800/90 border border-pink-400/30 hover:bg-gray-800/95'
                   : 'bg-white/95 border border-pink-300/50 hover:bg-white/100 hover:scale-105'
