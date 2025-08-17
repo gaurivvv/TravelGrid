@@ -357,8 +357,8 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
         return (
           <div className="space-y-8">
             {/* Description section */}
-            <div >
-              <h3 className="text-2xl font-bold text-pink-400 mb-4"> Description</h3>
+            <div class>
+              <h3 className="text-3xl font-bold text-pink-400 mb-4"> Description</h3>
               <p className="text-gray-700 leading-relaxed mb-6">{location.overview.description}</p>
               {/* State to control "Read more / Read Less" toggle for detail description */}
                {!expandDesc && (
@@ -377,7 +377,7 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
             </div>
                 {/* Highlight section */}
             <div>
-              <h4 className="text-2xl font-bold text-pink-400 mb-4">Highlights</h4>
+              <h4 className="text-3xl font-bold text-pink-400 mb-4">Highlights</h4>
                <div className="bg-pink-500/10 border border-pink-400 rounded-xl p-4 inline-block mb-6">
                 <span className='text-gray-900 flex gap-2 items-center'><Calendar className='w-5 h-5 text-pink-500'/> Best time to visit:   {location.bestTime}</span>
               </div>
@@ -414,7 +414,7 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
         {/* Content */}
         <div className="absolute top-20 bottom-0 left-0 right-0 p-8 z-20">
           <div className="max-w-6xl mx-auto">
-            <h1 className="text-3xl md:text-5xl font-bold text-pink-400 mb-4">
+            <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
               {location.name}
             </h1>
             <p className="md:text-sm sm:text-xs text-md text-wrap text-gray-200 mb-4 max-w-3xl">
