@@ -436,7 +436,7 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
             {/* Add book now and Add to wishlist button */}
             <div className="flex items-center space-x-6 text-gray-700">
             <button className="flex mx-4 items-center mt-4 space-x-2 px-6 py-2 rounded-md whitespace-nowrap transition-all duration-300 font-medium bg-pink-50 text-black cursor-pointer" onClick={()=>navigate('/wishlist')}>Add to wishlist</button>
-            <button className="flex mx-4 items-center mt-4 space-x-2 px-6 py-2 rounded-md whitespace-nowrap transition-all duration-300 font-medium bg-pink-500 text-white cursor-pointer" onClick={()=> navigate('/ticket')}>Book now</button>
+          <button className="flex mx-4 items-center mt-4 space-x-2 px-6 py-2 rounded-md whitespace-nowrap transition-all duration-300 font-medium bg-pink-500 text-white cursor-pointer" onClick={()=> navigate(`/package/${locationId}`)}>Book now</button>
             </div>
            
           </div>
