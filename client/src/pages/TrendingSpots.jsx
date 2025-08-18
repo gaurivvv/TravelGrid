@@ -446,7 +446,8 @@ const navigate = useNavigate();
               </div>
 
               {/* Content */}
-              <div className="p-4 md:p-6 flex flex-col h-full">
+               {/* Remove "height-full" which causing extra space in content */}
+              <div className="p-4 md:p-6 flex flex-col">
                 <div className="flex items-start justify-between mb-3 md:mb-4">
                   <div className="flex-1 min-w-0">
                     <h3 className="text-lg md:text-xl font-bold mb-1 md:mb-2 truncate" style={{ color: 'var(--text-primary)' }}>
