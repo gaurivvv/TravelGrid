@@ -303,7 +303,7 @@ const Navbar = () => {
           <div className="md:hidden flex items-center gap-2">
             <LanguageSelector />
             <ThemeToggle />
-            <button aria-label="Search"
+            <button
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
               className="text-pink-400 hover:text-pink-500 transition-colors duration-200 p-1 rounded-md hover:bg-pink-500/20 cursor-pointer"
@@ -333,7 +333,7 @@ const Navbar = () => {
             className={`flex justify-end mb-6 border-b ${isDarkMode ? "border-gray-600" : "border-gray-300"
               }`}
           >
-            <button aria-label="Search"
+            <button
               onClick={() => setIsSidebarOpen(false)}
               className="text-pink-500 hover:text-pink-400 p-1 rounded-md hover:bg-pink-500/10"
               aria-label="Close menu"
