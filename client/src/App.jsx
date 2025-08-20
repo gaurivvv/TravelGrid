@@ -25,6 +25,11 @@ function App() {
   }, [location]);
 
   return (
+  <div>
+    <h1>Hello TravelGrid</h1>
+  </div>
+);
+
     <WishlistProvider>
       <AppProvider>
         <DashboardDataProvider>
@@ -33,7 +38,7 @@ function App() {
             <Navbar />
             <div className="flex-grow">
               <ErrorBoundary>
-                <Outlet />
+                <h1> Hello TravelGrid</h1>
               </ErrorBoundary>
             </div>
             <GoToTopButton /> 

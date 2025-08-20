@@ -236,13 +236,17 @@ const Navbar = () => {
                     </span>
                   </button>
                   {expanded === link.name && (
-                    <div className="w-full flex flex-col px-4 py-2 justify-start items-center border-t border-pink-800">
+                    <div className="w-full flex flex-col px-4 py-2 bg-[#2c1a31] rounded-md mt-2 border border-pink-800 shadow-md">
+
+
                       {link.subitems.map((item) => (
                         <NavLink
                           key={item.label}
                           to={item.path}
-                          className="w-full px-2 py-2 font-medium rounded hover:bg-pink-500 transition-all duration-200"
-                        >
+                          className="w-full px-3 py-2 text-white font-medium rounded hover:bg-pink-600 transition-all duration-200"
+>
+
+                        
                           {item.label}
                         </NavLink>
                       ))}
