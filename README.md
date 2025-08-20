@@ -79,8 +79,11 @@ Follow these steps to set up **TravelGrid** locally and begin contributing.
 
 1. Clone the repository
 
+```bash
 git clone https://github.com/yourusername/TravelGrid.git
 cd TravelGrid
+```
+
 >📸 Screenshot placeholder: After cloning the repo, show the folder structure.
 
 2. Install Frontend Dependencies
@@ -101,7 +104,8 @@ npm install --legacy-peer-deps
 cd ../server
 npm install
 
-> ⚠️ Common issue: If you see ENOENT: no such file or directory, package.json, make sure you are in the correct server folder. 📸 Screenshot placeholder: After installing backend dependencies.
+> ⚠️ Common issue: If you see ENOENT: no such file or directory, package.json, make sure you are in the correct server folder.
+>📸 Screenshot placeholder: After installing backend dependencies.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
