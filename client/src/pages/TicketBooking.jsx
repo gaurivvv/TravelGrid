@@ -47,6 +47,7 @@ function TicketBooking() {
   
   const [submitted, setSubmitted] = useState(false);
   const [booked, setBooked] = useState(false); //adding a booked state variable to keep track if booked or not
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   //Function to get today's date for validating depart date for ticker
   const getToday=()=>{
@@ -93,7 +94,8 @@ function TicketBooking() {
       return;
     }
 
-    setSubmitted(true);
+    // Show login modal instead of setting submitted to true
+    setShowLoginModal(true);
   };
 
   const handleDownload = async () => {
@@ -175,6 +177,7 @@ function TicketBooking() {
       return: "",
       passengers: 1,
       cabin: "Economy",
+      petFriendly: false // Added missing petFriendly reset
     });
   };
 
@@ -259,7 +262,7 @@ function TicketBooking() {
                   required
                   value={form.from}
                   onChange={handleChange}
-                  className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white':'bg-white/90'} text-white-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30 `}
+                  className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode ? 'bg-white text-gray-900' : 'bg-white/90 text-gray-900'} placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
                 />
               </div>
 
@@ -291,7 +294,7 @@ function TicketBooking() {
                   required
                   value={form.to}
                   onChange={handleChange}
-                  className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white':'bg-white/90'} text-white-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
+                  className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode ? 'bg-white text-gray-900' : 'bg-white/90 text-gray-900'} placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
                 />
               </div>
               
@@ -306,9 +309,10 @@ function TicketBooking() {
                    placeholder="Departure Date"
                   name="depart"
                   required
+                  min={getToday()} // Add min date validation
                   value={form.depart}
                   onChange={handleChange}
-                  className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white text-white':'bg-white/90 text-gray-800'}  focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
+                  className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode ? 'bg-white text-gray-900' : 'bg-white/90 text-gray-900'} focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
                 />
               </div>
 
@@ -328,7 +332,7 @@ function TicketBooking() {
                       value={form.return}
                       min={form.depart}
                       onChange={handleChange}
-                      className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white text-white':'bg-white/90 text-gray-800'} focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
+                      className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode ? 'bg-white text-gray-900' : 'bg-white/90 text-gray-900'} focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
                     />
                   </>
                 ) : (
@@ -345,7 +349,7 @@ function TicketBooking() {
                       required
                       value={form.passengers}
                       onChange={handleChange}
-                      className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white text-white':'bg-white/90 text-gray-800'} focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
+                      className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode ? 'bg-white text-gray-900' : 'bg-white/90 text-gray-900'} focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
                     />
                   </>
                 )}
@@ -368,7 +372,7 @@ function TicketBooking() {
                     required
                     value={form.passengers}
                     onChange={handleChange}
-                    className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white text-white':'bg-white/90 text-gray-800'} focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
+                    className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode ? 'bg-white text-gray-900' : 'bg-white/90 text-gray-900'} focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
                     placeholder="Passengers"
                   />
                 </div>
@@ -377,7 +381,7 @@ function TicketBooking() {
                 name="cabin"
                 value={form.cabin}
                 onChange={handleChange}
-                className={`w-full p-3 rounded-xl ${isDarkMode?'bg-white text-white':'bg-white/90 text-gray-800'} focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
+                className={`w-full p-3 rounded-xl ${isDarkMode ? 'bg-white text-gray-900' : 'bg-white/90 text-gray-900'} focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
               >
                 {travelType === "flight" &&
                   ["Economy", "Premium Economy", "Business", "First"].map((c) => (
@@ -439,6 +443,40 @@ function TicketBooking() {
           </form>
         </div>
       </main>
+
+      {/* Login Modal */}
+      {showLoginModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+          <div className="bg-white rounded-2xl p-8 max-w-md w-full mx-4 relative">
+            <button
+              onClick={() => setShowLoginModal(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+            >
+              ✕
+            </button>
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Login Required</h3>
+              <p className="text-gray-600 mb-6">
+                Please log in or create an account to continue with your booking.
+              </p>
+              <div className="flex flex-col gap-3">
+                <Link
+                  to="/login"
+                  className="w-full py-3 bg-pink-600 text-white rounded-xl font-semibold hover:bg-pink-700 transition-colors"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="w-full py-3 border border-pink-600 text-pink-600 rounded-xl font-semibold hover:bg-pink-50 transition-colors"
+                >
+                  Create Account
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
