@@ -277,15 +277,6 @@ This project is licensed under the MIT License - see the [`License`](https://git
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
-**👨‍🏫 Mentors – TravelGrid (GSSoC'25)**
-
-| Role          | Name               | GitHub Profile                                      | LinkedIn Profile                                                        |
-| ------------- | ------------------ | --------------------------------------------------- | ----------------------------------------------------------------------- |
-| Mentor 1      | Vinayak Jain |    | [vinayakjain03](https://www.linkedin.com/in/vinayakjain03/) |
-| Mentor 2      | Kosaraju joshitha  |  [joshitha5g4](https://github.com/joshitha5g4)   | [joshitha-kosaraju](https://www.linkedin.com/in/joshitha-kosaraju/)     |
-| Mentor 3      | Tirumani Satya Akshay    | [akki-2004](https://github.com/akki-2004) | [tirumani-satya-akshay](https://www.linkedin.com/in/tirumani-satya-akshay/)    |
-| Mentor 4      | Kanishka   | [sachiikrish](https://github.com/sachiikrish) | [kanishka-tyagi](https://www.linkedin.com/in/kanishka-tyagi-a334b128b/)    |
-| Mentor 5      | Abdullah Jameel  | [abdullahxyz85](https://github.com/abdullahxyz85) | [abdullahjameel94](https://www.linkedin.com/in/abdullahjameel94/)    |
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
