@@ -20,15 +20,15 @@ import {
 import toast from "react-hot-toast";
 
 const tripModes = [
-  { label: "One-Way", value: "oneWay" },
-  { label: "Round Trip", value: "roundTrip" },
+  { label: "One-Way", value: "oneWay", icon: <Plane size={18} /> },
+  { label: "Round Trip", value: "roundTrip", icon: <TrainFront size={18} /> },
 ];
 
 const travelOptions = [
-  { label: "Flight", value: "flight", icon: <Plane size={18} /> },
-  { label: "Train", value: "train", icon: <TrainFront size={18} /> },
-  { label: "Bus", value: "bus", icon: <Bus size={18} /> },
-  { label: "Cab", value: "cab", icon: <Car size={18} /> },
+  { label: "FLIGHT", value: "flight", icon: <Plane size={18} /> },
+  { label: "TRAIN", value: "train", icon: <TrainFront size={18} /> },
+  { label: "BUS", value: "bus", icon: <Bus size={18} /> },
+  { label: "CAB", value: "cab", icon: <Car size={18} /> },
 ];
 
 function TicketBooking() {
@@ -217,6 +217,7 @@ function TicketBooking() {
                     ? "bg-pink-600 text-white border-pink-600"
                     : "bg-white/20 text-white border-transparent hover:bg-pink-700/20"
                 }`}
+                style={{ minWidth: 0 }}
               >
                 {opt.icon}
                 <span className="hidden sm:inline">{opt.label}</span>
@@ -236,6 +237,7 @@ function TicketBooking() {
                     ? "bg-pink-500 text-white border-pink-500"
                     : "bg-white/20 text-white border-transparent hover:bg-pink-700/20"
                 }`}
+                style={{ minWidth: 0 }}
               >
                 {mode.label}
               </button>
@@ -248,23 +250,24 @@ function TicketBooking() {
             className="space-y-6 sm:space-y-8 px-4 sm:px-6 md:px-10 max-w-5xl mx-auto"
           >
             {/* Core search panel */}
-            <div className=" grid gap-4 md:grid-cols-5 md:items-end">
+            <div className="grid gap-4 md:grid-cols-5 md:items-end">
               {/* From */}
-              <div className="relative col-span-2 md:col-span-1">
-                 <HiLocationMarker className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 text-xl" />
+              <div className="relative col-span-2 md:col-span-2 flex flex-col">
+                <HiLocationMarker className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 text-xl" />
                 <input
                   type="text"
                   name="from"
-                  placeholder="From"
+                  placeholder="FROM"
                   required
                   value={form.from}
                   onChange={handleChange}
-                  className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white':'bg-white/90'} text-white-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30 `}
+                  className={`w-full min-w-[20px] max-w-[400px] pl-10 pr-6 py-3 rounded-xl ${isDarkMode?'bg-white':'bg-white/90'} text-white-800 placeholder-gray-500 focus:outline-none focus:ring-5 focus:ring-pink-500/30`}
+                  style={{ fontSize: "1.1rem" }}
                 />
               </div>
 
-              {/* Swap button (visible on md and above) */}
-              <div className="hidden md:flex col-span-1 items-center justify-center">
+              {/* Swap button - centered between From and To */}
+              <div className="flex col-span-1 items-center justify-center">
                 <button
                   type="button"
                   title="Swap"
@@ -275,49 +278,66 @@ function TicketBooking() {
                       to: prev.from,
                     }))
                   }
-                  className="bg-pink-500 hover:bg-pink-600 text-white rounded-xl p-3 transition-all"
+                  className="bg-pink-500 hover:bg-pink-600 text-white rounded-full p-3 transition-all flex items-center justify-center"
+                  style={{ zIndex: 1, margin: "0 0.5rem" }}
                 >
-                  <ArrowRightLeft size={20} />
+                  <ArrowRightLeft size={25} />
                 </button>
               </div>
 
               {/* To */}
-              <div className="relative col-span-2 md:col-span-1">
-                 <HiUser className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 text-xl" />
+              <div className="relative col-span-2 md:col-span-2 flex flex-col">
+                <HiLocationMarker className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 text-xl" />
                 <input
                   type="text"
                   name="to"
-                  placeholder="To"
+                  placeholder="TO"
                   required
                   value={form.to}
                   onChange={handleChange}
-                  className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white':'bg-white/90'} text-white-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
+                  className={`w-full min-w-[220px] max-w-[500px] pl-10 pr-6 py-3 rounded-xl ${isDarkMode?'bg-white':'bg-white/90'} text-white-800 placeholder-gray-500 focus:outline-none focus:ring-5 focus:ring-pink-500/30`}
+                  style={{ fontSize: "1.1rem" }}
                 />
               </div>
               
               {/* Depart */}
-              <div className="relative col-span-2 md:col-span-1">
-                <CalendarDays
-                  className="absolute top-3 left-3 text-pink-400"
-                  size={18}
-                />
-                <input
-                  type="date"
-                   placeholder="Departure Date"
-                  name="depart"
-                  required
-                  value={form.depart}
-                  onChange={handleChange}
-                  className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white text-white':'bg-white/90 text-gray-800'}  focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
-                />
+              <div className="relative col-span-2 md:col-span-2 flex flex-col">
+                <div className="relative">
+                  <CalendarDays className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-400 text-xl" />
+                  <input
+                    type="date"
+                    id="depart"
+                    name="depart"
+                    required
+                    value={form.depart}
+                    onChange={handleChange}
+                    className={`w-full pl-10 pr-6 py-3 rounded-xl ${isDarkMode?'bg-white text-white':'bg-white/90 text-gray-800'} focus:outline-none focus:ring-5 focus:ring-pink-500/30`}
+                    style={{ fontSize: "1.1rem" }}
+                  />
+                </div>
               </div>
-
+              
+              <div className="flex col-span-1 items-center justify-center">
+                <button
+                  type="button"
+                  title="Swap"
+                  onClick={() =>
+                    setForm((prev) => ({
+                      ...prev,
+                      from: prev.to,
+                      to: prev.from,
+                    }))
+                  }
+                  style={{ zIndex: 1, margin: "0 0.5rem" }}
+                >
+                </button>
+              </div>
               {/* Return or Passengers */}
-              <div className="relative col-span-2 md:col-span-1">
+              <div className="relative col-span-2 md:col-span-2 flex flex-col">
                 {tripMode === "roundTrip" ? (
                   <>
                     <CalendarDays
-                      className="absolute top-3 left-3 text-pink-400"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-400 text-xl"
                       size={18}
                     />
                     <input
@@ -328,13 +348,14 @@ function TicketBooking() {
                       value={form.return}
                       min={form.depart}
                       onChange={handleChange}
-                      className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white text-white':'bg-white/90 text-gray-800'} focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
+                      className={`w-full min-w-[220px] max-w-[500px] pl-10 pr-6 py-3 rounded-xl ${isDarkMode?'bg-white text-white':'bg-white/90 text-gray-800'} focus:outline-none focus:ring-5 focus:ring-pink-500/30`}
+                      style={{ fontSize: "1.1rem" }}
                     />
                   </>
                 ) : (
                   <>
                     <Users
-                      className="absolute top-3 left-3 text-pink-400"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-400 text-xl"
                       size={18}
                     />
                     <input
@@ -345,13 +366,14 @@ function TicketBooking() {
                       required
                       value={form.passengers}
                       onChange={handleChange}
-                      className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white text-white':'bg-white/90 text-gray-800'} focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
+                      className={`w-full min-w-[220px] max-w-[500px] pl-10 pr-6 py-3 rounded-xl ${isDarkMode?'bg-white text-white':'bg-white/90 text-gray-800'} focus:outline-none focus:ring-5 focus:ring-pink-500/30`}
+                      style={{ fontSize: "1.1rem" }}
+                      placeholder="Passengers"
                     />
                   </>
                 )}
               </div>
             </div>
-
             {/* Extra row for Passengers + Cabin */}
             <div className="grid gap-4 sm:grid-cols-2">
               {tripMode === "roundTrip" && (
@@ -373,40 +395,50 @@ function TicketBooking() {
                   />
                 </div>
               )}
-              <select
-                name="cabin"
-                value={form.cabin}
-                onChange={handleChange}
-                className={`w-full p-3 rounded-xl ${isDarkMode?'bg-white text-white':'bg-white/90 text-gray-800'} focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
-              >
-                {travelType === "flight" &&
-                  ["Economy", "Premium Economy", "Business", "First"].map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  ))}
+<div className="w-full relative">
+  <select
+    name="cabin"
+    value={form.cabin}
+    onChange={handleChange}
+    className={`w-full pl-10 pr-6 py-3 rounded-xl border-2 border-black appearance-none
+      ${isDarkMode ? 'bg-white text-white' : 'bg-white/90 text-gray-800'} 
+      focus:outline-none focus:ring-2 focus:ring-pink-500/30`}
+    style={{ fontSize: "1.1rem" }}
+  >
+    {travelType === "flight" &&
+      ["Economy", "Premium Economy", "Business", "First"].map((c) => (
+        <option key={c} value={c}>
+          {c}
+        </option>
+      ))}
 
-                {travelType === "train" &&
-                  ["Sleeper", "3A", "2A", "1A"].map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  ))}
+    {travelType === "train" &&
+      ["Sleeper", "3A", "2A", "1A"].map((c) => (
+        <option key={c} value={c}>
+          {c}
+        </option>
+      ))}
 
-                {travelType === "bus" &&
-                  ["Seater", "Sleeper", "AC", "Non-AC"].map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  ))}
+    {travelType === "bus" &&
+      ["Seater", "Sleeper", "AC", "Non-AC"].map((c) => (
+        <option key={c} value={c}>
+          {c}
+        </option>
+      ))}
 
-                {travelType === "cab" &&
-                  ["Hatchback", "Sedan", "SUV", "Luxury"].map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  ))}
-              </select>
+    {travelType === "cab" &&
+      ["Hatchback", "Sedan", "SUV", "Luxury"].map((c) => (
+        <option key={c} value={c}>
+          {c}
+        </option>
+      ))}
+  </select>
+
+  {/* Custom dropdown arrow */}
+  <span className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-black">
+    ▼
+  </span>
+</div>
             </div>
 
             <div className="flex items-center gap-3 mt-4 text-white">
