@@ -275,13 +275,8 @@ const MusicPage = () => {
     return (
         <div className={`min-h-screen`}>
             {/* Hero Section */}
-<<<<<<< HEAD
             <div className={`relative overflow-hidden`}>
-                <div className="absolute inset-0 bg-black/20"></div>
-=======
-            <div className={`relative overflow-hidden ${isDarkMode ? 'bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900' : 'bg-gradient-to-br from-purple-100 via-blue-100 to-indigo-100'}`}>
                 <div className="absolute inset-0 bg-pink-100"></div>
->>>>>>> b1d8db4b7cb6ec3baa8ae526d84fd82c3363f122
                 <div className="relative max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8 text-center">
                     <div className="flex justify-center mb-8">
                         <div className={`p-4 rounded-full ${isDarkMode ? 'bg-white/10' : 'bg-pink-900/70'} backdrop-blur-sm`}>

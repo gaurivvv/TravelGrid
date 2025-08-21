@@ -310,7 +310,9 @@ const navigate = useNavigate();
   }
 
   return (
-    <div className="min-h-screen overflow-x-hidden transition-colors duration-300" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', marginTop: "5rem" }}>
+    <div className={`min-h-screen overflow-x-hidden transition-colors duration-300 ${isDarkMode ? 'bg-gradient-to-br from-black to-pink-900 text-white' : 'bg-gradient-to-br from-rose-300 via-blue-200 to-gray-300 text-black'}`}
+    style={{ marginTop: '5rem' }}
+    >
 
       <Navbar lightBackground />
       {/* Hero Section */}
