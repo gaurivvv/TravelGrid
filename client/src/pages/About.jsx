@@ -16,6 +16,7 @@ import {
   Eye,
   Lightbulb
 } from "lucide-react";
+import GitHubStats from "./GitHubStats";
 
 function About() {
   const navigate = useNavigate();
@@ -713,6 +714,8 @@ function About() {
           </motion.div>
         </div>
       </section>
+
+      <GitHubStats></GitHubStats>
 
       {/* Tech Stack Section */}
       <section
