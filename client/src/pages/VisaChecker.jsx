@@ -203,7 +203,7 @@ export default function VisaChecker() {
   };
 
   return (
-    <div className={`min-h-screen pt-24 px-4 py-8 ${isDarkMode ? 'bg-gradient-to-br from-gray-900 via-slate-800 to-blue-900' : 'bg-gradient-to-br from-blue-50 to-pink-50'}`}>
+    <div className={`min-h-screen pt-24 px-4 py-8`}>
   <div className="max-w-5xl mx-auto space-y-8">
 
     {/* Heading */}
