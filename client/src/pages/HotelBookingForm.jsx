@@ -201,13 +201,13 @@ const [bookingData, setBookingData] = useState({
 
   if (!hotel) {
     return (
-      <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-black to-pink-900 text-white">
+      <div className="flex flex-col min-h-screen w-full">
         <Navbar />
         <main className="flex flex-col flex-1 items-center justify-center">
           <h2 className="text-3xl font-bold mb-4">Hotel information not found</h2>
           <button
             onClick={() => navigate('/hotels')}
-            className="bg-gradient-to-r from-pink-600 to-pink-500 text-white px-6 py-3 rounded-lg font-semibold"
+            className="px-6 py-3 rounded-lg font-semibold"
           >
             Back to Hotels
           </button>
@@ -217,14 +217,14 @@ const [bookingData, setBookingData] = useState({
   }
 
   return (
-    <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-black to-pink-900">
+    <div className="flex flex-col min-h-screen w-full">
       <Navbar />
       
       <main className="flex-1 max-w-4xl mx-auto px-2 sm:px-4 pt-12 pb-8 w-full">
-        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 md:p-8 text-white">
+        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 md:p-8">
           <div className="mb-6 pt-2">
             <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 break-words mt-2">Book Your Stay</h1>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-pink-200">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
               <span className="text-lg sm:text-xl font-semibold break-words">{hotel.name}</span>
               <span className="hidden sm:inline">•</span>
               <span className="text-sm sm:text-base">{hotel.location}</span>
@@ -249,9 +249,9 @@ const [bookingData, setBookingData] = useState({
                     >
                       <div className="flex justify-between items-start mb-2">
                         <h3 className="font-semibold">{room.name}</h3>
-                        <span className="text-pink-300">₹{room.price}/night</span>
+                        <span className="text-pink-500">₹{room.price}/night</span>
                       </div>
-                      <p className="text-sm text-gray-300">{room.description}</p>
+                      <p className="text-sm">{room.description}</p>
                     </div>
                   ))}
                 </div>
@@ -270,7 +270,7 @@ const [bookingData, setBookingData] = useState({
                     value={bookingData.checkIn}
                     onChange={handleInputChange}
                     min={new Date().toISOString().split('T')[0]}
-                    className={`w-full p-3 rounded-lg bg-white/10 border text-white ${
+                    className={`w-full p-3 rounded-lg bg-white/10 border ${
                       errors.checkIn ? 'border-red-400' : 'border-gray-400'
                     }`}
                     required
@@ -287,7 +287,7 @@ const [bookingData, setBookingData] = useState({
                     value={bookingData.checkOut}
                     onChange={handleInputChange}
                     min={bookingData.checkIn || new Date().toISOString().split('T')[0]}
-                    className={`w-full p-3 rounded-lg bg-white/10 border text-white ${
+                    className={`w-full p-3 rounded-lg bg-white/10 border ${
                       errors.checkOut ? 'border-red-400' : 'border-gray-400'
                     }`}
                     required
@@ -338,7 +338,7 @@ const [bookingData, setBookingData] = useState({
                     value={bookingData.firstName}
                     onChange={handleInputChange}
                     placeholder="Enter first name"
-                    className={`w-full p-3 rounded-lg bg-white/10 border text-white placeholder-gray-400 ${
+                    className={`w-full p-3 rounded-lg bg-white/10 border placeholder-gray-400 ${
                       errors.firstName ? 'border-red-400' : 'border-gray-400'
                     }`}
                     minLength="2"
@@ -360,7 +360,7 @@ const [bookingData, setBookingData] = useState({
                     value={bookingData.lastName}
                     onChange={handleInputChange}
                     placeholder="Enter last name"
-                    className={`w-full p-3 rounded-lg bg-white/10 border text-white placeholder-gray-400 ${
+                    className={`w-full p-3 rounded-lg bg-white/10 border placeholder-gray-400 ${
                       errors.lastName ? 'border-red-400' : 'border-gray-400'
                     }`}
                     minLength="2"
@@ -384,7 +384,7 @@ const [bookingData, setBookingData] = useState({
                       name="countryCode"
                       value={bookingData.countryCode}
                       onChange={handleInputChange}
-                      className={`p-3 rounded-lg bg-white/10 border text-white ${
+                      className={`p-3 rounded-lg bg-white/10 border ${
                         errors.contactNumber ? 'border-red-400' : 'border-gray-400'
                       }`}
                       style={{ minWidth: '120px' }}
@@ -403,7 +403,7 @@ const [bookingData, setBookingData] = useState({
                       value={bookingData.contactNumber}
                       onChange={handleInputChange}
                       placeholder="Phone number"
-                      className={`flex-1 p-3 rounded-lg bg-white/10 border text-white placeholder-gray-400 ${
+                      className={`flex-1 p-3 rounded-lg bg-white/10 border placeholder-gray-400 ${
                         errors.contactNumber ? 'border-red-400' : 'border-gray-400'
                       }`}
                       required
@@ -421,7 +421,7 @@ const [bookingData, setBookingData] = useState({
                     value={bookingData.email}
                     onChange={handleInputChange}
                     placeholder="Email address"
-                    className={`w-full p-3 rounded-lg bg-white/10 border text-white placeholder-gray-400 ${
+                    className={`w-full p-3 rounded-lg bg-white/10 border placeholder-gray-400 ${
                       errors.email ? 'border-red-400' : 'border-gray-400'
                     }`}
                   />
@@ -440,7 +440,7 @@ const [bookingData, setBookingData] = useState({
                   onChange={handleInputChange}
                   placeholder="Any special requirements or requests..."
                   rows="3"
-                  className="w-full p-3 rounded-lg bg-white/10 border border-gray-400 text-white placeholder-gray-400"
+                  className="w-full p-3 rounded-lg bg-white/10 border border-gray-400 placeholder-gray-400"
                 />
               </div>
 

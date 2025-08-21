@@ -186,7 +186,7 @@ function TicketBooking() {
     };
 
   return (
-    <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-black to-pink-900 overflow-x-hidden">
+    <div className="flex flex-col min-h-screen w-full overflow-x-hidden">
       <Navbar />
       <main className="relative flex flex-col flex-1 items-center w-full pt-24 pb-10 px-4">
         {/* Background city image */}
@@ -198,9 +198,9 @@ function TicketBooking() {
         />
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2 mt-8">
-            Book Your <span className="text-pink-400">Perfect Trip</span>
+            Book Your <span className="text-pink-500">Perfect Trip</span>
           </h1>
-          <p className="text-pink-200 text-sm md:text-base">
+          <p className="text-sm md:text-base">
             Search and compare prices for flights, trains, buses, and cabs all
             in one place
           </p>
