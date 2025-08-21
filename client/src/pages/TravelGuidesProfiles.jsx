@@ -546,7 +546,7 @@ const TravelGuidesCarousel = () => {
               marginTop: "14px",
               marginBottom: "50px",
               color: isDarkMode ? "#fcfcfc" : "#1f2937",
-              
+
             }}
           >
             🐶 Pet Guides 🐱
