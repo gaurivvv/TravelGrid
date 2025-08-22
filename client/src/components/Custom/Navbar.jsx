@@ -59,6 +59,7 @@ const Navbar = () => {
         {label:"Map",path:"/itinerary-map"},
 
         { label: t('navigation.petTravelGuide'), path: "/pettravel" },
+        { label: "Travel Guides", path: "/travel-guides" },
         { label: "Enhanced Currency Converter", path: "/enhanced-currency" }
       ],
     },
