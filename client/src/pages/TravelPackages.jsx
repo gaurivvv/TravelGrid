@@ -106,11 +106,7 @@ const TravelPackages = () => {
 
   return (
     <div
-      className={`flex flex-col min-h-screen w-full overflow-x-hidden transition-colors duration-300 ${
-        isDarkMode
-          ? "bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white"
-          : "bg-gradient-to-br from-rose-300 via-blue-200 to-gray-300 text-gray-900"
-      }`}
+      className={`flex flex-col min-h-screen w-full overflow-x-hidden transition-colors duration-300`}
     >
       <Navbar />
       <main className="flex flex-col flex-1 w-full items-center pt-24">
