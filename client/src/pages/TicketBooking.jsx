@@ -197,10 +197,18 @@ function TicketBooking() {
           className="absolute inset-0 w-full h-full object-cover opacity-30 z-0"
         />
         <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2 mt-8">
+           <h1
+            className={`text-3xl md:text-4xl font-extrabold mb-2 mt-8 ${
+              isDarkMode ? "text-white" : "text-gray-900"
+            }`}
+          >
             Book Your <span className="text-pink-500">Perfect Trip</span>
           </h1>
-          <p className="text-sm md:text-base">
+           <p
+            className={`text-sm md:text-base ${
+              isDarkMode ? "text-gray-200" : "text-gray-700"
+            }`}
+          >
             Search and compare prices for flights, trains, buses, and cabs all
             in one place
           </p>
@@ -213,9 +221,11 @@ function TicketBooking() {
                 key={opt.value}
                 onClick={() => setTravelType(opt.value)}
                 className={`flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 sm:py-3 rounded-full font-semibold text-xs sm:text-sm transition-all border ${
-                  travelType === opt.value
+                 travelType === opt.value
                     ? "bg-pink-600 text-white border-pink-600"
-                    : "bg-white/20 text-white border-transparent hover:bg-pink-700/20"
+                    : isDarkMode
+                    ? "bg-white/20 text-white border-transparent hover:bg-pink-700/20"
+                    : "bg-gray-100 text-gray-500 border hover:bg-pink-100"
                 }`}
                 style={{ minWidth: 0 }}
               >
@@ -233,9 +243,11 @@ function TicketBooking() {
                 key={mode.value}
                 onClick={() => setTripMode(mode.value)}
                 className={`px-6 py-2 rounded-full font-medium border transition-all ${
-                  tripMode === mode.value
+                   tripMode === mode.value
                     ? "bg-pink-500 text-white border-pink-500"
-                    : "bg-white/20 text-white border-transparent hover:bg-pink-700/20"
+                    : isDarkMode
+                    ? "bg-white/20 text-white border-transparent hover:bg-pink-700/20"
+                    : "bg-gray-100 text-gray-500 border hover:bg-pink-100"
                 }`}
                 style={{ minWidth: 0 }}
               >
