@@ -11,8 +11,8 @@ const guides = [
       "Explore City Palace",
       "See Hawa Mahal",
       "Shop at Johari Bazaar",
-      "Try Rajasthani cuisine"
-    ]
+      "Try Rajasthani cuisine",
+    ],
   },
   {
     city: "Goa",
@@ -23,8 +23,8 @@ const guides = [
       "Party at Tito’s",
       "Water sports at Calangute",
       "Visit Aguada Fort",
-      "Enjoy Goan seafood"
-    ]
+      "Enjoy Goan seafood",
+    ],
   },
   {
     city: "Manali",
@@ -35,8 +35,8 @@ const guides = [
       "Explore Rohtang Pass",
       "Shop at Mall Road",
       "Try river rafting",
-      "Relax in hot springs"
-    ]
+      "Relax in hot springs",
+    ],
   },
   {
     city: "Munnar",
@@ -47,16 +47,16 @@ const guides = [
       "Visit Eravikulam National Park",
       "See Attukal Waterfalls",
       "Take a spice plantation tour",
-      "Enjoy Kerala cuisine"
-    ]
-  }
+      "Enjoy Kerala cuisine",
+    ],
+  },
 ];
 
 export default function TravelGuides() {
   return (
-    <main className="content-below-navbar px-6 py-10 bg-[var(--bg-secondary)] min-h-screen">
+    <main className="content-below-navbar px-6 py-10 bg-[var(--gradient-primary)] min-h-screen">
       {/* Page Heading */}
-      <h1 className="text-4xl font-bold gradient-text text-center mb-10">
+      <h1 className="text-6xl font-bold text-black text-center mb-20 mt-10">
         Travel Guides
       </h1>
 
@@ -65,19 +65,17 @@ export default function TravelGuides() {
         {guides.map((guide, idx) => (
           <Card
             key={idx}
-            className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl shadow-md hover-lift theme-transition"
+            className="bg-[var(--card-bgg)] border-2 border-[var(--card-borderr)] rounded-2xl shadow-md hover:shadow-[0_10px_15px_rgba(236,72,153,0.5)] theme-transition"
           >
             <CardContent className="p-6">
-              <h2 className="text-2xl font-semibold text-[var(--text-primary)] mb-2">
+              <h2 className="text-2xl font-bold text-[var(--text-primary)] text-center mb-4 ">
                 {guide.city}, {guide.state}
               </h2>
-              <p className="text-[var(--text-secondary)] mb-4">
+              <p className="text-[var(--text-secondary)] text-center mb-4">
                 {guide.description}
               </p>
-              <h3 className="text-lg font-medium text-[var(--accent-primary)] mb-2">
-                Top 5 Things to Do:
-              </h3>
-              <ul className="list-disc pl-5 space-y-1 text-[var(--text-primary)]">
+
+              <ul className="list-disc pl-5 space-y-1 text-[var(--text-primary)] marker:text-pink-700 mt-8">
                 {guide.topThings.map((item, i) => (
                   <li key={i}>{item}</li>
                 ))}

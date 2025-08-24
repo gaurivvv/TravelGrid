@@ -22,9 +22,12 @@
   --shadow-secondary: rgba(0, 0, 0, 0.05);
   --gradient-primary: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
   --gradient-secondary: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  --gradient-tert: linear-gradient(135deg, #f8fafc 0%, #ffa3d7 100%);
   --navbar-bg: rgba(255, 255, 255, 0.9);
   --card-bg: #ffffff;
+  --card-bgg: #ffe8f4cb;
   --card-border: #e2e8f0;
+  --card-borderr:rgb(229, 94, 139);
   --input-bg: #ffffff;
   --input-border: #d1d5db;
   --input-focus: #ec4899;
