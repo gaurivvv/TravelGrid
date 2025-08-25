@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import html2canvas from "html2canvas";
+import { HiUser } from 'react-icons/hi';         
+import { HiLocationMarker, HiArrowRight } from 'react-icons/hi'; 
+
 import jsPDF from "jspdf";
 import Navbar from "../components/Custom/Navbar";
+import { useTheme } from "../context/ThemeContext";
 import {
   Users,
   CalendarDays,
@@ -16,20 +20,21 @@ import {
 import toast from "react-hot-toast";
 
 const tripModes = [
-  { label: "One-Way", value: "oneWay" },
-  { label: "Round Trip", value: "roundTrip" },
+  { label: "One-Way", value: "oneWay", icon: <Plane size={18} /> },
+  { label: "Round Trip", value: "roundTrip", icon: <TrainFront size={18} /> },
 ];
 
 const travelOptions = [
-  { label: "Flight", value: "flight", icon: <Plane size={18} /> },
-  { label: "Train", value: "train", icon: <TrainFront size={18} /> },
-  { label: "Bus", value: "bus", icon: <Bus size={18} /> },
-  { label: "Cab", value: "cab", icon: <Car size={18} /> },
+  { label: "FLIGHT", value: "flight", icon: <Plane size={18} /> },
+  { label: "TRAIN", value: "train", icon: <TrainFront size={18} /> },
+  { label: "BUS", value: "bus", icon: <Bus size={18} /> },
+  { label: "CAB", value: "cab", icon: <Car size={18} /> },
 ];
 
 function TicketBooking() {
   const [tripMode, setTripMode] = useState("oneWay");
   const [travelType, setTravelType] = useState("flight");
+  const { isDarkMode } = useTheme();
   const [form, setForm] = useState({
     from: "",
     to: "",
@@ -37,8 +42,9 @@ function TicketBooking() {
     return: "",
     passengers: 1,
     cabin: "Economy",
+    petFriendly: false //adding for pet friendly feature
   });
-
+  
   const [submitted, setSubmitted] = useState(false);
   const [booked, setBooked] = useState(false); //adding a booked state variable to keep track if booked or not
 
@@ -100,6 +106,16 @@ function TicketBooking() {
     if (!el) return;
 
     const clone = el.cloneNode(true);
+    // Adding pet-friendly info
+    if (form.petFriendly) {
+      const petNote = document.createElement("div");
+      petNote.textContent = "🐾 Pet-friendly: Yes";
+      petNote.style.fontSize = "20px";
+      petNote.style.marginTop = "20px";
+      petNote.style.color = "#d63384"; 
+      clone.appendChild(petNote);
+    }
+
 
     // 🧹 Remove buttons from clone only
     const buttonsToRemove = clone.querySelectorAll("button");
@@ -170,20 +186,29 @@ function TicketBooking() {
     };
 
   return (
-    <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-black to-pink-900 overflow-x-hidden">
+    <div className="flex flex-col min-h-screen w-full overflow-x-hidden">
       <Navbar />
       <main className="relative flex flex-col flex-1 items-center w-full pt-24 pb-10 px-4">
         {/* Background city image */}
         <img
           src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=1600&q=80"
           alt="City skyline"
+          loading="lazy" 
           className="absolute inset-0 w-full h-full object-cover opacity-30 z-0"
         />
         <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2">
-            Book Your <span className="text-pink-400">Perfect Trip</span>
+           <h1
+            className={`text-3xl md:text-4xl font-extrabold mb-2 mt-8 ${
+              isDarkMode ? "text-white" : "text-gray-900"
+            }`}
+          >
+            Book Your <span className="text-pink-500">Perfect Trip</span>
           </h1>
-          <p className="text-pink-200 text-sm md:text-base">
+           <p
+            className={`text-sm md:text-base ${
+              isDarkMode ? "text-gray-200" : "text-gray-700"
+            }`}
+          >
             Search and compare prices for flights, trains, buses, and cabs all
             in one place
           </p>
@@ -196,10 +221,13 @@ function TicketBooking() {
                 key={opt.value}
                 onClick={() => setTravelType(opt.value)}
                 className={`flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 sm:py-3 rounded-full font-semibold text-xs sm:text-sm transition-all border ${
-                  travelType === opt.value
+                 travelType === opt.value
                     ? "bg-pink-600 text-white border-pink-600"
-                    : "bg-white/20 text-white border-transparent hover:bg-pink-700/20"
+                    : isDarkMode
+                    ? "bg-white/20 text-white border-transparent hover:bg-pink-700/20"
+                    : "bg-gray-100 text-gray-500 border hover:bg-pink-100"
                 }`}
+                style={{ minWidth: 0 }}
               >
                 {opt.icon}
                 <span className="hidden sm:inline">{opt.label}</span>
@@ -215,10 +243,13 @@ function TicketBooking() {
                 key={mode.value}
                 onClick={() => setTripMode(mode.value)}
                 className={`px-6 py-2 rounded-full font-medium border transition-all ${
-                  tripMode === mode.value
+                   tripMode === mode.value
                     ? "bg-pink-500 text-white border-pink-500"
-                    : "bg-white/20 text-white border-transparent hover:bg-pink-700/20"
+                    : isDarkMode
+                    ? "bg-white/20 text-white border-transparent hover:bg-pink-700/20"
+                    : "bg-gray-100 text-gray-500 border hover:bg-pink-100"
                 }`}
+                style={{ minWidth: 0 }}
               >
                 {mode.label}
               </button>
@@ -232,25 +263,73 @@ function TicketBooking() {
           >
             {/* Core search panel */}
             <div className="grid gap-4 md:grid-cols-5 md:items-end">
-              {/* From */}
-              <div className="relative col-span-2 md:col-span-1">
-                <MapPin
-                  className="absolute top-3 left-3 text-pink-400"
-                  size={18}
-                />
-                <input
-                  type="text"
-                  name="from"
-                  placeholder="From"
-                  required
-                  value={form.from}
-                  onChange={handleChange}
-                  className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
-                />
-              </div>
+{/* From */}
+<div className="relative col-span-2 md:col-span-2 flex flex-col">
+  <HiLocationMarker className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 text-xl" />
+  <input
+    type="text"
+    name="from"
+    placeholder="FROM"
+    required
+    value={form.from}
+    onChange={handleChange}
+    className={`w-full pl-10 pr-3 py-3 rounded-xl ${
+      isDarkMode ? "bg-white text-gray-900" : "bg-white/90 text-gray-900"
+    } placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
+  />
+</div>
 
-              {/* Swap button (visible on md and above) */}
-              <div className="hidden md:flex col-span-1 items-center justify-center">
+{/* Swap button */}
+<div className="flex col-span-1 items-center justify-center">
+  <button
+    type="button"
+    title="Swap"
+    onClick={() =>
+      setForm((prev) => ({
+        ...prev,
+        from: prev.to,
+        to: prev.from,
+      }))
+    }
+    className="bg-pink-500 hover:bg-pink-600 text-white rounded-full p-3 transition-all flex items-center justify-center"
+    style={{ zIndex: 1, margin: "0 0.5rem" }}
+  >
+    <ArrowRightLeft size={25} />
+  </button>
+</div>
+{/* To */}
+<div className="relative col-span-2 md:col-span-2 flex flex-col">
+  <HiLocationMarker className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 text-xl" />
+  <input
+    type="text"
+    name="to"
+    placeholder="TO"
+    required
+    value={form.to}
+    onChange={handleChange}
+    className={`w-full pl-10 pr-3 py-3 rounded-xl ${
+      isDarkMode ? "bg-white text-gray-900" : "bg-white/90 text-gray-900"
+    } placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
+  />
+</div>
+              
+{/* Depart */}
+<div className="relative col-span-2 md:col-span-1">
+  <CalendarDays className="absolute top-3 left-3 text-pink-400" size={18} />
+  <input
+    type="date"
+    name="depart"
+    required
+    min={getToday()} // ✅ restrict to today or future
+    value={form.depart}
+    onChange={handleChange}
+    className={`w-full pl-10 pr-3 py-3 rounded-xl ${
+      isDarkMode ? "bg-white text-gray-900" : "bg-white/90 text-gray-900"
+    } focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
+  />
+</div>
+              
+              <div className="flex col-span-1 items-center justify-center">
                 <button
                   type="button"
                   title="Swap"
@@ -261,84 +340,47 @@ function TicketBooking() {
                       to: prev.from,
                     }))
                   }
-                  className="bg-pink-500 hover:bg-pink-600 text-white rounded-xl p-3 transition-all"
+                  style={{ zIndex: 1, margin: "0 0.5rem" }}
                 >
-                  <ArrowRightLeft size={20} />
                 </button>
               </div>
-
-              {/* To */}
-              <div className="relative col-span-2 md:col-span-1">
-                <MapPin
-                  className="absolute top-3 left-3 text-pink-400"
-                  size={18}
-                />
-                <input
-                  type="text"
-                  name="to"
-                  placeholder="To"
-                  required
-                  value={form.to}
-                  onChange={handleChange}
-                  className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
-                />
-              </div>
-              
-              {/* Depart */}
-              <div className="relative col-span-2 md:col-span-1">
-                <CalendarDays
-                  className="absolute top-3 left-3 text-pink-400"
-                  size={18}
-                />
-                <input
-                  type="date"
-                  name="depart"
-                  required
-                  value={form.depart}
-                  onChange={handleChange}
-                  className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
-                />
-              </div>
-
-              {/* Return or Passengers */}
-              <div className="relative col-span-2 md:col-span-1">
-                {tripMode === "roundTrip" ? (
-                  <>
-                    <CalendarDays
-                      className="absolute top-3 left-3 text-pink-400"
-                      size={18}
-                    />
-                    <input
-                      type="date"
-                      name="return"
-                      required
-                      value={form.return}
-                      min={form.depart}
-                      onChange={handleChange}
-                      className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
-                    />
-                  </>
-                ) : (
-                  <>
-                    <Users
-                      className="absolute top-3 left-3 text-pink-400"
-                      size={18}
-                    />
-                    <input
-                      type="number"
-                      name="passengers"
-                      min="1"
-                      max="10"
-                      required
-                      value={form.passengers}
-                      onChange={handleChange}
-                      className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
-                    />
-                  </>
-                )}
-              </div>
-            </div>
-
+              {/* Return OR Passengers */}
+<div className="relative col-span-2 md:col-span-2 flex flex-col">
+  {tripMode === "roundTrip" ? (
+    <>
+      <CalendarDays className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-400 text-xl" />
+      <input
+        type="date"
+        name="return"
+        required
+        min={form.depart}
+        value={form.return}
+        onChange={handleChange}
+        className={`w-full pl-10 pr-3 py-3 rounded-xl ${
+          isDarkMode ? "bg-white text-gray-900" : "bg-white/90 text-gray-900"
+        } focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
+      />
+    </>
+  ) : (
+    <>
+      <Users className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-400 text-xl" />
+      <input
+        type="number"
+        name="passengers"
+        min="1"
+        max="10"
+        required
+        value={form.passengers}
+        onChange={handleChange}
+        placeholder="Passengers"
+        className={`w-full pl-10 pr-3 py-3 rounded-xl ${
+          isDarkMode ? "bg-white text-gray-900" : "bg-white/90 text-gray-900"
+        } focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
+      />
+    </>
+  )}
+</div>
+</div>
             {/* Extra row for Passengers + Cabin */}
             <div className="grid gap-4 sm:grid-cols-2">
               {tripMode === "roundTrip" && (
@@ -355,26 +397,73 @@ function TicketBooking() {
                     required
                     value={form.passengers}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-3 py-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
+                    className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white text-white':'bg-white/90 text-gray-800'} focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
                     placeholder="Passengers"
                   />
                 </div>
               )}
-              <select
-                name="cabin"
-                value={form.cabin}
-                onChange={handleChange}
-                className="w-full p-3 rounded-xl bg-white/90 text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-500/30"
-              >
-                {["Economy", "Premium Economy", "Business", "First"].map(
-                  (c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  )
-                )}
-              </select>
+<div className="w-full relative">
+  {/* Cabin Dropdown */}
+<select
+  name="cabin"
+  value={form.cabin}
+  onChange={handleChange}
+  className={`w-full p-3 rounded-xl ${
+    isDarkMode ? "bg-white text-gray-900" : "bg-white/90 text-gray-900"
+  } focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
+>
+  {travelType === "flight" &&
+    ["Economy", "Premium Economy", "Business", "First"].map((c) => (
+      <option key={c} value={c}>
+        {c}
+      </option>
+    ))}
+  {travelType === "train" &&
+    ["Sleeper", "3A", "2A", "1A"].map((c) => (
+      <option key={c} value={c}>
+        {c}
+      </option>
+    ))}
+  {travelType === "bus" &&
+    ["Seater", "Sleeper", "AC", "Non-AC"].map((c) => (
+      <option key={c} value={c}>
+        {c}
+      </option>
+    ))}
+  {travelType === "cab" &&
+    ["Hatchback", "Sedan", "SUV", "Luxury"].map((c) => (
+      <option key={c} value={c}>
+        {c}
+      </option>
+    ))}
+</select>
+
+  {/* Custom dropdown arrow */}
+  <span className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-black">
+    ▼
+  </span>
+</div>
             </div>
+
+            <div className="flex items-center gap-3 mt-4 text-white">
+              <input
+                type="checkbox"
+                id="petFriendly"
+                name="petFriendly"
+                checked={form.petFriendly}
+                onChange={(e) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    petFriendly: e.target.checked,
+                  }))
+                }
+                className={` accent-pink-600 w-5 h-5 rounded focus:ring-2 focus:ring-pink-500 `}
+              />
+              <label htmlFor="petFriendly" className="text-sm md:text-base font-medium">
+                I’m traveling with a pet
+              </label>
+            </div>
+
 
             {/* Submit button */}
             <button
