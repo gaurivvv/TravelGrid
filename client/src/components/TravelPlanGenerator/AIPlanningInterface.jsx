@@ -263,14 +263,14 @@ const AIPlanningInterface = ({
     return (
         <div className="space-y-6">
             {/* Voice Interface Header */}
-            <div className="bg-gradient-to-r from-purple-900/50 to-pink-900/50 backdrop-blur-sm rounded-xl p-6 border border-purple-700">
+            <div className="bg-gradient-to-r from-pink-900/50 to-blue-900/50 backdrop-blur-sm rounded-xl p-6 border border-white">
                 <div className="flex items-center justify-between mb-4">
                     <div>
-                        <h3 className="text-xl font-semibold flex items-center text-purple-300">
+                        <h3 className="text-xl font-semibold flex items-center text-pink-800">
                             <Brain className="w-5 h-5 mr-2" />
                             AI Planning Interface
                         </h3>
-                        <p className="text-sm text-purple-200 mt-1">
+                        <p className="text-sm text-white mt-1">
                             Use voice commands or natural language to interact with your AI travel planner
                         </p>
                     </div>
@@ -278,7 +278,7 @@ const AIPlanningInterface = ({
                         <div className="text-2xl font-bold text-purple-400">
                             {voiceCommands.length + textCommands.length}
                         </div>
-                        <div className="text-sm text-purple-300">Commands Processed</div>
+                        <div className="text-sm text-white">Commands Processed</div>
                     </div>
                 </div>
 
@@ -327,9 +327,9 @@ const AIPlanningInterface = ({
             </div>
 
             {/* Text Command Interface */}
-            <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
-                <h4 className="text-lg font-semibold mb-4 flex items-center">
-                    <MessageSquare className="w-5 h-5 mr-2 text-blue-400" />
+            <div className="backdrop-blur-sm rounded-xl p-6 border border-pink-700">
+                <h4 className="text-lg font-semibold mb-4 flex items-center text-pink-800">
+                    <MessageSquare className="w-5 h-5 mr-2 text-pink-800" />
                     Text Commands
                 </h4>
 
@@ -339,13 +339,13 @@ const AIPlanningInterface = ({
                         value={currentCommand}
                         onChange={(e) => setCurrentCommand(e.target.value)}
                         placeholder="Type your command here (e.g., 'Add museum visit to day 2')"
-                        className="flex-1 px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="flex-1 px-4 py-2 bg-pink-600 border border-pink-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         onKeyPress={(e) => e.key === 'Enter' && processTextCommand()}
                     />
                     <button
                         onClick={processTextCommand}
                         disabled={!currentCommand.trim() || isProcessing}
-                        className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 rounded-lg transition-colors flex items-center"
+                        className="px-4 py-2 bg-blue-300 hover:bg-blue-700 disabled:opacity-50 rounded-lg transition-colors flex items-center"
                     >
                         <Send className="w-4 h-4 mr-2" />
                         Send
@@ -354,7 +354,7 @@ const AIPlanningInterface = ({
 
                 {/* Quick Commands */}
                 <div className="mt-4">
-                    <div className="text-sm text-gray-400 mb-2">Quick Commands:</div>
+                    <div className="text-sm text-gray-600 mb-2">Quick Commands:</div>
                     <div className="flex flex-wrap gap-2">
                         {[
                             "Add museum visit",
@@ -449,9 +449,9 @@ const AIPlanningInterface = ({
             )}
 
             {/* Command History */}
-            <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
-                <h4 className="text-lg font-semibold mb-4 flex items-center">
-                    <Clock className="w-5 h-5 mr-2 text-purple-400" />
+            <div className="bg-white backdrop-blur-sm rounded-xl p-6 border border-pink-700">
+                <h4 className="text-lg font-semibold mb-4 flex items-center text-pink-800">
+                    <Clock className="w-5 h-5 mr-2 text-pink-800" />
                     Command History
                 </h4>
 
@@ -485,7 +485,7 @@ const AIPlanningInterface = ({
                     ))}
 
                     {voiceCommands.length === 0 && textCommands.length === 0 && (
-                        <div className="text-center py-8 text-gray-500">
+                        <div className="text-center py-8 text-gray-800">
                             <Bot className="w-16 h-16 mx-auto mb-4 opacity-50" />
                             <p>No commands yet. Start by using voice or text commands!</p>
                         </div>

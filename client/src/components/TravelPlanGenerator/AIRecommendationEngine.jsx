@@ -453,10 +453,10 @@ const AIRecommendationEngine = ({
   return (
     <div className="space-y-6">
       {/* AI Personalization Header */}
-      <div className="bg-gradient-to-r from-purple-900/50 to-blue-900/50 backdrop-blur-sm rounded-xl p-6 border border-purple-700">
+      <div className="bg-gradient-to-r from-pink-900/50 to-blue-900/50 backdrop-blur-sm rounded-xl p-6 border border-white">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="text-xl font-semibold flex items-center text-purple-300">
+            <h3 className="text-xl font-semibold flex items-center text-black">
               <Zap className="w-5 h-5 mr-2" />
               AI-Powered Recommendations
             </h3>
@@ -465,8 +465,8 @@ const AIRecommendationEngine = ({
             </p>
           </div>
           <div className="text-right">
-            <div className="text-2xl font-bold text-purple-400">{personalizationScore}%</div>
-            <div className="text-sm text-purple-300">AI Match Score</div>
+            <div className="text-2xl font-bold text-pink-800">{personalizationScore}%</div>
+            <div className="text-sm text-white">AI Match Score</div>
           </div>
         </div>
 
@@ -474,7 +474,7 @@ const AIRecommendationEngine = ({
         {aiInsights.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {aiInsights.map((insight) => (
-              <div key={insight.id} className="p-3 bg-purple-800/30 border border-purple-600/30 rounded-lg">
+              <div key={insight.id} className="p-3 bg-pink-800/20 border border-white rounded-lg">
                 <div className="flex items-center space-x-2 mb-2">
                   <span className="text-lg">{insight.icon}</span>
                   <span className="text-xs font-medium text-purple-300 uppercase">
@@ -489,10 +489,10 @@ const AIRecommendationEngine = ({
       </div>
 
       {/* Filters */}
-      <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
+      <div className="bg-pink-500/20 backdrop-blur-sm rounded-xl p-6 border border-pink-700">
         <div className="flex items-center justify-between mb-4">
           <h4 className="text-lg font-semibold flex items-center">
-            <Filter className="w-5 h-5 mr-2 text-blue-400" />
+            <Filter className="w-5 h-5 mr-2 text-black" />
             Smart Filters
           </h4>
           <button
@@ -502,7 +502,7 @@ const AIRecommendationEngine = ({
               distance: 'all',
               duration: 'all'
             })}
-            className="text-sm text-gray-400 hover:text-blue-400 transition-colors"
+            className="text-sm text-pink-700 hover:text-blue-400 transition-colors"
           >
             Reset Filters
           </button>
@@ -510,11 +510,11 @@ const AIRecommendationEngine = ({
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Price Range</label>
+            <label className="block text-sm font-medium text-pink-700 mb-2">Price Range</label>
             <select
               value={filters.priceRange}
               onChange={(e) => handleFilterChange('priceRange', e.target.value)}
-              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 text-pink-700 border border-gray-600 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
             >
               <option value="all">All Prices</option>
               <option value="$">Budget ($)</option>
@@ -524,7 +524,7 @@ const AIRecommendationEngine = ({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Min Rating</label>
+            <label className="block text-sm font-medium text-pink-700 mb-2">Min Rating</label>
             <select
               value={filters.rating}
               onChange={(e) => handleFilterChange('rating', e.target.value)}
@@ -538,7 +538,7 @@ const AIRecommendationEngine = ({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Distance</label>
+            <label className="block text-sm font-medium text-pink-700 mb-2">Distance</label>
             <select
               value={filters.distance}
               onChange={(e) => handleFilterChange('distance', e.target.value)}
@@ -552,7 +552,7 @@ const AIRecommendationEngine = ({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Duration</label>
+            <label className="block text-sm font-medium text-pink-700 mb-2">Duration</label>
             <select
               value={filters.duration}
               onChange={(e) => handleFilterChange('duration', e.target.value)}
@@ -568,15 +568,15 @@ const AIRecommendationEngine = ({
       </div>
 
       {/* Category Tabs */}
-      <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
+      <div className="backdrop-blur-sm rounded-xl p-6 border border-pink-700">
         <div className="flex flex-wrap gap-2 mb-6">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
               className={`px-4 py-2 rounded-lg font-medium transition-all flex items-center space-x-2 ${activeCategory === category
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  ? 'bg-pink-600 text-white'
+                  : 'bg-pink-400 text-gray-300 hover:bg-black'
                 }`}
             >
               <span>{getCategoryIcon(category)}</span>
@@ -592,7 +592,7 @@ const AIRecommendationEngine = ({
         {isLoading && (
           <div className="text-center py-12">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
-            <p className="text-gray-400">AI is analyzing your preferences...</p>
+            <p className="text-gray-800">AI is analyzing your preferences...</p>
           </div>
         )}
 
@@ -602,7 +602,7 @@ const AIRecommendationEngine = ({
             {filteredRecommendations[activeCategory].map((item) => (
               <div
                 key={item.id}
-                className="border border-gray-600 rounded-lg p-4 hover:border-blue-500/50 transition-all cursor-pointer"
+                className="border border-pink-600 rounded-lg p-4 hover:border-black transition-all cursor-pointer"
                 onClick={() => handleRecommendationSelect(item, activeCategory)}
               >
                 <div className="flex items-start space-x-4">
@@ -610,19 +610,19 @@ const AIRecommendationEngine = ({
 
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
-                      <h5 className="font-semibold text-lg text-white">{item.name}</h5>
+                      <h5 className="font-semibold text-lg text-pink-800">{item.name}</h5>
                       <div className="flex items-center space-x-2">
-                        <span className="flex items-center text-yellow-400">
+                        <span className="flex items-center text-yellow-600">
                           <Star className="w-4 h-4 mr-1" />
                           {item.rating}
                         </span>
-                        <span className="text-sm text-gray-400">{item.price}</span>
+                        <span className="text-sm text-gray-800">{item.price}</span>
                       </div>
                     </div>
 
-                    <p className="text-gray-300 text-sm mb-3">{item.description}</p>
+                    <p className="text-gray-700 text-sm mb-3">{item.description}</p>
 
-                    <div className="flex items-center space-x-4 text-sm text-gray-400 mb-3">
+                    <div className="flex items-center space-x-4 text-sm text-gray-800 mb-3">
                       {item.duration && (
                         <span className="flex items-center">
                           <Clock className="w-4 h-4 mr-1" />
@@ -648,7 +648,7 @@ const AIRecommendationEngine = ({
                         {item.tags?.map((tag, index) => (
                           <span
                             key={index}
-                            className="px-2 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full"
+                            className="px-2 py-1 bg-white text-pink-600 text-xs rounded-full"
                           >
                             {tag}
                           </span>
