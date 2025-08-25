@@ -15,7 +15,6 @@ const ItineraryMapPage = () => {
         { headers: { "User-Agent": "TravelGrid/1.0" } } // Nominatim requires UA
       );
       const data = await res.json();
-      console.log("Geocode result for", place, data);
       if (data.length > 0) {
         return {
           name: place,
@@ -44,19 +43,20 @@ const ItineraryMapPage = () => {
 
   return (
     <div
-      className={
-        isDarkMode
-          ? "min-h-screen p-6 pt-24"
-          : "min-h-screen p-6 pt-24"
-      }
+      className={`min-h-screen pt-24 px-6 flex flex-col items-center justify-start relative ${
+        isDarkMode ? "bg-gradient-to-br from-gray-900 via-gray-800 to-black" : "bg-gradient-to-br from-pink-50 via-rose-100 to-pink-200"
+      }`}
     >
+      {/* Decorative background image overlay */}
+      <div
+        className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1350&q=80')] bg-cover bg-center opacity-20"
+      ></div>
+
+      {/* Page Title */}
       <h1
-        className={
-          isDarkMode
-            ? "text-3xl font-extrabold mb-4 text-center"
-            : "text-3xl font-extrabold mb-4 text-center"
-        }
-        style={isDarkMode ? undefined : { color: "#be185d" }}
+        className={`text-4xl font-extrabold mb-6 text-center relative z-10 ${
+          isDarkMode ? "bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-500" : "bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-rose-500"
+        }`}
       >
         ✈️ Plan Your Trip Visually
       </h1>
@@ -64,75 +64,41 @@ const ItineraryMapPage = () => {
       {/* Add Stop Form */}
       <form
         onSubmit={handleRoute}
-        className={
+        className={`relative z-10 mb-8 p-6 rounded-2xl shadow-2xl w-full max-w-xl backdrop-blur-md ${
           isDarkMode
-            ? "mb-6 p-6 rounded-xl shadow-lg space-y-3"
-            : "mb-6 p-6 rounded-xl shadow-lg space-y-3"
-        }
-        style={
-          isDarkMode
-            ? undefined
-            : {
-                background: "#ffffff",
-                border: "1px solid #f9a8d4",
-              }
-        }
+            ? "bg-gray-800/60 border border-gray-700"
+            : "bg-white/70 border border-pink-300"
+        }`}
       >
         <input
           type="text"
           placeholder="Departure City"
           value={formData.from}
           onChange={(e) => setFormData({ ...formData, from: e.target.value })}
-          className={
+          className={`w-full p-3 rounded-lg mb-4 focus:outline-none focus:ring-2 transition-all ${
             isDarkMode
-              ? "border border-gray-600 p-3 rounded w-full focus:outline-none focus:border-blue-500"
-              : "border p-3 rounded w-full focus:outline-none"
-          }
-          style={
-            isDarkMode
-              ? undefined
-              : {
-                  borderColor: "#f9a8d4",
-                  background: "#fff",
-                  color: "#1e293b",
-                }
-          }
+              ? "bg-gray-700 text-white border border-gray-600 focus:ring-pink-400"
+              : "bg-white text-gray-800 border border-pink-300 focus:ring-pink-500"
+          }`}
         />
         <input
           type="text"
           placeholder="Destination City"
           value={formData.to}
           onChange={(e) => setFormData({ ...formData, to: e.target.value })}
-          className={
+          className={`w-full p-3 rounded-lg mb-6 focus:outline-none focus:ring-2 transition-all ${
             isDarkMode
-              ? "border border-gray-600 bg-gray-700 text-white p-3 rounded w-full focus:outline-none focus:border-blue-500"
-              : "border p-3 rounded w-full focus:outline-none"
-          }
-          style={
-            isDarkMode
-              ? undefined
-              : {
-                  borderColor: "#f9a8d4",
-                  background: "#fff",
-                  color: "#1e293b",
-                }
-          }
+              ? "bg-gray-700 text-white border border-gray-600 focus:ring-pink-400"
+              : "bg-white text-gray-800 border border-pink-300 focus:ring-pink-500"
+          }`}
         />
         <button
           type="submit"
-          className={
+          className={`w-full py-3 rounded-xl font-semibold shadow-md transform transition-all hover:scale-[1.02] ${
             isDarkMode
-              ? "bg-blue-600 hover:bg-blue-500 transition-colors w-full py-3 rounded text-white font-semibold"
-              : "transition-colors w-full py-3 rounded font-semibold"
-          }
-          style={
-            isDarkMode
-              ? undefined
-              : {
-                  background: "linear-gradient(135deg, #ec4899 0%, #be185d 100%)",
-                  color: "#fff",
-                }
-          }
+              ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:opacity-90"
+              : "bg-gradient-to-r from-pink-500 to-rose-600 text-white hover:opacity-95"
+          }`}
         >
           Show Route
         </button>
@@ -140,12 +106,11 @@ const ItineraryMapPage = () => {
 
       {/* Map */}
       <div
-        className={
+        className={`relative z-10 rounded-2xl overflow-hidden shadow-2xl w-full max-w-4xl h-[500px] ${
           isDarkMode
-            ? "rounded-lg overflow-hidden shadow-lg border border-gray-700"
-            : "rounded-lg overflow-hidden shadow-lg"
-        }
-        style={isDarkMode ? undefined : { border: "1px solid #f9a8d4" }}
+            ? "border border-gray-700"
+            : "border border-pink-300"
+        }`}
       >
         <ItineraryMap stops={itineraryStops} />
       </div>
