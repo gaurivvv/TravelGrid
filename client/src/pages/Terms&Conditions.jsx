@@ -1,66 +1,178 @@
-import React, { useState } from 'react';
-import Navbar from '../components/Custom/Navbar';
-
+import React, { useState, useEffect } from "react";
+import Navbar from "../components/Custom/Navbar";
 
 export default function TermsAndConditions() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    const systemIsDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    setIsDarkMode(savedTheme ? savedTheme === "dark" : systemIsDark);
+  }, []);
+
+  // Theme classes with proper contrast
+  const themeClasses = {
+    bg: isDarkMode ? "bg-gray-900" : "bg-gray-50",
+    text: isDarkMode ? "text-gray-200" : "text-gray-700",
+    heading: isDarkMode ? "text-white" : "text-gray-900",
+    card: isDarkMode ? "bg-gray-800" : "bg-white",
+    border: isDarkMode ? "border-gray-700" : "border-gray-200",
+    muted: isDarkMode ? "text-gray-400" : "text-gray-500"
+  };
+
+  const sections = [
+    {
+      title: "Acceptance of Terms",
+      content: "By accessing or using the TravelGrid website (the 'Service'), you agree to be bound by these Terms and our Privacy Policy."
+    },
+    {
+      title: "Use of the Service",
+      content: "TravelGrid provides an online platform for browsing and booking travel services. You agree to use the Service lawfully and without infringing others' rights.",
+      list: [
+        "You must be at least 18 years old",
+        "Keep your account credentials secure",
+        "Provide accurate and current information"
+      ],
+      highlight: "blue"
+    },
+    {
+      title: "Bookings and Payments",
+      content: "When booking, you contract directly with the service provider. TravelGrid acts only as an intermediary.",
+      list: [
+        "Prices may change until booking is confirmed",
+        "Full payment required at booking",
+        "Cancellation policies vary by provider"
+      ],
+      highlight: "orange"
+    },
+    {
+      title: "Intellectual Property",
+      content: "All website content is TravelGrid's property or licensed material, protected by copyright. Reproduction or modification without permission is prohibited."
+    },
+    {
+      title: "Disclaimer of Warranties",
+      content: "The Service is provided 'as is' and 'as available'. TravelGrid makes no warranties about service operation or content accuracy.",
+      highlight: "red"
+    },
+    {
+      title: "Governing Law",
+      content: "These Terms are governed by Indian law, without regard to conflict principles."
+    }
+  ];
+
+  // Highlight colors with proper contrast for both themes
+  const highlightColors = {
+    blue: {
+      bg: isDarkMode ? "bg-blue-900/30" : "bg-blue-50",
+      border: "border-blue-500",
+      text: isDarkMode ? "text-blue-200" : "text-blue-800"
+    },
+    orange: {
+      bg: isDarkMode ? "bg-amber-900/30" : "bg-amber-50",
+      border: "border-amber-500",
+      text: isDarkMode ? "text-amber-200" : "text-amber-800"
+    },
+    red: {
+      bg: isDarkMode ? "bg-red-900/30" : "bg-red-50",
+      border: "border-red-500",
+      text: isDarkMode ? "text-red-200" : "text-red-800"
+    }
+  };
+
   return (
     <>
-    <Navbar />
-    <div className="bg-white p-8 rounded-lg shadow-lg" style={{ paddingTop: '70px' }}>
-      <h2 className="text-4xl font-extrabold text-gray-800 mb-6 text-center">Terms & Conditions</h2>
+      <Navbar />
+      <div className={`min-h-screen ${themeClasses.bg}`} style={{ paddingTop: "70px" }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+          {/* Header */}
+          <div className="text-center mb-8 sm:mb-12">
+            <h1 className={`text-3xl sm:text-4xl font-bold mb-3 ${themeClasses.heading}`}>
+              Terms & Conditions
+            </h1>
+            <p className={themeClasses.muted}>
+              Please read these terms carefully before using our services.
+            </p>
+            <div className="w-20 h-1 bg-blue-500 mx-auto mt-5 rounded"></div>
+          </div>
 
-      <section className="mb-8">
-        <h3 className="text-2xl font-semibold text-gray-700 mb-3">1. Acceptance of Terms</h3>
-        <p className="text-gray-500 leading-relaxed">
-          By accessing or using the TravelGrid website <span className="font-bold">(the "Service")</span>, you agree to be bound by these Terms and Conditions and our Privacy Policy. If you do not agree to all the terms and conditions of this agreement, then you may not access the website or use any services.
-        </p>
-      </section>
+          {/* Sections */}
+          <div className="space-y-6">
+            {sections.map((section, index) => (
+              <div key={index} className={`p-5 sm:p-6 rounded-lg shadow-sm ${themeClasses.card}`}>
+                <div className="flex items-start">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-semibold text-xs sm:text-sm mr-3 mt-1">
+                    {index + 1}
+                  </div>
+                  <div className="flex-1">
+                    <h2 className={`text-xl font-semibold mb-3 ${themeClasses.heading}`}>
+                      {section.title}
+                    </h2>
 
-      <section className="mb-8">
-        <h3 className="text-2xl font-semibold text-gray-700 mb-3">2. Use of the Service</h3>
-        <p className="text-gray-500 leading-relaxed mb-4">
-          TravelGrid provides an online platform that allows users to browse, compare, and book travel-related services such as flights, hotels, packages, and activities. You agree to use the Service only for lawful purposes and in a way that does not infringe the rights of, restrict or inhibit anyone else's use and enjoyment of the Service.
-        </p>
-        <ul className="list-disc list-inside text-gray-500 ml-4 space-y-2">
-          <li>You must be at least 18 years old to use this Service.</li>
-          <li>You are responsible for maintaining the confidentiality of your account and password.</li>
-          <li>All information you provide must be accurate, complete, and current.</li>
-        </ul>
-      </section>
+                    <p className={`mb-3 ${themeClasses.text}`}>
+                      {section.content}
+                    </p>
 
-      <section className="mb-8">
-        <h3 className="text-2xl font-semibold text-gray-700 mb-3">3. Bookings and Payments</h3>
-        <p className="text-gray-500 leading-relaxed mb-4">
-          When you make a booking through TravelGrid, you are entering into a contract directly with the travel service provider (e.g., airline, hotel). TravelGrid acts solely as an intermediary.
-        </p>
-        <ul className="list-disc list-inside text-gray-500 ml-4 space-y-2">
-          <li>Prices are subject to change without notice until a booking is confirmed.</li>
-          <li>Payment must be made in full at the time of booking unless otherwise specified.</li>
-          <li>Cancellation and refund policies are determined by the individual service providers and will be clearly stated at the time of booking.</li>
-        </ul>
-      </section>
+                    {section.list && (
+                      <div className={`p-4 rounded-lg border-l-4 mb-3 ${highlightColors[section.highlight].border} ${highlightColors[section.highlight].bg}`}>
+                        <h4 className={`font-semibold mb-2 ${highlightColors[section.highlight].text}`}>
+                          {section.highlight === "blue" ? "Requirements:" : "Important:"}
+                        </h4>
+                        <ul className={`space-y-1 ${highlightColors[section.highlight].text}`}>
+                          {section.list.map((item, i) => (
+                            <li key={i}>• {item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
 
-      <section className="mb-8">
-        <h3 className="text-2xl font-semibold text-gray-700 mb-3">4. Intellectual Property</h3>
-        <p className="text-gray-500 leading-relaxed">
-          All content on the TravelGrid website, including text, graphics, logos, images, and software, is the property of TravelGrid or its content suppliers and is protected by international copyright laws. You may not reproduce, distribute, modify, or create derivative works of any content without our express written permission.
-        </p>
-      </section>
+                    {section.highlight === "red" && (
+                      <div className={`p-4 rounded-lg border-l-4 ${highlightColors.red.border} ${highlightColors.red.bg}`}>
+                        <p className={highlightColors.red.text}>
+                          The Service is provided{" "}
+                          <span className="font-semibold">
+                            "as is"
+                          </span>{" "}
+                          and{" "}
+                          <span className="font-semibold">
+                            "as available"
+                          </span>
+                          . TravelGrid makes no warranties about service operation or content accuracy.
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
 
-      <section className="mb-8">
-        <h3 className="text-2xl font-semibold text-gray-700 mb-3">5. Disclaimer of Warranties</h3>
-        <p className="text-gray-500 leading-relaxed">
-          The Service is provided on an "as is" and "as available" basis. TravelGrid makes no representations or warranties of any kind, express or implied, as to the operation of the Service or the information, content, materials, or products included on the Service.
-        </p>
-      </section>
+          {/* Contact Section */}
+          <div className={`mt-10 p-6 sm:p-8 rounded-lg text-center border ${isDarkMode ? "bg-blue-900/20 border-blue-700" : "bg-blue-50 border-blue-200"}`}>
+            <h3 className={`font-semibold mb-3 text-lg ${isDarkMode ? "text-blue-100" : "text-blue-900"}`}>
+              Have Questions?
+            </h3>
+            <p className={isDarkMode ? "text-blue-200" : "text-blue-700"}>
+              Contact us if you need clarification on these terms.
+            </p>
+            <a
+              href="mailto:legal@travelgrid.com"
+              className="inline-flex items-center mt-4 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition"
+            >
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Contact Legal Team
+            </a>
+          </div>
 
-      <section>
-        <h3 className="text-2xl font-semibold text-gray-700 mb-3">6. Governing Law</h3>
-        <p className="text-gray-500 leading-relaxed">
-          These Terms and Conditions are governed by and construed in accordance with the laws of India, without regard to its conflict of law principles.
-        </p>
-      </section>
-    </div>
+          {/* Footer */}
+          <div className={`text-center mt-8 pt-6 border-t ${themeClasses.border}`}>
+            <p className={themeClasses.muted}>
+              Terms effective from the date above and may be updated periodically.
+            </p>
+          </div>
+        </div>
+      </div>
     </>
   );
-};
+}
