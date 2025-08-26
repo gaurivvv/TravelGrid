@@ -65,6 +65,7 @@ const Navbar = () => {
       ],
     },
     { name: t('navigation.wishlist'), path: "/wishlist" },
+    { name: "Leaderboard", path: "/leaderboard" },
   ];
 
   const getActiveParentTab = () => {

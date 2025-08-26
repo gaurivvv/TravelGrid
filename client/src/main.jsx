@@ -32,6 +32,7 @@ import LocationDetail from './pages/LocationDetail';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import { Provider } from 'react-redux';
 import appStore from './app/store.js';
+import LeaderBoard from './components/Leaderboard/Leaderboard';
 
 //import TrendingSpots from './pages/TrendingSpots.jsx';
 //import PackingChecklistPage from './pages/PackingChecklist.jsx';
@@ -74,6 +75,8 @@ const TrendingSpots = lazy(() => import('./pages/TrendingSpots'));
 const PackingChecklistPage = lazy(() => import('./pages/PackingChecklist'));
 const Summarizer = lazy(() => import('./components/Summarizer'));
 const Recommendation = lazy(() => import('./components/recommendation'));
+const Leaderboard = lazy(() => import('./components/Leaderboard/LeaderBoard'));
+
 const Wishlist = lazy(() => import('./pages/Wishlist'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const TripsPlanned = lazy(() => import('./pages/TripsPlanned'));
@@ -100,6 +103,7 @@ const MusicPlayerDemo = lazy(() => import('./pages/MusicPlayerDemo'));
 const Music = lazy(() => import('./pages/Music'));
 const VisaChecker = lazy(() => import('./pages/VisaChecker'));
 const BudgetEstimator = lazy(() => import('./pages/BudgetEstimator'));
+
 
 const router = createBrowserRouter([
   { path: '/login', element: <AuthLayout><Login /></AuthLayout> },
@@ -154,6 +158,8 @@ const router = createBrowserRouter([
       {path:"/itinerary-map", element:<Suspense fallback={<Spinner />}><ItineraryMapPage/></Suspense>},
       { path: '/visa-checker', element: <Suspense fallback={<Spinner />}><VisaChecker /></Suspense> },
       { path: '/budget-estimator', element: <Suspense fallback={<Spinner />}><BudgetEstimator /></Suspense> },
+      { path: '/leaderboard', element: <Suspense fallback={<Spinner />}><LeaderBoard /></Suspense> },
+
 
 
       {
