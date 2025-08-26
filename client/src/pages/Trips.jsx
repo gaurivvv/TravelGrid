@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from '../context/ThemeContext';
+
 import {
   Plane,
   Map,
@@ -34,9 +36,15 @@ const TRIP_SUPPORT = [
 ];
 function Trips() {
   const navigate = useNavigate();
+   const { isDarkMode } = useTheme();
 
   return (
-    <div className="pt-30 w-full min-h-screen flex flex-col items-center px-4 sm:px-6 lg:px-8 relative bg-gradient-to-br from-black to-pink-900 text-white">
+    <div className={`pt-30 w-full min-h-screen flex flex-col items-center px-4 sm:px-6 lg:px-8 relative text-white${
+        isDarkMode 
+            ? 'bg-black border-pink-500' 
+            : 'bg-white/90 border-pink-200 text-gray-900'
+    }`}
+    >
       <h2 className="mt-2 px-2 leading-tight text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
         Planning a Trip?{" "}
         <span className=" text-pink-400">We've Got You Covered!</span>

@@ -8,6 +8,8 @@ const COMMON_HEALTH_NOTE =
   "Ensure you have travel insurance and required vaccinations before your trip.";
 
 export default function VisaChecker() {
+
+  
   const { isDarkMode } = useTheme();
   const [countries, setCountries] = useState([]);
   const [passport, setPassport] = useState("");
