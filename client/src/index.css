@@ -76,6 +76,9 @@ body {
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
+
+  overflow-x: hidden;
+  min-height: 100svh;
 }
 
 /* Custom scrollbar */
