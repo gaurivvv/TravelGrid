@@ -20,8 +20,6 @@ export default defineConfig({
     },
   },
   server: {
-    port: 5000,   // force Vite to always use port 5000
-    strictPort: true, // ❗ this makes Vite fail if 5000 is not free (instead of switching)
     hmr: {
       overlay: false,
     },
@@ -33,58 +31,4 @@ export default defineConfig({
       },
     },
   },
- feat/wishlist-tooltip-ux
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
- main

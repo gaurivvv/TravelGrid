@@ -29,30 +29,6 @@ function App() {
   }, [location]);
 
   return (
-feat/wishlist-tooltip-ux
-  <div>
-    <h1>Hello TravelGrid</h1>
-  </div>
-);
-
-    <WishlistProvider>
-      <AppProvider>
-        <DashboardDataProvider>
-          <div className="flex flex-col min-h-screen">
-            {loading && <Spinner />}
-            <Navbar />
-            <div className="flex-grow">
-              <ErrorBoundary>
-                <h1> Hello TravelGrid</h1>
-              </ErrorBoundary>
-            </div>
-            <GoToTopButton /> 
-            <FeedbackButton />
-            <Footer />
-          </div>
-        </DashboardDataProvider>
-      </AppProvider>
-
     <AuthProvider>
       <WishlistProvider>
         <AppProvider>
@@ -88,7 +64,6 @@ feat/wishlist-tooltip-ux
             </MapProvider>
           </DashboardDataProvider>
         </AppProvider>
- main
       </WishlistProvider>
     </AuthProvider>
   );
