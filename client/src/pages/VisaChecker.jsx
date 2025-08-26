@@ -208,11 +208,20 @@ export default function VisaChecker() {
 
     {/* Heading */}
     {/* Full-width Hero Section */}
-<div className={`h-[50vh] w-full flex flex-col justify-center items-center bg-pink-100`}>
+<div className={`h-[50vh] w-full flex flex-col justify-center items-center ${
+
+isDarkMode 
+                    ? 'border-pink-500 bg-gray-100/10 shadow-lg  backdrop-blur-md hover:shadow-pink-500/20 hover:bg-gray-200/15 text-white ' 
+                    : 'bg-white border-gray-300 shadow-pink-500/20 text-gray-900'
+}`}>
   <h1 className="text-4xl md:text-6xl font-bold text-pink-700 text-center">
     Visa & Travel Requirements
   </h1>
-  <p className="mt-6 text-sm md:text-lg text-black text-center max-w-full whitespace-nowrap overflow-x-auto">
+  <p className={`mt-6 text-sm md:text-lg  text-center max-w-full whitespace-nowrap overflow-x-auto${
+    isDarkMode
+    ?'text-white'
+    :'text-black'
+  }`}>
     Quickly check visa requirements and travel guidelines for any country with ease.
   </p>
 </div>
