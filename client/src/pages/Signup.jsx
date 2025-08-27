@@ -158,6 +158,7 @@ const Signup = () => {
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
+                    onCopy={(e) => e.preventDefault()}
                     className={`w-full pl-10 pr-12 py-3 bg-gray-50 border ${
                       isDarkMode ? "border-white/20 " : "border-black/20"
                     } rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent`}
@@ -199,6 +200,7 @@ const Signup = () => {
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleChange}
+                    onPaste={(e) => e.preventDefault()}
                     className={`w-full pl-10 pr-12 py-3 bg-gray-50 border ${
                       isDarkMode ? "border-white/20 " : "border-black/20"
                     } rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent`}

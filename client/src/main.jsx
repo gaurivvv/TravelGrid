@@ -32,7 +32,7 @@ import LocationDetail from './pages/LocationDetail';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import { Provider } from 'react-redux';
 import appStore from './app/store.js';
-import LeaderBoard from './components/Leaderboard/Leaderboard';
+import LeaderBoard from './components/Leaderboard/LeaderBoard';
 
 //import TrendingSpots from './pages/TrendingSpots.jsx';
 //import PackingChecklistPage from './pages/PackingChecklist.jsx';
@@ -75,7 +75,7 @@ const TrendingSpots = lazy(() => import('./pages/TrendingSpots'));
 const PackingChecklistPage = lazy(() => import('./pages/PackingChecklist'));
 const Summarizer = lazy(() => import('./components/Summarizer'));
 const Recommendation = lazy(() => import('./components/recommendation'));
-const Leaderboard = lazy(() => import('./components/Leaderboard/LeaderBoard'));
+// const Leaderboard = lazy(() => import('./components/Leaderboard/LeaderBoard'));
 
 const Wishlist = lazy(() => import('./pages/Wishlist'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
