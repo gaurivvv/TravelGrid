@@ -32,6 +32,7 @@ import LocationDetail from './pages/LocationDetail';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import { Provider } from 'react-redux';
 import appStore from './app/store.js';
+import { UpdatePassword } from './pages/UpdatePassword';
 
 //import TrendingSpots from './pages/TrendingSpots.jsx';
 //import PackingChecklistPage from './pages/PackingChecklist.jsx';
@@ -154,6 +155,7 @@ const router = createBrowserRouter([
       {path:"/itinerary-map", element:<Suspense fallback={<Spinner />}><ItineraryMapPage/></Suspense>},
       { path: '/visa-checker', element: <Suspense fallback={<Spinner />}><VisaChecker /></Suspense> },
       { path: '/budget-estimator', element: <Suspense fallback={<Spinner />}><BudgetEstimator /></Suspense> },
+      { path: '/update-password/:id', element: <Suspense fallback={<Spinner />}><UpdatePassword /></Suspense> },
 
 
       {
@@ -177,8 +179,7 @@ const router = createBrowserRouter([
       { path: '*', element: <NotFound /> },
       { path: '/package/:id', element: <PackageDetails /> },*/
       { path: '/location/:locationId', element: <LocationDetail /> },
-
-
+      
 
       { path: '/pettravel', element: <PetTravel /> },
 
