@@ -193,18 +193,18 @@ function TicketBooking() {
         <img
           src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=1600&q=80"
           alt="City skyline"
-          loading="lazy" 
-          className="absolute inset-0 w-full h-full object-cover opacity-30 z-0"
+          loading="lazy"
+          className={`absolute inset-0 w-full h-full object-cover ${isDarkMode? "opacity-30":"opacity-70"} z-0`}
         />
-        <div className="text-center mb-8">
-           <h1
+        <div className="text-center mb-8 z-3">
+          <h1
             className={`text-3xl md:text-4xl font-extrabold mb-2 mt-8 ${
               isDarkMode ? "text-white" : "text-gray-900"
             }`}
           >
             Book Your <span className="text-pink-500">Perfect Trip</span>
           </h1>
-           <p
+          <p
             className={`text-sm md:text-base ${
               isDarkMode ? "text-gray-200" : "text-gray-700"
             }`}
@@ -213,19 +213,19 @@ function TicketBooking() {
             in one place
           </p>
         </div>
-        <div className="relative z-10 w-full max-w-4xl bg-white/10 backdrop-blur-md border border-pink-400/30 rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 lg:p-12">
+        <div className="relative z-10 w-full max-w-4xl bg-white/10 backdrop-blur-xl border border-pink-400/20 rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 lg:p-12">
           {/* Travel type tabs - Fixed layout */}
           <div className="grid grid-cols-4 gap-2 sm:gap-3 mb-8">
             {travelOptions.map((opt) => (
               <button
                 key={opt.value}
                 onClick={() => setTravelType(opt.value)}
-                className={`flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 sm:py-3 rounded-full font-semibold text-xs sm:text-sm transition-all border ${
-                 travelType === opt.value
+                className={`flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 sm:py-3 rounded-full font-semibold text-xs sm:text-sm transition-all duration-300 cursor-pointer ${
+                  travelType === opt.value
                     ? "bg-pink-600 text-white border-pink-600"
                     : isDarkMode
-                    ? "bg-white/20 text-white border-transparent hover:bg-pink-700/20"
-                    : "bg-gray-100 text-gray-500 border hover:bg-pink-100"
+                    ? "bg-white/20 text-white hover:bg-pink-500/20"
+                    : "bg-gray-50 text-gray-700 hover:bg-pink-200"
                 }`}
                 style={{ minWidth: 0 }}
               >
@@ -242,12 +242,12 @@ function TicketBooking() {
               <button
                 key={mode.value}
                 onClick={() => setTripMode(mode.value)}
-                className={`px-6 py-2 rounded-full font-medium border transition-all ${
-                   tripMode === mode.value
-                    ? "bg-pink-500 text-white border-pink-500"
+                className={`px-6 py-2 rounded-full font-medium transition-all duration-300 cursor-pointer ${
+                  tripMode === mode.value
+                    ? "bg-pink-500 text-white"
                     : isDarkMode
-                    ? "bg-white/20 text-white border-transparent hover:bg-pink-700/20"
-                    : "bg-gray-100 text-gray-500 border hover:bg-pink-100"
+                    ? "bg-white/20 text-white hover:bg-pink-500/20"
+                    : "bg-gray-50 text-gray-700 hover:bg-pink-200"
                 }`}
                 style={{ minWidth: 0 }}
               >
@@ -263,72 +263,81 @@ function TicketBooking() {
           >
             {/* Core search panel */}
             <div className="grid gap-4 md:grid-cols-5 md:items-end">
-{/* From */}
-<div className="relative col-span-2 md:col-span-2 flex flex-col">
-  <HiLocationMarker className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 text-xl" />
-  <input
-    type="text"
-    name="from"
-    placeholder="FROM"
-    required
-    value={form.from}
-    onChange={handleChange}
-    className={`w-full pl-10 pr-3 py-3 rounded-xl ${
-      isDarkMode ? "bg-white text-gray-900" : "bg-white/90 text-gray-900"
-    } placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
-  />
-</div>
+              {/* From */}
+              <div className="relative col-span-2 md:col-span-2 flex flex-col">
+                <HiLocationMarker className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 text-xl" />
+                <input
+                  type="text"
+                  name="from"
+                  placeholder="FROM"
+                  required
+                  value={form.from}
+                  onChange={handleChange}
+                  className={`w-full pl-10 pr-3 py-3 rounded-xl text-gray-900 ${
+                    isDarkMode
+                      ? "bg-white/20 placeholder-gray-300"
+                      : "bg-white/90 placeholder-gray-400"
+                  }  focus:outline-none focus:ring-3 focus:ring-pink-400`}
+                />
+              </div>
 
-{/* Swap button */}
-<div className="flex col-span-1 items-center justify-center">
-  <button
-    type="button"
-    title="Swap"
-    onClick={() =>
-      setForm((prev) => ({
-        ...prev,
-        from: prev.to,
-        to: prev.from,
-      }))
-    }
-    className="bg-pink-500 hover:bg-pink-600 text-white rounded-full p-3 transition-all flex items-center justify-center"
-    style={{ zIndex: 1, margin: "0 0.5rem" }}
-  >
-    <ArrowRightLeft size={25} />
-  </button>
-</div>
-{/* To */}
-<div className="relative col-span-2 md:col-span-2 flex flex-col">
-  <HiLocationMarker className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 text-xl" />
-  <input
-    type="text"
-    name="to"
-    placeholder="TO"
-    required
-    value={form.to}
-    onChange={handleChange}
-    className={`w-full pl-10 pr-3 py-3 rounded-xl ${
-      isDarkMode ? "bg-white text-gray-900" : "bg-white/90 text-gray-900"
-    } placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
-  />
-</div>
-              
-{/* Depart */}
-<div className="relative col-span-2 md:col-span-1">
-  <CalendarDays className="absolute top-3 left-3 text-pink-400" size={18} />
-  <input
-    type="date"
-    name="depart"
-    required
-    min={getToday()} // ✅ restrict to today or future
-    value={form.depart}
-    onChange={handleChange}
-    className={`w-full pl-10 pr-3 py-3 rounded-xl ${
-      isDarkMode ? "bg-white text-gray-900" : "bg-white/90 text-gray-900"
-    } focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
-  />
-</div>
-              
+              {/* Swap button */}
+              <div className="flex col-span-1 items-center justify-center">
+                <button
+                  type="button"
+                  title="Swap"
+                  onClick={() =>
+                    setForm((prev) => ({
+                      ...prev,
+                      from: prev.to,
+                      to: prev.from,
+                    }))
+                  }
+                  className="bg-pink-500 hover:bg-pink-600 text-white rounded-full p-3 transition-all flex items-center justify-center cursor-pointer"
+                  style={{ zIndex: 1, margin: "0 0.5rem" }}
+                >
+                  <ArrowRightLeft size={25} />
+                </button>
+              </div>
+              {/* To */}
+              <div className="relative col-span-2 md:col-span-2 flex flex-col">
+                <HiLocationMarker className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 text-xl z-3" />
+                <input
+                  type="text"
+                  name="to"
+                  placeholder="TO"
+                  required
+                  value={form.to}
+                  onChange={handleChange}
+                  className={`w-full pl-10 pr-3 py-3 rounded-xl text-gray-900 ${
+                    isDarkMode
+                      ? "bg-white/20 placeholder-gray-300"
+                      : "bg-white/90 placeholder-gray-400"
+                  } focus:outline-none focus:ring-3 focus:ring-pink-400`}
+                />
+              </div>
+
+              {/* Depart */}
+              <div className="relative col-span-2 md:col-span-2 flex flex-col">
+                <CalendarDays
+                  className="absolute top-4 left-3 text-pink-500"
+                  size={22}
+                />
+                <input
+                  type="date"
+                  name="depart"
+                  required
+                  min={getToday()} // ✅ restrict to today or future
+                  value={form.depart}
+                  onChange={handleChange}
+                  className={`w-full col-span-1 pl-10 pr-3 py-3 rounded-xl text-gray-900 cursor-pointer ${
+                    isDarkMode
+                      ? "bg-white/20 placeholder-gray-300"
+                      : "bg-white/90 placeholder-gray-400"
+                    } focus:outline-none focus:ring-3 focus:ring-pink-400`}
+                />
+              </div>
+
               <div className="flex col-span-1 items-center justify-center">
                 <button
                   type="button"
@@ -341,53 +350,56 @@ function TicketBooking() {
                     }))
                   }
                   style={{ zIndex: 1, margin: "0 0.5rem" }}
-                >
-                </button>
+                ></button>
               </div>
               {/* Return OR Passengers */}
-<div className="relative col-span-2 md:col-span-2 flex flex-col">
-  {tripMode === "roundTrip" ? (
-    <>
-      <CalendarDays className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-400 text-xl" />
-      <input
-        type="date"
-        name="return"
-        required
-        min={form.depart}
-        value={form.return}
-        onChange={handleChange}
-        className={`w-full pl-10 pr-3 py-3 rounded-xl ${
-          isDarkMode ? "bg-white text-gray-900" : "bg-white/90 text-gray-900"
-        } focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
-      />
-    </>
-  ) : (
-    <>
-      <Users className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-400 text-xl" />
-      <input
-        type="number"
-        name="passengers"
-        min="1"
-        max="10"
-        required
-        value={form.passengers}
-        onChange={handleChange}
-        placeholder="Passengers"
-        className={`w-full pl-10 pr-3 py-3 rounded-xl ${
-          isDarkMode ? "bg-white text-gray-900" : "bg-white/90 text-gray-900"
-        } focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
-      />
-    </>
-  )}
-</div>
-</div>
+              <div className="relative col-span-2 md:col-span-2 flex flex-col">
+                {tripMode === "roundTrip" ? (
+                  <>
+                    <CalendarDays className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 font-bold text-xl" size={22}/>
+                    <input
+                      type="date"
+                      name="return"
+                      required
+                      min={form.depart}
+                      value={form.return}
+                      onChange={handleChange}
+                      className={`w-full pl-10 pr-3 py-3 rounded-xl text-gray-900 cursor-pointer ${
+                        isDarkMode
+                          ? "bg-white/20 placeholder-gray-300"
+                        : "bg-white/90 placeholder-gray-400"
+                    } focus:outline-none focus:ring-3 focus:ring-pink-400`}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <Users className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 font-bold" size={22}/>
+                    <input
+                      type="number"
+                      name="passengers"
+                      min="1"
+                      max="10"
+                      required
+                      value={form.passengers}
+                      onChange={handleChange}
+                      placeholder="Passengers"
+                      className={`w-full pl-10 pr-3 py-3 rounded-xl text-gray-900 ${
+                        isDarkMode
+                          ? "bg-white/20 placeholder-gray-300"
+                        : "bg-white/90 placeholder-gray-400"
+                    } focus:outline-none focus:ring-3 focus:ring-pink-400`}
+                    />
+                  </>
+                )}
+              </div>
+            </div>
             {/* Extra row for Passengers + Cabin */}
             <div className="grid gap-4 sm:grid-cols-2">
               {tripMode === "roundTrip" && (
                 <div className="relative">
                   <Users
-                    className="absolute top-3 left-3 text-pink-400"
-                    size={18}
+                    className="absolute top-4 left-3 font-bold text-pink-500"
+                    size={22}
                   />
                   <input
                     type="number"
@@ -397,52 +409,55 @@ function TicketBooking() {
                     required
                     value={form.passengers}
                     onChange={handleChange}
-                    className={`w-full pl-10 pr-3 py-3 rounded-xl ${isDarkMode?'bg-white text-white':'bg-white/90 text-gray-800'} focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
+                    className={`w-full pl-10 pr-3 py-3 rounded-xl text-gray-900 ${
+                      isDarkMode
+                        ? "bg-white/20 placeholder-gray-300"
+                        : "bg-white/90 placeholder-gray-400"
+                    } focus:outline-none focus:ring-3 focus:ring-pink-400`}
                     placeholder="Passengers"
                   />
                 </div>
               )}
-<div className="w-full relative">
-  {/* Cabin Dropdown */}
-<select
-  name="cabin"
-  value={form.cabin}
-  onChange={handleChange}
-  className={`w-full p-3 rounded-xl ${
-    isDarkMode ? "bg-white text-gray-900" : "bg-white/90 text-gray-900"
-  } focus:outline-none focus:ring-4 focus:ring-pink-500/30`}
->
-  {travelType === "flight" &&
-    ["Economy", "Premium Economy", "Business", "First"].map((c) => (
-      <option key={c} value={c}>
-        {c}
-      </option>
-    ))}
-  {travelType === "train" &&
-    ["Sleeper", "3A", "2A", "1A"].map((c) => (
-      <option key={c} value={c}>
-        {c}
-      </option>
-    ))}
-  {travelType === "bus" &&
-    ["Seater", "Sleeper", "AC", "Non-AC"].map((c) => (
-      <option key={c} value={c}>
-        {c}
-      </option>
-    ))}
-  {travelType === "cab" &&
-    ["Hatchback", "Sedan", "SUV", "Luxury"].map((c) => (
-      <option key={c} value={c}>
-        {c}
-      </option>
-    ))}
-</select>
-
-  {/* Custom dropdown arrow */}
-  <span className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-black">
-    ▼
-  </span>
-</div>
+              <div className="w-full relative flex flex-col">
+                {/* Cabin Dropdown */}
+                <select
+                  name="cabin"
+                  value={form.cabin}
+                  onChange={handleChange}
+                  className={`w-full p-4 rounded-2xl cursor-pointer text-gray-900 ${
+                    isDarkMode
+                      ? "bg-white/20"
+                      : "bg-white/90"
+                  } focus:outline-none focus:ring-3 focus:ring-pink-400`}
+                >
+                  {travelType === "flight" &&
+                    ["Economy", "Premium Economy", "Business", "First"].map(
+                      (c) => (
+                        <option key={c} value={c}>
+                          {c}
+                        </option>
+                      )
+                    )}
+                  {travelType === "train" &&
+                    ["Sleeper", "3A", "2A", "1A"].map((c) => (
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
+                    ))}
+                  {travelType === "bus" &&
+                    ["Seater", "Sleeper", "AC", "Non-AC"].map((c) => (
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
+                    ))}
+                  {travelType === "cab" &&
+                    ["Hatchback", "Sedan", "SUV", "Luxury"].map((c) => (
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
+                    ))}
+                </select>
+              </div>
             </div>
 
             <div className="flex items-center gap-3 mt-4 text-white">
@@ -459,18 +474,22 @@ function TicketBooking() {
                 }
                 className={` accent-pink-600 w-5 h-5 rounded focus:ring-2 focus:ring-pink-500 `}
               />
-              <label htmlFor="petFriendly" className="text-sm md:text-base font-medium">
+              <label
+                htmlFor="petFriendly"
+                className="text-sm md:text-base font-medium"
+              >
                 I’m traveling with a pet
               </label>
             </div>
 
-
             {/* Submit button */}
             <button
               type="submit"
-              className="w-full mt-4 py-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-bold rounded-xl text-lg tracking-wide shadow-lg transition-all hover:shadow-pink-700/50"
+              className="w-full mt-4 py-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-bold rounded-xl text-lg tracking-wide shadow-md transition-all duration-300 cursor-pointer"
             >
-              Search {pluralMap[travelType] || (travelType.charAt(0).toUpperCase() + travelType.slice(1) + 's')}
+              Search{" "}
+              {pluralMap[travelType] ||
+                travelType.charAt(0).toUpperCase() + travelType.slice(1) + "s"}
             </button>
           </form>
         </div>
