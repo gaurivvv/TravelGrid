@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom'; // Add this import
 import {   MapPin, Star, Calendar, Info, Sparkles } from 'lucide-react';
 import Navbar from '../components/Custom/Navbar';
+import ARExperience from "../components/ARExperience";
 
 const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
   const { locationId } = useParams(); // Get locationId from URL parameters
@@ -10,6 +11,7 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
   const [loading, setLoading] = useState(true);
   const navigate=useNavigate()
   const [expandDesc,setExpandDesc]=useState(false)
+  const [arMode, setArMode] = useState(false);
 
   // Comprehensive location data with natural descriptions
   const locationData = {
@@ -24,6 +26,7 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
       bestTime: "April - October",
       shortDescription: "A volcanic island paradise famous for its dramatic clifftop villages, stunning sunsets, and distinctive blue-domed churches.",
       image: "https://images.unsplash.com/photo-1673137175648-889d7d236ba6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      coordinates: "36.3932,25.4615", // Santorini, Greece
       overview: {
         description: "Santorini is a crescent-shaped volcanic island in the southern Aegean Sea, about 200 kilometers southeast of mainland Greece. The island was shaped by one of the largest volcanic eruptions in recorded history, which occurred around 3,600 years ago. This dramatic geological event created the island's iconic caldera - a large volcanic crater filled with brilliant blue water that serves as the backdrop for the famous clifftop towns.",
         geography: "The island covers approximately 76 square kilometers and is characterized by dramatic cliffs that rise up to 400 meters above sea level. The western coast features the famous caldera cliffs with their black, red, and white volcanic rock layers, while the eastern coast has beautiful beaches with unique colored sands - red, black, and white - all created by the volcanic activity.",
@@ -49,6 +52,7 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
       bestTime: "March - May, September - November",
       shortDescription: "Japan's former imperial capital, home to over 2,000 temples and shrines, traditional wooden houses, and perfectly manicured gardens.",
       image: "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      coordinates: "35.0116,135.7681", // Kyoto, Japan
       overview: {
         description: "Kyoto served as Japan's imperial capital for over 1,000 years (794-1868) and remains the heart of traditional Japanese culture. The city is home to 17 UNESCO World Heritage Sites, including some of Japan's most iconic temples and gardens. Despite being a modern city of 1.5 million people, Kyoto has carefully preserved its historical districts and traditional way of life.",
         geography: "Kyoto sits in a valley surrounded by mountains on three sides, with the Kamo and Katsura rivers flowing through the city. The city is organized in a grid pattern originally based on the ancient Chinese capital of Chang'an. The eastern mountains (Higashiyama) and western mountains (Nishiyama) provide a beautiful backdrop and are home to many of the city's most famous temples.",
@@ -74,6 +78,7 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
         bestTime: "June - September",
         shortDescription: "Canada's first national park, featuring pristine mountain lakes, glacial peaks, and abundant wildlife in the heart of the Canadian Rockies.",
         image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+        coordinates: "51.4968,-115.9281", // Banff National Park
         overview: {
         description: "Established in 1885, Banff National Park is Canada's oldest national park and a UNESCO World Heritage Site. Located in the Canadian Rockies, the park covers 6,641 square kilometers of mountainous terrain with numerous glaciers, dense coniferous forest, alpine landscapes, and pristine wilderness. The park attracts over 4 million visitors annually who come to experience its stunning natural beauty and outdoor recreation opportunities.",
         geography: "Banff National Park is situated in the Rocky Mountains of Alberta, bordering British Columbia. The park features over 1,000 glaciers, including the Columbia Icefield, and is home to iconic peaks like Mount Assiniboine. The Continental Divide runs through the park, with major river systems including the Bow and Saskatchewan rivers. Lake Louise and Moraine Lake are among the most photographed lakes in the world.",
@@ -99,6 +104,7 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
         bestTime: "November - March",
         shortDescription: "A futuristic metropolis in the desert, known for luxury shopping, ultramodern architecture, and world-class entertainment.",
         image: "https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+        coordinates: "25.2048,55.2708", // Dubai
         overview: {
         description: "Dubai has transformed from a modest fishing village to one of the world's most dynamic cities in just a few decades. This emirate in the UAE is renowned for its ambitious architecture, luxury lifestyle, and position as a global business hub. With over 16.7 million visitors annually, Dubai offers a unique blend of traditional Arabian culture and cutting-edge modernity, making it a top destination for luxury travelers and business professionals alike.",
         geography: "Located on the southeast coast of the Persian Gulf, Dubai sits on the Arabian Peninsula's eastern coast. The city is built along Dubai Creek, which divides it into two main sections: Deira and Bur Dubai. The emirate features a mix of coastal areas, desert landscapes, and man-made islands including the famous Palm Jumeirah. The city experiences a hot desert climate with mild winters making it ideal for tourism.",
@@ -124,6 +130,7 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
         bestTime: "December - April",
         shortDescription: "A bohemian beach town featuring spectacular Mayan ruins perched on cliffs overlooking the Caribbean Sea and mystical cenotes.",
         image: "https://images.unsplash.com/photo-1518638150340-f706e86654de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+        coordinates: "20.2110,-87.4654", // Tulum
         overview: {
         description: "Tulum has evolved from a sleepy fishing village to one of Mexico's most sought-after destinations, attracting around 800,000 visitors annually. This coastal town on the Yucatan Peninsula offers a perfect blend of ancient Mayan history, pristine beaches, and eco-conscious luxury. The town is famous for its clifftop archaeological site, cenotes (natural swimming holes), and bohemian atmosphere that attracts yoga enthusiasts, digital nomads, and luxury travelers seeking an authentic Mexican Caribbean experience.",
         geography: "Located on the Caribbean coast of Mexico's Yucatan Peninsula, Tulum sits about 130 kilometers south of Cancun. The area features a unique landscape of white sand beaches, turquoise waters, dense jungle, and limestone cenotes. The Mesoamerican Reef System, the second-largest coral reef in the world, lies just offshore, making it excellent for snorkeling and diving.",
@@ -150,6 +157,7 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
         shortDescription: "The world's northernmost capital, gateway to Iceland's natural wonders including Northern Lights, geothermal pools, and dramatic landscapes.",
       image: "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
 
+        coordinates: "64.1466,-21.9426", // Reykjavik
         overview: {
         description: "Reykjavik, home to about 130,000 people, serves as Iceland's cultural and economic center while maintaining a charming small-town feel. This northernmost capital in the world attracts 1.2 million visitors annually who use it as a base to explore Iceland's incredible natural phenomena. The city perfectly balances modern Scandinavian design with a rich Viking heritage, offering world-class museums, vibrant nightlife, and easy access to some of the planet's most spectacular natural wonders.",
         geography: "Reykjavik sits on the southwestern coast of Iceland on the shores of Faxaflói Bay. The city is built on a peninsula and is surrounded by mountains, including Mount Esja to the north. The area sits on the Mid-Atlantic Ridge, resulting in significant geothermal activity that powers much of the city. The location at 64°N latitude means extreme seasonal variation in daylight hours.",
@@ -176,6 +184,7 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
         shortDescription: "A tropical paradise of 1,192 coral islands featuring overwater villas, crystal-clear lagoons, and world-class diving in the Indian Ocean.",
       image: "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
 
+        coordinates: "3.2028,73.2207", // Maldives
         overview: {
         description: "The Maldives consists of 1,192 coral islands grouped into 26 atolls, stretching across 871 kilometers in the Indian Ocean. Only about 200 islands are inhabited, with approximately 100 developed as tourist resorts. This island nation attracts 1.7 million visitors annually seeking the ultimate tropical luxury experience. Known for having the lowest natural point of any country (just 1.5 meters above sea level), the Maldives offers unparalleled beauty with crystal-clear waters, pristine beaches, and some of the world's best marine life.",
         geography: "Located southwest of Sri Lanka and India, the Maldives sits astride the equator in the Indian Ocean. The islands are built on a foundation of coral reefs and feature white sand beaches, turquoise lagoons, and house reefs perfect for snorkeling. The country is entirely composed of low-lying islands, with the highest point being only 2.4 meters above sea level, making it particularly vulnerable to climate change and sea level rise.",
@@ -202,6 +211,7 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
         shortDescription: "The legendary 'Lost City of the Incas' perched high in the Andes Mountains, offering spectacular ancient ruins and mountain hiking.",
       image: "https://images.unsplash.com/photo-1587595431973-160d0d94add1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
 
+        coordinates: "-13.1631,-72.5450", // Machu Picchu
         overview: {
         description: "Machu Picchu, built around 1450 CE and abandoned during the Spanish conquest, remained hidden until American historian Hiram Bingham brought it to international attention in 1911. This UNESCO World Heritage Site sits at 2,430 meters above sea level and attracts approximately 1.5 million visitors annually. The citadel represents one of the most important archaeological sites in South America and showcases the remarkable architectural and engineering achievements of the Inca civilization.",
         geography: "Located in the Eastern Cordillera of southern Peru, Machu Picchu sits on a mountain ridge above the Sacred Valley, approximately 80 kilometers northwest of Cusco. The site is surrounded by the Amazon rainforest and features dramatic mountain peaks including Huayna Picchu and Machu Picchu mountain. The Urubamba River flows around the base of the mountain, creating a natural moat around the ancient citadel.",
@@ -228,6 +238,7 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
         shortDescription: "The 'Island of the Gods' featuring emerald rice terraces, ancient Hindu temples, volcanic landscapes, and vibrant cultural traditions.",
       image: "https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
 
+        coordinates: "-8.3405,115.0920", // Bali
         overview: {
         description: "Bali, known as the 'Island of the Gods,' is Indonesia's most famous destination, attracting 6.3 million visitors annually. This tropical paradise seamlessly blends ancient Hindu traditions with stunning natural beauty, creating a unique cultural landscape found nowhere else in the world. From the artistic hub of Ubud to the beach resorts of Seminyak and the dramatic volcanic landscapes of Mount Batur, Bali offers diverse experiences within a relatively small island of just 5,780 square kilometers.",
         geography: "Bali is located between Java and Lombok in the Indonesian archipelago, sitting just 8 degrees south of the equator. The island features a dramatic landscape of volcanic mountains, including the active Mount Batur and the sacred Mount Agung, alongside pristine beaches, dense tropical forests, and the famous subak irrigation system creating the iconic terraced rice fields. The Wallace Line runs through the Lombok Strait east of Bali, marking the boundary between Asian and Australian flora and fauna.",
@@ -254,6 +265,7 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
         shortDescription: "Majestic mountain peaks, pristine alpine lakes, world-renowned skiing resorts, and charming villages in the heart of Europe.",
         image: "https://images.unsplash.com/photo-1551524164-6cf2ac925319?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
 
+        coordinates: "46.8876,9.6570", // Swiss Alps
         overview: {
         description: "The Swiss Alps cover approximately 65% of Switzerland's total area and attract 3.1 million visitors annually seeking both summer and winter mountain experiences. This iconic mountain range features some of Europe's highest peaks, including the Matterhorn and Jungfraujoch, alongside pristine alpine lakes, efficient mountain railways, and luxury ski resorts. The region perfectly combines natural beauty with Swiss precision, offering world-class infrastructure and hospitality in one of the planet's most spectacular mountain environments.",
         geography: "The Swiss Alps form the largest portion of the greater Alpine range, stretching across southern and eastern Switzerland. Key peaks include the Matterhorn (4,478m), Monte Rosa (4,634m), and the Jungfrau (4,158m). The region features numerous glaciers, pristine alpine lakes like Lake Geneva and Lake Lucerne, and dramatic valleys including the Lauterbrunnen Valley with its 72 waterfalls. The Continental Divide runs through the region, separating watersheds flowing to different seas.",
@@ -280,6 +292,7 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
         shortDescription: "The 'City of Light' featuring iconic landmarks like the Eiffel Tower, world-renowned art museums, and timeless romantic charm.",
       image: "https://images.unsplash.com/photo-1502602898536-47ad22581b52?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
 
+        coordinates: "48.8566,2.3522", // Paris
         overview: {
         description: "Paris, the capital of France and the 'City of Light,' welcomes approximately 38 million visitors annually, making it one of the world's most visited cities. This iconic metropolis along the Seine River has been a center of art, fashion, gastronomy, and culture for centuries. From the Gothic magnificence of Notre-Dame to the iron lattice of the Eiffel Tower, Paris seamlessly blends historical grandeur with contemporary sophistication, offering an unmatched urban experience in the heart of Europe.",
         geography: "Paris sits in the north-central part of France in the Île-de-France region, built around the meandering Seine River. The city is organized into 20 arrondissements (districts) spiraling outward from the center. Key geographic features include the Île de la Cité (where Notre-Dame stands), Montmartre hill crowned by Sacré-Cœur, and the large parks like the Tuileries and Luxembourg Gardens. The greater Paris metropolitan area extends far beyond the city proper.",
@@ -306,6 +319,7 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
         shortDescription: "The 'Big Apple' featuring iconic skyscrapers, Broadway shows, world-class museums, and the vibrant energy of America's cultural capital.",
       image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
 
+        coordinates: "40.7128,-74.0060", // New York City
         overview: {
         description: "New York City, the most populous city in the United States with over 8.3 million residents, attracts approximately 65 million visitors annually. Known as 'The Big Apple' and 'The City That Never Sleeps,' NYC is a global hub for finance, arts, fashion, and culture. The city's five boroughs - Manhattan, Brooklyn, Queens, The Bronx, and Staten Island - each offer distinct personalities while collectively creating one of the world's most dynamic urban experiences.",
         geography: "New York City is located at the mouth of the Hudson River in southeastern New York State. The city is built on a natural harbor formed by the convergence of the Hudson and East rivers with New York Bay. Manhattan, the city's heart, is a narrow island featuring the famous grid street system north of Houston Street. The surrounding boroughs are connected by an extensive network of bridges, tunnels, and ferry services.",
@@ -436,7 +450,8 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
             {/* Add book now and Add to wishlist button */}
             <div className="flex items-center space-x-6 text-gray-700">
             <button className="flex mx-4 items-center mt-4 space-x-2 px-6 py-2 rounded-md whitespace-nowrap transition-all duration-300 font-medium bg-pink-50 text-black cursor-pointer" onClick={()=>navigate('/wishlist')}>Add to wishlist</button>
-          <button className="flex mx-4 items-center mt-4 space-x-2 px-6 py-2 rounded-md whitespace-nowrap transition-all duration-300 font-medium bg-pink-500 text-white cursor-pointer" onClick={()=> navigate(`/package/${locationId}`)}>Book now</button>
+          <button className="flex mx-4 items-center mt-4 space-x-2 px-6 py-2 rounded-md whitespace-nowrap transition-all duration-300 font-medium bg-pink-500 text-white cursor-pointer" onClick={()=> navigate(`/package/${locationId}`)}>Book now</button>
+            <button className="flex mx-4 items-center mt-4 space-x-2 px-6 py-2 rounded-md whitespace-nowrap transition-all duration-300 font-medium bg-purple-600 text-white cursor-pointer" onClick={()=> setArMode(true)}>AR Mode</button>
             </div>
            
           </div>
@@ -469,6 +484,9 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {renderTabContent()}
       </div>
+      {arMode && (
+        <ARExperience location={location} onClose={() => setArMode(false)} />
+      )}
     </div>
   );
 };

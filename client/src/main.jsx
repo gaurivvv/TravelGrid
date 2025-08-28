@@ -34,6 +34,9 @@ import { Provider } from 'react-redux';
 import appStore from './app/store.js';
 import { UpdatePassword } from './pages/UpdatePassword';
 
+import LeaderBoard from './components/Leaderboard/LeaderBoard';
+
+
 //import TrendingSpots from './pages/TrendingSpots.jsx';
 //import PackingChecklistPage from './pages/PackingChecklist.jsx';
 //import Summarizer from './components/Summarizer';
@@ -75,6 +78,8 @@ const TrendingSpots = lazy(() => import('./pages/TrendingSpots'));
 const PackingChecklistPage = lazy(() => import('./pages/PackingChecklist'));
 const Summarizer = lazy(() => import('./components/Summarizer'));
 const Recommendation = lazy(() => import('./components/recommendation'));
+// const Leaderboard = lazy(() => import('./components/Leaderboard/LeaderBoard'));
+
 const Wishlist = lazy(() => import('./pages/Wishlist'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const TripsPlanned = lazy(() => import('./pages/TripsPlanned'));
@@ -101,6 +106,7 @@ const MusicPlayerDemo = lazy(() => import('./pages/MusicPlayerDemo'));
 const Music = lazy(() => import('./pages/Music'));
 const VisaChecker = lazy(() => import('./pages/VisaChecker'));
 const BudgetEstimator = lazy(() => import('./pages/BudgetEstimator'));
+
 
 const router = createBrowserRouter([
   { path: '/login', element: <AuthLayout><Login /></AuthLayout> },
@@ -156,6 +162,8 @@ const router = createBrowserRouter([
       { path: '/visa-checker', element: <Suspense fallback={<Spinner />}><VisaChecker /></Suspense> },
       { path: '/budget-estimator', element: <Suspense fallback={<Spinner />}><BudgetEstimator /></Suspense> },
       { path: '/update-password/:id', element: <Suspense fallback={<Spinner />}><UpdatePassword /></Suspense> },
+      { path: '/leaderboard', element: <Suspense fallback={<Spinner />}><LeaderBoard /></Suspense> },
+
 
 
       {
