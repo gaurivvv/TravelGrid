@@ -40,23 +40,23 @@ const Navbar = () => {
         { label: t('navigation.guide'), path: "/guides" },
         { label: t('navigation.contact'), path: "/contact" },
         { label: t('navigation.reviewSummarizer'), path: "/Summarizer" },
-        { label: t('Visa'), path: "/visa-checker" },
+        {label:t('Visa'),path:"/visa-checker"},
       ],
     },
     {
       name: t('navigation.tools'),
       subitems: [
         { label: t('navigation.tripCalculator'), path: "/trip-calculator" },
-        { label: t('navigation.packingChecklist'), path: "/packing-checklist" },
-        { label: "Destination Packing List", path: "/destination-packing" },
-
-        { label: t('navigation.travelRecommendations'), path: "/recommendation" },
+       { label: t('navigation.packingChecklist'), path: "/packing-checklist" },
+       { label: "Destination Packing List", path: "/destination-packing" },
+ 
+       { label: t('navigation.travelRecommendations'), path: "/recommendation" },
         { label: t('navigation.feedback'), path: "/feedback" },
         { label: "AI Mood Board", path: "/mood-board" },
         { label: "AI Travel Planner", path: "/ai-travel-planner" },
         { label: "Travel Countdown Timer", path: "/countdown-demo" },
         { label: "Music", path: "/music" },
-        { label: "Map", path: "/itinerary-map" },
+        {label:"Map",path:"/itinerary-map"},
         { label: "Budget Estimator", path: "/budget-estimator" },
 
         { label: t('navigation.petTravelGuide'), path: "/pettravel" },
@@ -144,13 +144,13 @@ const Navbar = () => {
               src="/favicon.ico"
               alt="TravelGrid Logo"
 
-              loading="lazy"
+              loading="lazy" 
               className="w-8 h-8 mx-2 rounded-full border border-pink-300 shadow-md  flex-shrink-0 "
 
             />
             <span className="text-lg font-bold truncate max-w-[120px] sm:max-w-[160px] md:max-w-none">
-              TravelGrid
-            </span>
+    TravelGrid
+  </span>
           </NavLink>
 
 
@@ -239,22 +239,13 @@ const Navbar = () => {
 
                 <NavLink
                   to="/dashboard"
-                  className={({ isActive }) =>
-                    `flex items-center gap-2 px-2 py-1 rounded-md transition-colors ${isDarkMode
-                      ? isActive
-                        ? " text-white"
-                        : "hover:text-white text-gray-300"
-                      : isActive
-                        ? "text-pink-500"
-                        : "hover:text-pink-500 text-gray-700 bg-white shadow-md"
-                    }`
-                  }
+                  className={`flex items-center gap-2 transition-colors ${isDarkMode ? "hover:text-white" : "hover:text-pink-500"}` }
                 >
                   {user?.picture ? (
                     <img
                       src={user.picture}
                       alt="User Avatar"
-                      loading="lazy"
+                      loading="lazy" 
                       className="w-6 h-6 rounded-full object-cover"
                     />
                   ) : user?.name ? (
@@ -296,7 +287,7 @@ const Navbar = () => {
             <LanguageSelector />
             <ThemeToggle />
 
-            <button
+            <button 
 
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
@@ -328,7 +319,7 @@ const Navbar = () => {
               }`}
           >
 
-            <button
+            <button 
 
               onClick={() => setIsSidebarOpen(false)}
               className="text-pink-500 hover:text-pink-400 p-1 rounded-md hover:bg-pink-500/10"
