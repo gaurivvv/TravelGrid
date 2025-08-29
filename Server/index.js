@@ -27,6 +27,7 @@ const moodBoardRoutes = require('./routes/moodBoardRoutes');
 const searchRoutes = require('./routes/search');
 const currencyRoutes = require('./routes/currencyRoutes');
 const musicRoutes = require('./routes/musicRoutes');
+const resetPassword = require("./routes/resetPassword")
 
 
 const app = express();
@@ -139,6 +140,8 @@ app.use('/api/currency', currencyRoutes);
 
 // Music Routes
 app.use('/api/music', musicRoutes);
+
+app.use('/api/forgot-password',resetPassword)
 
 // 404 Not Found middleware
 app.use((req, res, next) => {

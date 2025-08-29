@@ -185,7 +185,6 @@ export const AuthProvider = ({ children }) => {
 
       const data = await res.json();
       if (!res.ok) return { success: false, error: data.error || data.message };
-
       return { success: true, message: data.message };
     } catch (err) {
       return { success: false, error: "Failed to resend verification code" };
@@ -209,6 +208,50 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+    const resetPassword = async (email) => {
+      try {
+        const res = await fetch(`${config.API_BASE_URL}/forgot-password/reset-password-token`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ email }),
+        });
+
+        const data = await res.json();
+        if (!res.ok) return { success: false, error: data.error || data.message };
+
+        if (data.user) {
+          setUser(data.user);
+        }
+
+        return { success: true, message: data.message };
+      } catch (err) {
+        return { success: false, error: "Failed to Send reset link" };
+      }
+    };
+
+    const changePassword = async (password , confirmPassword, token) => {
+      try {
+        const res = await fetch(`${config.API_BASE_URL}/forgot-password/reset-password`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ password , confirmPassword, token }),
+        });
+
+        const data = await res.json();
+        if (!res.ok) return { success: false, error: data.error || data.message };
+
+        if (data.user) {
+          setUser(data.user);
+        }
+
+        return { success: true, message: data.message };
+      } catch (err) {
+        return { success: false, error: "Failed to change password" };
+      }
+    };
+
   return (
     <AuthContext.Provider value={{
       user,
@@ -220,7 +263,9 @@ export const AuthProvider = ({ children }) => {
       sendVerificationEmail,
       verifyEmailCode,
       resendVerificationCode,
-      checkVerificationStatus
+      checkVerificationStatus,
+      resetPassword,
+      changePassword
     }}>
       {children}
     </AuthContext.Provider>
