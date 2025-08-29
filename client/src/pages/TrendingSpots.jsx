@@ -296,17 +296,17 @@ const TrendingSpots = () => {
 
   if (loading) {
     return (
-      <div className={`min-h-screen flex items-center justify-center ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      <div className={`min-h-screen flex items-center justify-center ${isDarkMode ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900' : 'bg-gradient-to-br from-rose-300 via-blue-200 to-gray-300'}`}>
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-blue-500 mx-auto mb-4"></div>
-          <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Loading trending destinations...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-500 mx-auto mb-4"></div>
+          <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Discovering trending destinations...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'}`}>
+    <div className={`min-h-screen ${isDarkMode ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900' : 'bg-gradient-to-br from-rose-300 via-blue-200 to-gray-300'}`}>
       <Navbar />
 
       {/* Hero Section */}
@@ -388,7 +388,11 @@ const TrendingSpots = () => {
             {filteredSpots.slice(0, visibleCount).map((spot, index) => (
               <div
                 key={spot.id}
-                className={`rounded-lg border ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} shadow-md hover:shadow-xl transition-all duration-300 flex flex-col`}
+                className={`backdrop-blur-md rounded-2xl border transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 overflow-hidden h-full ${
+                  isDarkMode 
+                    ? 'bg-black/20 border-white/20 hover:border-white/40' 
+                    : 'bg-white/20 border-gray-200/50 hover:border-gray-300/70'
+                }`}
               >
                 {/* Image Container */}
                 <div className="relative h-48 md:h-64 overflow-hidden">
@@ -396,35 +400,47 @@ const TrendingSpots = () => {
                     src={spot.image}
                     alt={spot.name}
                     loading="lazy"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                  
+                  {/* Trending Badge */}
                   <div className="absolute top-3 left-3">
-                    <div className="px-2 py-1 rounded-full bg-blue-500 text-white text-sm font-semibold flex items-center space-x-1">
+                    <div className="px-2 py-1 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white text-sm font-semibold flex items-center space-x-1">
                       <TrendingUp className="h-3 w-3" />
                       <span>#{index + 1}</span>
                     </div>
                   </div>
+
+                  {/* Action Buttons */}
                   <div className="absolute top-3 right-3 flex space-x-2">
                     <button
                       onClick={() => toggleFavorite(spot.id)}
-                      className={`p-2 rounded-full ${isDarkMode ? 'bg-gray-900/50 text-white' : 'bg-white/80 text-gray-700'} hover:scale-110 transition-all duration-200`}
+                      className={`p-2 rounded-full transition-all duration-300 hover:scale-110 ${
+                        isDarkMode ? 'bg-black/50 text-white' : 'bg-white/80 text-gray-700'
+                      }`}
                     >
                       {favoriteSpots.includes(spot.id) ? (
-                        <HeartFilled className="h-4 w-4 text-red-500" fill="red" />
+                        <HeartFilled className="h-4 w-4 text-red-500" />
                       ) : (
                         <Heart className="h-4 w-4" />
                       )}
                     </button>
-                    <button className={`p-2 rounded-full ${isDarkMode ? 'bg-gray-900/50 text-white' : 'bg-white/80 text-gray-700'} hover:scale-110 transition-all duration-200`}>
+                    <button className={`p-2 rounded-full transition-all duration-300 hover:scale-110 ${
+                      isDarkMode ? 'bg-black/50 text-white' : 'bg-white/80 text-gray-700'
+                    }`}>
                       <Share2 className="h-4 w-4" />
                     </button>
                   </div>
+
+                  {/* Growth Badge */}
                   <div className="absolute bottom-3 right-3">
                     <div className="px-2 py-1 rounded-full bg-green-500 text-white text-xs font-semibold">
                       +{spot.growth_percentage}%
                     </div>
                   </div>
+
+                  {/* Location Info Overlay */}
                   <div className="absolute bottom-3 left-3">
                     <h3 className="text-lg font-bold text-white">{spot.name}</h3>
                     <div className="flex items-center text-sm text-gray-200">
@@ -459,13 +475,13 @@ const TrendingSpots = () => {
 
                   <div className="grid grid-cols-2 gap-4 mb-4">
                     <div className="flex items-center space-x-2">
-                      <Users className="h-4 w-4 text-blue-500" />
+                      <Users className="h-4 w-4 text-pink-500" />
                       <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                         {spot.visitors_count}
                       </span>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <Calendar className="h-4 w-4 text-blue-500" />
+                      <Calendar className="h-4 w-4 text-pink-500" />
                       <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                         {spot.best_time}
                       </span>
@@ -478,7 +494,9 @@ const TrendingSpots = () => {
                         <span
                           key={idx}
                           className={`px-2 py-1 rounded-full text-xs font-medium ${
-                            isDarkMode ? 'bg-blue-500/20 text-blue-300' : 'bg-blue-100 text-blue-700'
+                            isDarkMode 
+                              ? 'bg-pink-500/20 text-pink-300 border border-pink-500/30' 
+                              : 'bg-pink-100 text-pink-700'
                           }`}
                         >
                           {highlight}
@@ -486,7 +504,9 @@ const TrendingSpots = () => {
                       ))}
                       {spot.highlights.length > 2 && (
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          isDarkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-200 text-gray-700'
+                          isDarkMode 
+                            ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' 
+                            : 'bg-purple-100 text-purple-700'
                         }`}>
                           +{spot.highlights.length - 2} more
                         </span>
@@ -496,19 +516,19 @@ const TrendingSpots = () => {
 
                   <div className="flex items-center justify-between mt-auto">
                     <div className="flex items-center space-x-2">
-                      <Eye className="h-4 w-4 text-blue-500" />
+                      <Eye className="h-4 w-4 text-pink-500" />
                       <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                         {spot.recent_reviews} reviews
                       </span>
                     </div>
-                    <div className="text-sm font-semibold text-blue-500">
+                    <div className="text-sm font-semibold text-pink-500">
                       Score: {spot.trending_score}
                     </div>
                   </div>
 
                   <button
                     onClick={() => handleExploreLocation(spot.id)}
-                    className="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg font-semibold transition-all duration-200"
+                    className="w-full mt-4 bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
                   >
                     Explore {spot.name}
                   </button>
@@ -529,9 +549,9 @@ const TrendingSpots = () => {
             <div className="text-center mt-8">
               <button
                 onClick={handleLoadMoreSpots}
-                className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold transition-all duration-200"
+                className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
               >
-                Load More Destinations
+                Load More Trending Spots
               </button>
             </div>
           )}
