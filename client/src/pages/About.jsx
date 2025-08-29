@@ -81,14 +81,7 @@ function About() {
       icon: "📖",
       path: '/guides'
     },
-    // Adding new feature cards
-    {
-      title: "Travel with pets",
-      description:
-        "Enjoy your trip with your furry friends with our pet friednly packages, travel and guides",
-      icon: "🐾",
-      path: '/pettravel'
-    },
+
     {
       title: "Essentials Chechlist",
       description:

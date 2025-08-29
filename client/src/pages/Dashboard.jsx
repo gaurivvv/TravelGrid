@@ -6,7 +6,7 @@ import { MapPin, Calendar, Heart, LogOut, Building2, Edit, Save, X } from 'lucid
 import hotels from '../data/hotels';
 import axios from 'axios';
 import { config } from '../config';
-import { TravelCountdownTimer } from '../components/TravelCountdownTimer';
+
 
 import defaultAvatar from '../assets/defaultprofile.svg';
 import toast from 'react-hot-toast';
@@ -257,15 +257,7 @@ const Dashboard = () => {
                     </div>
                 </div>
 
-                {/* Travel Countdown Timer */}
-                <div className="mb-8 mt-8">
-                    <TravelCountdownTimer
-                        trips={[]} // This will be populated with actual trips data
-                        onTripUpdate={() => {
-                            // Handle trip updates if needed
-                        }}
-                    />
-                </div>
+
 
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
