@@ -38,8 +38,8 @@ const guides = [
   },
   {
     name: "Ayushi Uniyal",
-    expertise: "🐾 Pet Travel & Coastal Getaways",
-    bio: "Loves helping travelers explore India’s beaches with their furry companions.",
+    expertise: "🏖️ Coastal Getaways",
+    bio: "Loves helping travelers explore India's beautiful coastline and beach destinations.",
     image: "https://randomuser.me/api/portraits/women/17.jpg",
   },
   {
