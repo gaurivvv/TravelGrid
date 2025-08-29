@@ -50,7 +50,7 @@ const Footer = () => {
     <>
       <footer className={`relative text-white transition-all duration-300 ${
      isDarkMode 
-          ? 'bg-gradient-to-b from-black via-zinc-800 to-zinc-800' 
+          ? 'bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900' 
           : 'bg-gradient-to-br from-gray-900  to-pink-900'
       }`}>
         {/* Background pattern */}

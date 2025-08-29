@@ -100,7 +100,11 @@ const Testimonials = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
-              className={`group backdrop-blur-md rounded-2xl p-6 flex flex-col items-center text-center border transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 h-full`}
+              className={`group backdrop-blur-md rounded-2xl p-6 flex flex-col items-center text-center border transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 h-full ${
+                isDarkMode 
+                  ? 'bg-black/20 border-white/20 hover:border-white/40' 
+                  : 'bg-white/20 border-gray-200/50 hover:border-gray-300/70'
+              }`}
             >
               <img
                 src={t.avatar}

@@ -98,8 +98,8 @@ const cardVariants = {
               className="group relative"
             >
               <div className={`backdrop-blur-md rounded-2xl p-8 border transition-all duration-500 hover:scale-105 hover:shadow-2xl h-full ${isDarkMode
-                ? 'bg-gradient-to-b from-black  to-zinc-800 border-white/70 hover:border-white/40 hover:shadow-pink-500/20 shadow-xl shadow-gray-700'
-                : 'bg-gradient-to-b from-white  to-pink-200 border-pink-600 hover:border-pink-300 hover:shadow-pink-500/20 shadow-xl shadow-gray-600'
+                ? 'bg-black/20 border-white/20 hover:border-white/40 hover:shadow-pink-500/20'
+                : 'bg-white/20 border-gray-200/50 hover:border-gray-300/70 hover:shadow-pink-500/20'
                 }`}>
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}

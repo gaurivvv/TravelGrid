@@ -3,7 +3,7 @@ import { MapPin, TrendingUp, Star, Users, Calendar, Heart, Share2, Eye } from 'l
 import Navbar from '../components/Custom/Navbar';
 import { useTheme } from '../context/ThemeContext';
 import { useNavigate } from 'react-router-dom';
-import { Heart as HeartFilled } from "lucide-react"; // We'll reuse but with fill
+import { Heart as HeartFilled } from 'lucide-react';
 
 const TrendingSpots = () => {
   const [spots, setSpots] = useState([]);
@@ -12,10 +12,9 @@ const TrendingSpots = () => {
   const [visibleCount, setVisibleCount] = useState(9);
   const [favoriteSpots, setFavoriteSpots] = useState([]);
   
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const { isDarkMode } = useTheme();
 
-  // Mock data for trending spots
   const mockTrendingSpots = [
     {
       id: 1,
@@ -257,7 +256,6 @@ const navigate = useNavigate();
       recent_reviews: 760,
       growth_percentage: 9
     }
-
   ];
 
   useEffect(() => {
@@ -269,16 +267,15 @@ const navigate = useNavigate();
 
   const handleLoadMoreSpots = () => {
     setVisibleCount((prev) => prev + 9);
-  }
-
-  const toggleFavorite = (spotId) => {
-  setFavoriteSpots((prev) =>
-    prev.includes(spotId)
-      ? prev.filter((id) => id !== spotId) // remove if already in favorites
-      : [...prev, spotId]                  // add if not in favorites
-   );
   };
 
+  const toggleFavorite = (spotId) => {
+    setFavoriteSpots((prev) =>
+      prev.includes(spotId)
+        ? prev.filter((id) => id !== spotId)
+        : [...prev, spotId]
+    );
+  };
 
   const filteredSpots = filter === 'all'
     ? spots
@@ -286,261 +283,280 @@ const navigate = useNavigate();
 
   const categories = [
     { key: 'all', label: 'All Spots', icon: TrendingUp },
-    { key: 'beach', label: 'Beach', icon: '🏖️' },
-    { key: 'cultural', label: 'Cultural', icon: '🏛️' },
-    { key: 'nature', label: 'Nature', icon: '🏔️' },
-    { key: 'city', label: 'City', icon: '🏙️' },
-    { key: 'adventure', label: 'Adventure', icon: '🏕️' }
+    { key: 'beach', label: 'Beach', icon: MapPin },
+    { key: 'cultural', label: 'Cultural', icon: Star },
+    { key: 'nature', label: 'Nature', icon: Calendar },
+    { key: 'city', label: 'City', icon: Users },
+    { key: 'adventure', label: 'Adventure', icon: Heart }
   ];
 
-  //function to navigate to location detail
   const handleExploreLocation = (locationId) => {
     navigate(`/location/${locationId}`);
-  }
+  };
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--bg-primary)' }}>
+      <div className={`min-h-screen flex items-center justify-center ${isDarkMode ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900' : 'bg-gradient-to-br from-rose-300 via-blue-200 to-gray-300'}`}>
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 md:h-12 md:w-12 border-b-2 mx-auto mb-4" style={{ borderColor: 'var(--accent-primary)' }}></div>
-          <p className="text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>Loading trending spots...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-500 mx-auto mb-4"></div>
+          <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Discovering trending destinations...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className={`min-h-screen overflow-x-hidden transition-colors duration-300 ${isDarkMode ? 'bg-gradient-to-br from-black to-pink-900 text-white' : 'bg-gradient-to-br from-rose-300 via-blue-200 to-gray-300 text-black'}`}
-    style={{ marginTop: '5rem' }}
-    >
+    <div className={`min-h-screen ${isDarkMode ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900' : 'bg-gradient-to-br from-rose-300 via-blue-200 to-gray-300'}`}>
+      <Navbar />
 
-      <Navbar lightBackground />
       {/* Hero Section */}
-      <div className="relative text-white py-24 md:py-46 overflow-hidden">
-        {/* Background Image with Overlay */}
+      <section className="relative py-16 md:py-24 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3000&q=80"
+            src="https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?ixlib=rb-4.0.3&auto=format&fit=crop&w=3000&q=80"
             alt="World travel destinations"
-            loading="lazy" 
-            className="w-full h-full object-cover object-center brightness-100"
+            loading="lazy"
+            className="w-full h-full object-cover opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-pink-900/40 to-black/30" />
+          <div className={`absolute inset-0 ${isDarkMode ? 'bg-gray-900/70' : 'bg-gray-50/70'}`} />
         </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg text-pink-500">
-              Trending <span className='text-pink-500'>Spots</span>
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-gray-100 drop-shadow-md">
-              Discover the hottest destinations everyone's talking about
-            </p>
-            <div className="flex items-center justify-center space-x-2 text-gray-100 drop-shadow-sm">
-              <TrendingUp className="h-5 w-5" />
-              <span>Updated daily based on bookings and reviews</span>
-            </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Discover <span className="text-blue-500">Trending Destinations</span>
+          </h1>
+          <p className={`text-lg md:text-xl mb-8 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            Explore the world's most popular destinations, updated daily based on traveler insights.
+          </p>
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20">
+            <TrendingUp className="h-5 w-5 text-blue-500 mr-2" />
+            <span className="text-blue-500 font-medium">Real-Time Trends</span>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Filter Tabs */}
-      <div className="bg-pink-900 shadow-sm sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-start md:justify-center space-x-2 md:space-x-4 py-3 md:py-4 overflow-x-auto scrollbar-hide">
+      <section className="sticky top-0 z-10 bg-gray-900 shadow-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex flex-wrap gap-2">
             {categories.map((category) => (
-              <button aria-label="Search"
+              <button
                 key={category.key}
                 onClick={() => setFilter(category.key)}
-                className={`flex items-center space-x-1 md:space-x-2 px-3 md:px-4 py-2 rounded-full whitespace-nowrap transition-all duration-200 cursor-pointer text-sm md:text-base ${filter === category.key
-                  ? 'bg-white text-pink-600 font-semibold shadow-md'
-                  : 'border border-pink-300/20 text-pink-100 hover:bg-white/10 hover:border-pink-200/30'
-                  }`}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                  filter === category.key
+                    ? 'bg-blue-500 text-white'
+                    : isDarkMode
+                    ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                }`}
               >
-                {typeof category.icon === 'string' ? (
-                  <span className="text-base md:text-lg">{category.icon}</span>
-                ) : (
-                  <category.icon className="h-4 w-4 md:h-5 md:w-5" />
-                )}
+                <category.icon className="h-4 w-4" />
                 <span>{category.label}</span>
               </button>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
-
-      {/* Trending Stats Banner */}
-      <div className="border-b" style={{ borderColor: 'var(--border-primary)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            <div className="border-white/20 hover:border-white/40 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 rounded-2xl border shadow-lg overflow-hidden transition-all duration-300 group p-4 md:p-6 text-center" style={{ background: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
-              <div className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--accent-primary)' }}>{filteredSpots.length}+</div>
-              <div className="text-sm md:text-base" style={{ color: 'var(--accent-secondary)' }}>Trending Destinations</div>
-            </div>
-            <div className="border-white/20 hover:border-white/40 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 rounded-2xl border shadow-lg overflow-hidden transition-all duration-300 group p-4 md:p-6 text-center" style={{ background: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
-              <div className="text-2xl md:text-3xl font-bold text-green-400">23%</div>
-              <div className="text-sm md:text-base" style={{ color: 'var(--accent-secondary)' }}>Average Growth</div>
-            </div>
-            <div className="border-white/20 hover:border-white/40 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 rounded-2xl border shadow-lg overflow-hidden transition-all duration-300 group p-4 md:p-6 text-center" style={{ background: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
-              <div className="text-2xl md:text-3xl font-bold text-purple-400">—</div>
-              <div className="text-sm md:text-base" style={{ color: 'var(--accent-secondary)' }}>Monthly Searches</div>
-            </div>
-            <div className="border-white/20 hover:border-white/40 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 rounded-2xl border shadow-lg overflow-hidden transition-all duration-300 group p-4 md:p-6 text-center" style={{ background: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
-              <div className="text-2xl md:text-3xl font-bold text-red-400">4.7★</div>
-              <div className="text-sm md:text-base" style={{ color: 'var(--accent-secondary)' }}>Average Rating</div>
-            </div>
+      {/* Stats Banner */}
+      <section className="py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { icon: MapPin, label: 'Destinations', value: `${filteredSpots.length}+`, color: 'text-blue-400' },
+              { icon: TrendingUp, label: 'Avg Growth', value: '23%', color: 'text-green-400' },
+              { icon: Users, label: 'Travelers', value: '150M+', color: 'text-purple-400' },
+              { icon: Star, label: 'Avg Rating', value: '4.7★', color: 'text-yellow-400' }
+            ].map((stat, index) => (
+              <div
+                key={index}
+                className={`p-6 rounded-lg border ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} text-center hover:shadow-lg transition-all duration-200`}
+              >
+                <stat.icon className={`h-8 w-8 mx-auto mb-2 ${stat.color}`} />
+                <div className={`text-2xl font-bold ${stat.color}`}>{stat.value}</div>
+                <div className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Spots Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {filteredSpots.slice(0, visibleCount).map((spot, index) => (
-            <div
-              key={spot.id}
-              className=" hover:border-white/40 hover:scale-105 hover:shadow-pink-500/20 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col h-full bg-white border border-gray-200"
-            >
-              {/* Image Container */}
-              <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
-                <img
-                  src={spot.image}
-                  alt={spot.name}
-                  loading ="lazy"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute top-3 left-3">
-                  <div className="px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-semibold flex items-center space-x-1" style={{ background: 'var(--accent-primary)', color: '#fff' }}>
-                    <TrendingUp className="h-3 w-3" />
-                    <span>#{index + 1}</span>
+      <section className="py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredSpots.slice(0, visibleCount).map((spot, index) => (
+              <div
+                key={spot.id}
+                className={`backdrop-blur-md rounded-2xl border transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 overflow-hidden h-full ${
+                  isDarkMode 
+                    ? 'bg-black/20 border-white/20 hover:border-white/40' 
+                    : 'bg-white/20 border-gray-200/50 hover:border-gray-300/70'
+                }`}
+              >
+                {/* Image Container */}
+                <div className="relative h-48 md:h-64 overflow-hidden">
+                  <img
+                    src={spot.image}
+                    alt={spot.name}
+                    loading="lazy"
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                  
+                  {/* Trending Badge */}
+                  <div className="absolute top-3 left-3">
+                    <div className="px-2 py-1 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white text-sm font-semibold flex items-center space-x-1">
+                      <TrendingUp className="h-3 w-3" />
+                      <span>#{index + 1}</span>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="absolute top-3 right-3 flex space-x-2">
+                    <button
+                      onClick={() => toggleFavorite(spot.id)}
+                      className={`p-2 rounded-full transition-all duration-300 hover:scale-110 ${
+                        isDarkMode ? 'bg-black/50 text-white' : 'bg-white/80 text-gray-700'
+                      }`}
+                    >
+                      {favoriteSpots.includes(spot.id) ? (
+                        <HeartFilled className="h-4 w-4 text-red-500" />
+                      ) : (
+                        <Heart className="h-4 w-4" />
+                      )}
+                    </button>
+                    <button className={`p-2 rounded-full transition-all duration-300 hover:scale-110 ${
+                      isDarkMode ? 'bg-black/50 text-white' : 'bg-white/80 text-gray-700'
+                    }`}>
+                      <Share2 className="h-4 w-4" />
+                    </button>
+                  </div>
+
+                  {/* Growth Badge */}
+                  <div className="absolute bottom-3 right-3">
+                    <div className="px-2 py-1 rounded-full bg-green-500 text-white text-xs font-semibold">
+                      +{spot.growth_percentage}%
+                    </div>
+                  </div>
+
+                  {/* Location Info Overlay */}
+                  <div className="absolute bottom-3 left-3">
+                    <h3 className="text-lg font-bold text-white">{spot.name}</h3>
+                    <div className="flex items-center text-sm text-gray-200">
+                      <MapPin className="h-3 w-3 mr-1" />
+                      {spot.country}
+                    </div>
                   </div>
                 </div>
-                <div className="absolute top-3 right-3 flex space-x-2">
-                  <button aria-label="Search"
-                    onClick={() => toggleFavorite(spot.id)}
-                    className="p-1.5 md:p-2 rounded-full transition-all cursor-pointer hover:scale-110"
-                    style={{
-                      background: "var(--card-bg)",
-                      color: "var(--text-primary)",
-                      border: "1px solid var(--border-primary)",
-                    }}
+
+                {/* Content */}
+                <div className="p-6 flex flex-col flex-grow">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-2">
+                      <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                      <span className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                        {spot.rating}
+                      </span>
+                      <span className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                        ({spot.recent_reviews} reviews)
+                      </span>
+                    </div>
+                    <div
+                      className={`px-2 py-1 rounded-full text-sm font-semibold ${
+                        spot.price_range === '$' ? 'bg-green-100 text-green-800' :
+                        spot.price_range === '$$' ? 'bg-yellow-100 text-yellow-800' :
+                        'bg-red-100 text-red-800'
+                      }`}
+                    >
+                      {spot.price_range}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4 mb-4">
+                    <div className="flex items-center space-x-2">
+                      <Users className="h-4 w-4 text-pink-500" />
+                      <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                        {spot.visitors_count}
+                      </span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Calendar className="h-4 w-4 text-pink-500" />
+                      <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                        {spot.best_time}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <div className="flex flex-wrap gap-2">
+                      {spot.highlights.slice(0, 2).map((highlight, idx) => (
+                        <span
+                          key={idx}
+                          className={`px-2 py-1 rounded-full text-xs font-medium ${
+                            isDarkMode 
+                              ? 'bg-pink-500/20 text-pink-300 border border-pink-500/30' 
+                              : 'bg-pink-100 text-pink-700'
+                          }`}
+                        >
+                          {highlight}
+                        </span>
+                      ))}
+                      {spot.highlights.length > 2 && (
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                          isDarkMode 
+                            ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' 
+                            : 'bg-purple-100 text-purple-700'
+                        }`}>
+                          +{spot.highlights.length - 2} more
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between mt-auto">
+                    <div className="flex items-center space-x-2">
+                      <Eye className="h-4 w-4 text-pink-500" />
+                      <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                        {spot.recent_reviews} reviews
+                      </span>
+                    </div>
+                    <div className="text-sm font-semibold text-pink-500">
+                      Score: {spot.trending_score}
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => handleExploreLocation(spot.id)}
+                    className="w-full mt-4 bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
                   >
-                    {favoriteSpots.includes(spot.id) ? (
-                      <HeartFilled
-                        className="h-3 w-3 md:h-4 md:w-4"
-                        fill="red"
-                        color="red"
-                      />
-                    ) : (
-                      <Heart className="h-3 w-3 md:h-4 md:w-4" />
-                    )}
-                  </button>
-                  <button aria-label="Search" className="p-1.5 md:p-2 rounded-full transition-all cursor-pointer hover:scale-110" style={{ background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--border-primary)' }}>
-                    <Share2 className="h-3 w-3 md:h-4 md:w-4" />
+                    Explore {spot.name}
                   </button>
                 </div>
-                <div className="absolute bottom-3 right-3">
-                  <div className="px-2 py-1 rounded text-xs font-semibold" style={{ background: 'var(--success-color)', color: '#fff' }}>
-                    +{spot.growth_percentage}%
-                  </div>
-                </div>
               </div>
+            ))}
+          </div>
 
-              {/* Content */}
-               {/* Remove "height-full" which causing extra space in content */}
-              <div className="p-4 md:p-6 flex flex-col">
-                <div className="flex items-start justify-between mb-3 md:mb-4">
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-lg md:text-xl font-bold mb-1 md:mb-2 truncate" style={{ color: 'var(--text-primary)' }}>
-                      {spot.name}
-                    </h3>
-                    <div className="flex items-center" style={{ color: 'var(--text-secondary)' }}>
-                      <MapPin className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2 flex-shrink-0" />
-                      <span className="text-sm md:text-base truncate">{spot.country}</span>
-                    </div>
-                  </div>
-                  <div className="text-right ml-2 md:ml-4 flex-shrink-0">
-                    <div className="flex items-center justify-end space-x-1 mb-1">
-                      <Star className="h-3 w-3 md:h-4 md:w-4 flex-shrink-0" style={{ color: 'var(--warning-color)' }} />
-                      <span className="text-xs md:text-sm font-semibold" style={{ color: 'var(--text-muted)' }}>{spot.rating}</span>
-                    </div>
-                    <div className="text-xs" style={{ color: 'var(--text-muted)' }}>{spot.price_range}</div>
-                  </div>
-                </div>
-
-                {/* Stats */}
-                <div className="grid grid-cols-2 gap-3 md:gap-4 mb-3 md:mb-4 text-xs md:text-sm">
-                  <div className="flex items-center space-x-1 md:space-x-2">
-                    <Users className="h-3 w-3 md:h-4 md:w-4 flex-shrink-0" style={{ color: 'var(--accent-primary)' }} />
-                    <span className="truncate" style={{ color: 'var(--text-muted)' }}>{spot.visitors_count} visitors</span>
-                  </div>
-                  <div className="flex items-center space-x-1 md:space-x-2">
-                    <Calendar className="h-3 w-3 md:h-4 md:w-4 flex-shrink-0" style={{ color: 'var(--accent-primary)' }} />
-                    <span className="truncate" style={{ color: 'var(--text-muted)' }}>{spot.best_time}</span>
-                  </div>
-                </div>
-
-                {/* Highlights */}
-                <div className="mb-3 md:mb-4">
-                  <div className="flex flex-wrap gap-1 md:gap-2">
-                    {spot.highlights.slice(0, 2).map((highlight, idx) => (
-                      <span
-                        key={idx}
-                        className="px-2 py-1 md:px-3 md:py-1 rounded-full text-xs font-medium truncate max-w-full"
-                        style={{ background: 'var(--bg-tertiary)', color: 'var(--accent-primary)' }}
-                      >
-                        {highlight}
-                      </span>
-                    ))}
-                    {spot.highlights.length > 2 && (
-                      <span className="px-2 py-1 md:px-3 md:py-1 rounded-full text-xs font-medium" style={{ background: 'var(--accent-secondary)', color: '#fff' }}>
-                        +{spot.highlights.length - 2} more
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                {/* Bottom Stats */}
-                <div className="flex items-center justify-between pt-3 md:pt-4 border-t mt-auto" style={{ borderColor: 'var(--border-primary)' }}>
-                  <div className="flex items-center space-x-1 md:space-x-2 text-xs md:text-sm" style={{ color: 'var(--text-muted)' }}>
-                    <Eye className="h-3 w-3 md:h-4 md:w-4 flex-shrink-0" />
-                    <span className="truncate">{spot.recent_reviews} recent reviews</span>
-                  </div>
-                  <div className="text-xs md:text-sm font-semibold" style={{ color: 'var(--accent-primary)' }}>
-                    Trending Score: {spot.trending_score}
-                  </div>
-                </div>
-
-                {/* CTA Button */}
-                <button aria-label="Search" className="w-full mt-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white py-3 px-6 rounded-lg font-semibold transition-all transform hover:scale-105 cursor-pointer duration-200"
-                  onClick={() => handleExploreLocation(spot.id)}>
-                  Explore {spot.name}
-                </button>
-              </div>
-            </div>
-          ))}
           {filteredSpots.length === 0 && (
-            <div className="col-span-full text-center py-12">
-              <p className="text-lg md:text-xl font-medium" style={{ color: 'var(--text-secondary)' }}>
-                No spots match the selected category.
+            <div className="text-center py-12">
+              <p className={`text-lg font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                No destinations match the selected category.
               </p>
             </div>
           )}
-        </div>
 
-        {/* Load More Button */}
-        {visibleCount < filteredSpots.length && (
-          <div className="text-center mt-8 md:mt-12">
-            <button aria-label="Search"
-              onClick={handleLoadMoreSpots}
-              className="bg-gradient-to-r from-pink-600 to-pink-500 shadow-md hover:shadow-lg text-white px-6 md:px-8 py-2 md:py-3 rounded-lg font-semibold transition-all transform hover:scale-105 duration-200 cursor-pointer text-sm md:text-base"
-            >
-              Load More Trending Spots
-            </button>
-          </div>
-        )}
-      </div>
+          {visibleCount < filteredSpots.length && (
+            <div className="text-center mt-8">
+              <button
+                onClick={handleLoadMoreSpots}
+                className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+              >
+                Load More Trending Spots
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
     </div>
   );
 };
