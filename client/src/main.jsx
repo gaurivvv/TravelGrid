@@ -27,7 +27,7 @@ import LocationDetail from './pages/LocationDetail';
 //import Summarizer from './components/Summarizer';
 //import Recommendation from './components/recommendation';
 //import Wishlist from './pages/Wishlist';
-// import PetTravel from './pages/PetTravel';
+
 
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import { Provider } from 'react-redux';
@@ -43,7 +43,7 @@ import LeaderBoard from './components/Leaderboard/LeaderBoard';
 //import Recommendation from './components/recommendation';
 //import Wishlist from './pages/Wishlist';
 //import { WishlistProvider } from "./context/WishlistContext";
-//import PetTravel from './pages/PetTravel';
+
 
 //import ProtectedRoute from './components/Auth/ProtectedRoute';
 
@@ -93,19 +93,12 @@ const VerifyEmail = lazy(() => import('./pages/VerifyEmail'));
 const NetworkError = lazy(() => import('./components/ErrorHandle/NetworkError'));
 const ServerError = lazy(() => import('./components/ErrorHandle/ServerError'));
 const NotFound = lazy(() => import('./pages/NotFound'));
-const PetTravel = lazy(() => import('./pages/PetTravel'));
 const BookingHistory = lazy(() => import('./pages/BookingHistory'));
 const MoodBoardPage = lazy(() => import('./pages/MoodBoardPage'));
-
-const DestinationPacking = lazy(() => import('./pages/DestinationPacking'));
-
-
-const CountdownDemo = lazy(() => import('./pages/CountdownDemo'));
 const AITravelPlannerDemo = lazy(() => import('./pages/AITravelPlannerDemo'));
 const MusicPlayerDemo = lazy(() => import('./pages/MusicPlayerDemo'));
 const Music = lazy(() => import('./pages/Music'));
 const VisaChecker = lazy(() => import('./pages/VisaChecker'));
-const BudgetEstimator = lazy(() => import('./pages/BudgetEstimator'));
 
 
 const router = createBrowserRouter([
@@ -149,18 +142,12 @@ const router = createBrowserRouter([
       { path: '/mood-board', element: <Suspense fallback={<Spinner />}><MoodBoardPage /></Suspense> },
       { path: '/trending-spots', element: <Suspense fallback={<Spinner />}><TrendingSpots /></Suspense> },
       { path: '/trending', element: <Suspense fallback={<Spinner />}><TrendingSpots /></Suspense> },
-      { path: '/pettravel', element: <Suspense fallback={<Spinner />}><PetTravel /></Suspense> },
       { path: '/booking-history', element: <Suspense fallback={<Spinner />}><BookingHistory /></Suspense> },
-
-      { path: '/destination-packing', element: <Suspense fallback={<Spinner />}><DestinationPacking /></Suspense> },
-
-      { path: '/countdown-demo', element: <Suspense fallback={<Spinner />}><CountdownDemo /></Suspense> },
       { path: '/ai-travel-planner', element: <Suspense fallback={<Spinner />}><AITravelPlannerDemo /></Suspense> },
       { path: '/music-player-demo', element: <Suspense fallback={<Spinner />}><MusicPlayerDemo /></Suspense> },
       { path: '/music', element: <Suspense fallback={<Spinner />}><Music /></Suspense> },
       {path:"/itinerary-map", element:<Suspense fallback={<Spinner />}><ItineraryMapPage/></Suspense>},
       { path: '/visa-checker', element: <Suspense fallback={<Spinner />}><VisaChecker /></Suspense> },
-      { path: '/budget-estimator', element: <Suspense fallback={<Spinner />}><BudgetEstimator /></Suspense> },
       { path: '/update-password/:id', element: <Suspense fallback={<Spinner />}><UpdatePassword /></Suspense> },
       { path: '/leaderboard', element: <Suspense fallback={<Spinner />}><LeaderBoard /></Suspense> },
 
@@ -189,7 +176,7 @@ const router = createBrowserRouter([
       { path: '/location/:locationId', element: <LocationDetail /> },
       
 
-      { path: '/pettravel', element: <PetTravel /> },
+
 
       { path: '/package/:id', element: <Suspense fallback={<Spinner />}><PackageDetails /></Suspense> },
       { path: '/network-error', element: <Suspense fallback={<Spinner />}><NetworkError /></Suspense> },

@@ -53,8 +53,6 @@ const Navbar = () => {
       subitems: [
         { label: t("navigation.tripCalculator"), path: "/trip-calculator" },
         { label: t("navigation.packingChecklist"), path: "/packing-checklist" },
-        { label: "Destination Packing List", path: "/destination-packing" },
-
         {
           label: t("navigation.travelRecommendations"),
           path: "/recommendation",
@@ -62,12 +60,8 @@ const Navbar = () => {
         { label: t("navigation.feedback"), path: "/feedback" },
         { label: "AI Mood Board", path: "/mood-board" },
         { label: "AI Travel Planner", path: "/ai-travel-planner" },
-        { label: "Travel Countdown Timer", path: "/countdown-demo" },
         { label: "Music", path: "/music" },
         { label: "Map", path: "/itinerary-map" },
-        { label: "Budget Estimator", path: "/budget-estimator" },
-
-        { label: t("navigation.petTravelGuide"), path: "/pettravel" },
         { label: "Travel Guides", path: "/travel-guides" },
         { label: "Enhanced Currency Converter", path: "/enhanced-currency" },
       ],
