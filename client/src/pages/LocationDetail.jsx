@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom'; // Add this import
-import {   MapPin, Star, Calendar, Info, Sparkles } from 'lucide-react';
+import {   MapPin, Star, Calendar, Info, Sparkles, Images } from 'lucide-react';
 import Navbar from '../components/Custom/Navbar';
 import ARExperience from "../components/ARExperience";
 
@@ -40,6 +40,16 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
           "The island's distinctive architecture creates a postcard-perfect landscape"
         ]
       },
+      photos:[
+       {id:1, src: "https://images.unsplash.com/5/greece-2.jpg?w=500&auto=format&fit=crop&q=60"},
+
+       {id:2, src: "https://images.unsplash.com/photo-1531215304442-a45f5ddb0404?w=500&auto=format&fit=crop&q=60"},
+       {id:3, src: "https://images.unsplash.com/photo-1571406761717-16a4756722bc?w=500&auto=format&fit=crop&q=60"},
+       {id:4, src:"https://images.unsplash.com/photo-1664112115778-0ed2f2da97e2?w=500&auto=format&fit=crop&q=60"},
+       {id:5, src:"https://images.unsplash.com/photo-1599953068727-4e98147352f0?w=500&auto=format&fit=crop&q=60"}
+
+
+      ]
     },
     2: {
       id: 2,
@@ -65,7 +75,16 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
           "Kiyomizu-dera temple offers panoramic views over the city from its wooden stage",
           "The Philosopher's Path winds along a canal lined with hundreds of cherry trees"
         ]
-      }
+      },
+       photos:[
+       {id:1, src: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},
+
+       {id:2,src: "https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?w=500&auto=format&fit=crop&q=60"},
+       {id:3, src: "https://images.unsplash.com/photo-1649129683265-15a9aaf99f49?w=500&auto=format&fit=crop&q=60"},
+       {id:4, src:"https://images.unsplash.com/photo-1571406761717-16a4756722bc?w=500&auto=format&fit=crop&q=60"},
+       {id:5, src:"https://images.unsplash.com/photo-1583648008754-6dcfd0e1043f?w=500&auto=format&fit=crop&q=60"}
+
+      ]
     },
     3: {
         id: 3,
@@ -91,7 +110,16 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
             "Abundant wildlife including grizzly bears, black bears, elk, bighorn sheep, and mountain goats",
             "World-class skiing at three major resorts: Lake Louise, Sunshine Village, and Mount Norquay"
         ]
-        }
+        },
+        photos:[
+       {id:1, src: "https://images.unsplash.com/photo-1729872527247-f1b3c6086a72?w=500&auto=format&fit=crop&q=60"},
+
+       {id:2,src: "https://images.unsplash.com/photo-1491931466419-0ec3344c8f5e?w=500&auto=format&fit=crop&q=60"},
+       {id:3, src: "https://images.unsplash.com/photo-1659588868851-0f215cc59b47?w=500&auto=format&fit=crop&q=60"},
+       {id:4, src:"https://images.unsplash.com/photo-1722524270207-3d2c92b5f5e9?w=500&auto=format&fit=crop&q=60"},
+        {id:5, src:"https://images.unsplash.com/photo-1722524270207-3d2c92b5f5e9?w=500&auto=format&fit=crop&q=60"},
+
+      ]
     },
     4: {
         id: 4,
@@ -117,7 +145,17 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
             "Gold and Spice Souks in old Dubai offer traditional shopping experiences with authentic Arabian atmosphere",
             "Desert safari experiences include dune bashing, camel riding, and traditional Bedouin-style dinners"
         ]
-        }
+        },
+        photos:[
+       {id:1, src: "https://images.unsplash.com/flagged/photo-1559717865-a99cac1c95d8?w=500&auto=format&fit=crop&q=60"},
+
+       {id:2,src: "https://images.unsplash.com/photo-1739952342769-6ec6163d6dee?w=500&auto=format&fit=crop&q=60"},
+       {id:3, src: "https://images.unsplash.com/photo-1737183616956-7da135f9a41d?w=500&auto=format&fit=crop&q=60"},
+       {id:4, src:"https://images.unsplash.com/photo-1734144197581-f2f672fa40d0?w=500&auto=format&fit=crop&q=60"},
+        {id:5, src:"https://images.unsplash.com/photo-1721974301263-5a328fe7a9a9?w=500&auto=format&fit=crop&q=60"},
+
+      ]
+
     },
     5: {
         id: 5,
@@ -143,7 +181,17 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
             "Coba Archaeological Site features the tallest pyramid in the Yucatan Peninsula that visitors can still climb",
             "Vibrant wellness scene with numerous yoga studios, spa retreats, and organic restaurants focusing on healthy living"
         ]
-        }
+        },
+        photos:[
+       {id:1, src: "https://images.unsplash.com/photo-1501532349-1c215c24f718?w=500&auto=format&fit=crop&q=60"},
+
+       {id:2,src: "https://images.unsplash.com/photo-1440558953273-969c107f78a4?w=500&auto=format&fit=crop&q=60"},
+
+       {id:3, src: "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?w=500&auto=format&fit=crop&q=60"},
+       {id:4, src:"https://images.unsplash.com/photo-1503187680590-525b6e7a793f?w=500&auto=format&fit=crop&q=60"},
+       {id:5, src:"https://images.unsplash.com/photo-1457794355224-e92bb76cec4c?w=500&auto=format&fit=crop&q=60"}
+
+      ]
     },
     6: {
         id: 6,
@@ -170,7 +218,17 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
             "Harpa Concert Hall showcases stunning modern architecture and hosts world-class performances",
             "Vibrant nightlife scene with numerous bars, clubs, and live music venues concentrated in the compact city center"
         ]
-        }
+        },
+        photos:[
+       {id:1, src: "https://images.unsplash.com/photo-1474690870753-1b92efa1f2d8?w=500&auto=format&fit=crop&q=60"},
+
+       {id:2,src: "https://images.unsplash.com/photo-1565520637984-003fe752a844?w=500&auto=format&fit=crop&q=60"},
+
+       {id:3, src: "https://images.unsplash.com/photo-1723059199210-c9bec172bf44?w=500&auto=format&fit=crop&q=60"},
+       {id:4, src:"https://images.unsplash.com/photo-1518156959312-07a5380c1261?w=500&auto=format&fit=crop&q=60"},
+       {id:5, src:"https://images.unsplash.com/photo-1546178806-764c688238c0?w=500&auto=format&fit=crop&q=60"}
+
+      ]
     },
     7: {
         id: 7,
@@ -197,7 +255,17 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
             "World-class spa treatments often featuring traditional Maldivian techniques in overwater spa pavilions",
             "Sunset dolphin cruises and romantic sandbank picnics create unforgettable romantic experiences"
         ]
-        }
+        },
+        photos:[
+       {id:1, src: "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=500&auto=format&fit=crop&q=60"},
+
+       {id:2,src: "https://images.unsplash.com/photo-1512100356356-de1b84283e18?w=500&auto=format&fit=crop&q=60"},
+
+       {id:3, src: "https://images.unsplash.com/photo-1586495985096-787fb4a54ac0?w=500&auto=format&fit=crop&q=60"},
+       {id:4, src:"https://images.unsplash.com/photo-1543731068-7e0f5beff43a?q=70&w=1074&auto=format&fit=crop"},
+       {id:5, src:"https://images.unsplash.com/photo-1574226780565-388f10f8121e?w=500&auto=format&fit=crop&q=60"}
+
+      ]
     },
     8: {
         id: 8,
@@ -224,7 +292,17 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
             "Agricultural terraces showcase Inca engineering prowess and sustainable farming techniques",
             "Sacred Valley exploration includes additional Inca sites, traditional markets, and authentic Andean culture"
         ]
-        }
+        },
+        photos:[
+       {id:1, src: "https://images.unsplash.com/photo-1543385426-191664295b58?w=500&auto=format&fit=crop&q=60"},
+
+       {id:2,src: "https://images.unsplash.com/photo-1718649872891-e8a3d72d08fc?w=500&auto=format&fit=crop&q=60"},
+
+       {id:3, src: "https://images.unsplash.com/photo-1522451056252-3fa650a3b8bf?w=500&auto=format&fit=crop&q=60"},
+       {id:4, src:"https://images.unsplash.com/photo-1601226261548-82fa0b3e8e91?w=500&auto=format&fit=crop&q=60"},
+       {id:5, src:"https://images.unsplash.com/photo-1472982728022-601a8d99e9af?w=500&auto=format&fit=crop&q=60"}
+
+      ]
     },
     9: {
         id: 9,
@@ -251,7 +329,17 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
             "Traditional Kecak fire dance and Legong performances demonstrate centuries-old Balinese artistic traditions",
             "Seminyak and Canggu beaches offer world-class surfing, beach clubs, and stunning sunset views"
         ]
-        }
+        },
+        photos:[
+       {id:1, src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop&q=60"},
+
+       {id:2,src: "https://images.unsplash.com/photo-1698466632744-f79b37b88ffd?w=500&auto=format&fit=crop&q=60"},
+
+       {id:3, src: "https://images.unsplash.com/photo-1704253411612-e4deb715dcd8?w=500&auto=format&fit=crop&q=60"},
+       {id:4, src:"https://images.unsplash.com/photo-1733281121131-6aa280eab10f?w=500&auto=format&fit=crop&q=60"},
+       {id:5, src:"https://images.unsplash.com/photo-1655289112220-59e25ac59d7e?w=500&auto=format&fit=crop&q=60"}
+
+      ]
     },
     10: {
         id: 10,
@@ -278,7 +366,17 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
             "Alpine hiking trails with over 65,000 kilometers of marked paths ranging from gentle walks to challenging climbs",
             "Crystal-clear alpine lakes perfect for swimming, boating, and reflection of surrounding snow-capped peaks"
         ]
-        }
+        },
+        photos:[
+       {id:1, src: "https://images.unsplash.com/photo-1508264165352-258a6d1d9392?w=500&auto=format&fit=crop&q=60"},
+
+       {id:2,src: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=500&auto=format&fit=crop&q=60"},
+
+       {id:3, src: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=500&auto=format&fit=crop&q=60"},
+       {id:4, src:"https://images.unsplash.com/photo-1508261303437-e520c1f41b72?w=500&auto=format&fit=crop&q=60"},
+       {id:5, src:"https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=500&auto=format&fit=crop&q=60"}
+
+      ]
     },
     11: {
         id: 11,
@@ -305,7 +403,17 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
             "Montmartre district features the bohemian charm of Sacré-Cœur Basilica and Place du Tertre artists' square",
             "Seine River cruises provide romantic perspectives of the city's monuments and historic bridges"
         ]
-        }
+        },
+        photos:[
+       {id:1, src: "https://images.unsplash.com/photo-1551865673-9e9ee4f8cd4c?w=500&auto=format&fit=crop&q=60"},
+
+       {id:2,src: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=500&auto=format&fit=crop&q=60"},
+
+       {id:3, src: "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?w=500&auto=format&fit=crop&q=60"},
+       {id:4, src:"https://images.unsplash.com/photo-1503187680590-525b6e7a793f?w=500&auto=format&fit=crop&q=60"},
+       {id:5, src:"https://images.unsplash.com/photo-1543349687-8f911b218ae6?w=500&auto=format&fit=crop&q=60"}
+
+      ]
     },
     12: {
         id: 12,
@@ -332,7 +440,17 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
             "Brooklyn Bridge spans the East River as an engineering marvel and pedestrian promenade with stunning skyline views",
             "9/11 Memorial and Museum provide moving tributes to those lost with twin reflecting pools marking the original towers' footprints"
         ]
-        }
+        },
+        photos:[
+       {id:1, src: "https://images.unsplash.com/photo-1750810977550-b27de8ee6a82?w=500&auto=format&fit=crop&q=60"},
+
+       {id:2,src: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=500&auto=format&fit=crop&q=60"},
+
+       {id:3, src: "https://images.unsplash.com/photo-1570613319757-68b3b899b183?w=500&auto=format&fit=crop&q=60"},
+       {id:4, src:"https://images.unsplash.com/photo-1522083165195-3424ed129620?w=500&auto=format&fit=crop&q=60"},
+       {id:5, src:"https://images.unsplash.com/photo-1507502167143-3f06acc85b8f?w=500&auto=format&fit=crop&q=60"}
+
+      ]
     }
   };
 
@@ -347,6 +465,8 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
 
   const tabs = [
     { key: 'overview', label: 'Overview', icon: Info },
+    {key:"photos",     label:"Photos",    icon:Images}
+
   ];
 
   if (loading) {
@@ -408,6 +528,19 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
             </div>
           </div>
         );
+        case "photos":
+         return (
+         <div className="space-y-8">
+          <h2 className='text-xl text-gray-700 border-b-2 border-gray-400 px-2 py-3 rounded-sm font-medium'>Photos</h2>
+          <div className="grid grid-cols-1 items-center place-items-center sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {location.photos.map((image) => (
+              <div className='aspect-square overflow-hidden shadow-md rounded-xl group' key={image.id}>
+              <img src={image.src} alt={`Photo ${image.id}`}  className='shadow-md w-full h-full object-cover rounded-xl group-hover:scale-105 transform transition-transform duration-500'/>
+              </div>
+            ))}
+          </div>
+         </div>
+         )
     }
   };
 
