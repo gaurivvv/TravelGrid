@@ -239,7 +239,7 @@ const Navbar = () => {
 
                 <NavLink
                   to="/dashboard"
-                  className="hover:text-white flex items-center gap-2 transition-colors"
+                  className={`flex items-center gap-2 transition-colors ${isDarkMode ? "hover:text-white" : "hover:text-pink-500"}` }
                 >
                   {user?.picture ? (
                     <img
