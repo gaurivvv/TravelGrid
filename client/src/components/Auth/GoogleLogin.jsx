@@ -33,8 +33,6 @@ const GoogleLoginButton = ({ onSuccess, onError, buttonText = "Continue with Goo
       <GoogleLogin
         onSuccess={handleSuccess}
         onError={handleError}
-        useOneTap
-        theme="filled_blue"
         size="large"
         text={buttonText}
         shape="rectangular"

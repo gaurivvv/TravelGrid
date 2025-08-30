@@ -53,8 +53,6 @@ const Navbar = () => {
       subitems: [
         { label: t("navigation.tripCalculator"), path: "/trip-calculator" },
         { label: t("navigation.packingChecklist"), path: "/packing-checklist" },
-        { label: "Destination Packing List", path: "/destination-packing" },
-
         {
           label: t("navigation.travelRecommendations"),
           path: "/recommendation",
@@ -62,12 +60,8 @@ const Navbar = () => {
         { label: t("navigation.feedback"), path: "/feedback" },
         { label: "AI Mood Board", path: "/mood-board" },
         { label: "AI Travel Planner", path: "/ai-travel-planner" },
-        { label: "Travel Countdown Timer", path: "/countdown-demo" },
         { label: "Music", path: "/music" },
         { label: "Map", path: "/itinerary-map" },
-        { label: "Budget Estimator", path: "/budget-estimator" },
-
-        { label: t("navigation.petTravelGuide"), path: "/pettravel" },
         { label: "Travel Guides", path: "/travel-guides" },
         { label: "Enhanced Currency Converter", path: "/enhanced-currency" },
       ],
@@ -168,7 +162,7 @@ const Navbar = () => {
                 <div className="relative group" key={link.name}>
                   <button
                     aria-label={link.name}
-                    className={`py-1.5 px-2 text-sm font-medium rounded-sm transition-all  duration-300 flex items-center gap-1 truncate max-w-[80px] ${
+                    className={`py-1.5 px-2 text-sm font-medium rounded-sm transition-all  duration-300 flex items-center gap-1 truncate max-w-fit ${
                       activeParentTab === link.name
                         ? "bg-gradient-to-r from-pink-700 to-pink-500 shadow-md text-white"
                         : `hover:text-pink-500 hover:shadow-sm ${
@@ -176,7 +170,7 @@ const Navbar = () => {
                           }`
                     }`}
                   >
-                    {link.name} <ChevronDown fontSize={14} />
+                    {link.name} <ChevronDown className="text-neutral-300 w-3.5 h-3.5" />
                   </button>
                   {/* Dropdown menu */}
                   <div
