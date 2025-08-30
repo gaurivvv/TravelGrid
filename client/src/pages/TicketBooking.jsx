@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import html2canvas from "html2canvas";
 import { HiLocationMarker } from "react-icons/hi";
