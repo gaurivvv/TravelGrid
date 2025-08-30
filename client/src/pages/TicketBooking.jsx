@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+"use client";
+
+import { useState } from "react";
 import html2canvas from "html2canvas";
-import { HiUser } from 'react-icons/hi';         
-import { HiLocationMarker, HiArrowRight } from 'react-icons/hi'; 
+import { HiLocationMarker } from "react-icons/hi";
+import CustomDropdown from "@/components/CustomDropdown";
 
 import jsPDF from "jspdf";
 import Navbar from "../components/Custom/Navbar";
@@ -10,7 +11,6 @@ import { useTheme } from "../context/ThemeContext";
 import {
   Users,
   CalendarDays,
-  MapPin,
   Plane,
   TrainFront,
   Bus,
@@ -42,17 +42,17 @@ function TicketBooking() {
     return: "",
     passengers: 1,
     cabin: "Economy",
-    petFriendly: false //adding for pet friendly feature
+    petFriendly: false, //adding for pet friendly feature
   });
-  
+
   const [submitted, setSubmitted] = useState(false);
   const [booked, setBooked] = useState(false); //adding a booked state variable to keep track if booked or not
 
   //Function to get today's date for validating depart date for ticker
-  const getToday=()=>{
+  const getToday = () => {
     const today = new Date();
-    return today.toISOString().split('T')[0]
-  }
+    return today.toISOString().split("T")[0];
+  };
 
   const confirmBooking = () => {
     //function called when flight booked.
@@ -112,10 +112,9 @@ function TicketBooking() {
       petNote.textContent = "🐾 Pet-friendly: Yes";
       petNote.style.fontSize = "20px";
       petNote.style.marginTop = "20px";
-      petNote.style.color = "#d63384"; 
+      petNote.style.color = "#d63384";
       clone.appendChild(petNote);
     }
-
 
     // 🧹 Remove buttons from clone only
     const buttonsToRemove = clone.querySelectorAll("button");
@@ -135,7 +134,7 @@ function TicketBooking() {
       } else if (node instanceof SVGElement) {
         node.setAttribute("class", "");
       }
-      for (let child of node.children) {
+      for (const child of node.children) {
         removeClasses(child);
       }
     };
@@ -157,7 +156,7 @@ function TicketBooking() {
 
       pdf.save("ticket.pdf");
     } catch (err) {
-      toast.error("Unable to Generate At this Moment")
+      toast.error("Unable to Generate At this Moment");
     } finally {
       document.body.removeChild(clone);
       // Restore button display
@@ -178,12 +177,11 @@ function TicketBooking() {
     });
   };
 
-  
   const pluralMap = {
-      bus: "Buses",
-      train: "Trains",
-      flight: "Flights"
-    };
+    bus: "Buses",
+    train: "Trains",
+    flight: "Flights",
+  };
 
   return (
     <div className="flex flex-col min-h-screen w-full overflow-x-hidden">
@@ -194,7 +192,9 @@ function TicketBooking() {
           src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=1600&q=80"
           alt="City skyline"
           loading="lazy"
-          className={`absolute inset-0 w-full h-full object-cover ${isDarkMode? "opacity-30":"opacity-70"} z-0`}
+          className={`absolute inset-0 w-full h-full object-cover ${
+            isDarkMode ? "opacity-30" : "opacity-70"
+          } z-0`}
         />
         <div className="text-center mb-8 z-3">
           <h1
@@ -334,7 +334,7 @@ function TicketBooking() {
                     isDarkMode
                       ? "bg-white/20 placeholder-gray-300"
                       : "bg-white/90 placeholder-gray-400"
-                    } focus:outline-none focus:ring-3 focus:ring-pink-400`}
+                  } focus:outline-none focus:ring-3 focus:ring-pink-400`}
                 />
               </div>
 
@@ -356,7 +356,10 @@ function TicketBooking() {
               <div className="relative col-span-2 md:col-span-2 flex flex-col">
                 {tripMode === "roundTrip" ? (
                   <>
-                    <CalendarDays className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 font-bold text-xl" size={22}/>
+                    <CalendarDays
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 font-bold text-xl"
+                      size={22}
+                    />
                     <input
                       type="date"
                       name="return"
@@ -367,13 +370,16 @@ function TicketBooking() {
                       className={`w-full pl-10 pr-3 py-3 rounded-xl text-gray-900 cursor-pointer ${
                         isDarkMode
                           ? "bg-white/20 placeholder-gray-300"
-                        : "bg-white/90 placeholder-gray-400"
-                    } focus:outline-none focus:ring-3 focus:ring-pink-400`}
+                          : "bg-white/90 placeholder-gray-400"
+                      } focus:outline-none focus:ring-3 focus:ring-pink-400`}
                     />
                   </>
                 ) : (
                   <>
-                    <Users className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 font-bold" size={22}/>
+                    <Users
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 font-bold"
+                      size={22}
+                    />
                     <input
                       type="number"
                       name="passengers"
@@ -383,12 +389,47 @@ function TicketBooking() {
                       value={form.passengers}
                       onChange={handleChange}
                       placeholder="Passengers"
-                      className={`w-full pl-10 pr-3 py-3 rounded-xl text-gray-900 ${
+                      className={`w-full pl-10 pr-10 py-3 rounded-xl text-gray-900 ${
                         isDarkMode
                           ? "bg-white/20 placeholder-gray-300"
-                        : "bg-white/90 placeholder-gray-400"
-                    } focus:outline-none focus:ring-3 focus:ring-pink-400`}
+                          : "bg-white/90 placeholder-gray-400"
+                      } focus:outline-none focus:ring-3 focus:ring-pink-400 appearance-none`} // <-- hides default spinner
                     />
+                    {/* Custom increment/decrement buttons */}
+                    <div className="absolute inset-y-0 right-2 flex flex-col justify-center pr-2">
+                      <button
+                        type="button"
+                        aria-label="Increase passengers"
+                        onClick={() =>
+                          setForm((prev) => ({
+                            ...prev,
+                            passengers: Math.min(
+                              10,
+                              Number(prev.passengers) + 1
+                            ),
+                          }))
+                        }
+                        className="text-pink-500 hover:text-pink-600 text-xs mb-0"
+                      >
+                        ▲
+                      </button>
+                      <button
+                        type="button"
+                        aria-label="Decrease passengers"
+                        onClick={() =>
+                          setForm((prev) => ({
+                            ...prev,
+                            passengers: Math.max(
+                              1,
+                              Number(prev.passengers) - 1
+                            ),
+                          }))
+                        }
+                        className="text-pink-500 hover:text-pink-600 text-xs"
+                      >
+                        ▼
+                      </button>
+                    </div>
                   </>
                 )}
               </div>
@@ -409,54 +450,68 @@ function TicketBooking() {
                     required
                     value={form.passengers}
                     onChange={handleChange}
-                    className={`w-full pl-10 pr-3 py-3 rounded-xl text-gray-900 ${
+                    placeholder="Passengers"
+                    className={`w-full pl-10 pr-10 py-3 rounded-xl text-gray-900 ${
                       isDarkMode
                         ? "bg-white/20 placeholder-gray-300"
                         : "bg-white/90 placeholder-gray-400"
-                    } focus:outline-none focus:ring-3 focus:ring-pink-400`}
-                    placeholder="Passengers"
+                    } focus:outline-none focus:ring-3 focus:ring-pink-400 appearance-none`} // <-- hides default spinner
                   />
+                  {/* Custom increment/decrement buttons */}
+                  <div className="absolute inset-y-0 right-2 flex flex-col justify-center pr-2">
+                      <button
+                        type="button"
+                        aria-label="Increase passengers"
+                        onClick={() =>
+                          setForm((prev) => ({
+                            ...prev,
+                            passengers: Math.min(
+                              10,
+                              Number(prev.passengers) + 1
+                            ),
+                          }))
+                        }
+                        className="text-pink-500 hover:text-pink-600 leading-none mb-1 text-xs"
+                      >
+                        ▲
+                      </button>
+                      <button
+                        type="button"
+                        aria-label="Decrease passengers"
+                        onClick={() =>
+                          setForm((prev) => ({
+                            ...prev,
+                            passengers: Math.max(
+                              1,
+                              Number(prev.passengers) - 1
+                            ),
+                          }))
+                        }
+                        className="text-pink-500 hover:text-pink-600 leading-none text-xs"
+                      >
+                        ▼
+                      </button>
+                    </div>
                 </div>
               )}
-              <div className="w-full relative flex flex-col">
+              <div className="relative flex flex-col">
                 {/* Cabin Dropdown */}
-                <select
-                  name="cabin"
+                <CustomDropdown
+                  options={
+                    travelType === "flight"
+                      ? ["Economy", "Premium Economy", "Business", "First"]
+                      : travelType === "train"
+                      ? ["Sleeper", "3A", "2A", "1A"]
+                      : travelType === "bus"
+                      ? ["Seater", "Sleeper", "AC", "Non-AC"]
+                      : ["Hatchback", "Sedan", "SUV", "Luxury"]
+                  }
                   value={form.cabin}
-                  onChange={handleChange}
-                  className={`w-full p-4 rounded-2xl cursor-pointer text-gray-900 ${
-                    isDarkMode
-                      ? "bg-white/20"
-                      : "bg-white/90"
-                  } focus:outline-none focus:ring-3 focus:ring-pink-400`}
-                >
-                  {travelType === "flight" &&
-                    ["Economy", "Premium Economy", "Business", "First"].map(
-                      (c) => (
-                        <option key={c} value={c}>
-                          {c}
-                        </option>
-                      )
-                    )}
-                  {travelType === "train" &&
-                    ["Sleeper", "3A", "2A", "1A"].map((c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
-                    ))}
-                  {travelType === "bus" &&
-                    ["Seater", "Sleeper", "AC", "Non-AC"].map((c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
-                    ))}
-                  {travelType === "cab" &&
-                    ["Hatchback", "Sedan", "SUV", "Luxury"].map((c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
-                    ))}
-                </select>
+                  onChange={(val) =>
+                    setForm((prev) => ({ ...prev, cabin: val }))
+                  }
+                  isDarkMode={isDarkMode}
+                />
               </div>
             </div>
 
