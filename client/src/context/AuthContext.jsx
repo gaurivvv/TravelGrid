@@ -75,6 +75,7 @@ export const AuthProvider = ({ children }) => {
       });
 
       const data = await res.json();
+      
       if (!res.ok) return { success: false, error: data.error || data.message };
 
       setUser(data.user);
@@ -230,27 +231,27 @@ export const AuthProvider = ({ children }) => {
       }
     };
 
-    const changePassword = async (password , confirmPassword, token) => {
-      try {
-        const res = await fetch(`${config.API_BASE_URL}/forgot-password/reset-password`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-          body: JSON.stringify({ password , confirmPassword, token }),
-        });
 
-        const data = await res.json();
-        if (!res.ok) return { success: false, error: data.error || data.message };
+const changePassword = async (password, confirmPassword, token) => {
+  try {
+    const res = await fetch(`${config.API_BASE_URL}/forgot-password/reset-password`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ password, confirmPassword, token }),
+    });
 
-        if (data.user) {
-          setUser(data.user);
-        }
-
-        return { success: true, message: data.message };
-      } catch (err) {
-        return { success: false, error: "Failed to change password" };
-      }
-    };
+    const data = await res.json();
+    
+    if (!res.ok) {
+      const error = new Error(data?.msg || "Password reset failed");
+      throw error;
+    }
+    return data.msg; 
+  } catch (err) {
+    throw err;
+  }
+};
 
   return (
     <AuthContext.Provider value={{

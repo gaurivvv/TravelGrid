@@ -16,24 +16,6 @@ export const UpdatePassword = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { changePassword } =  useAuth()
 
-//   const handleSubmit = async(e) => {
-//     e.preventDefault();
-
-//     if (password !== confirmPassword) {
-//       toast.error("Passwords do not match");
-//       return;
-//     }
-
-//     const token = location.pathname.split("/").at(-1);
-//     console.log("Token for reset:", token);
-
-//     // 👉 Here you can call your API to reset password
-//     await changePassword(password , confirmPassword, token);
-
-//     toast.success("Password updated successfully!");
-//     navigate('/login')
-//   };
-
 const handleSubmit = async (e) => {
   e.preventDefault();
 
@@ -43,19 +25,18 @@ const handleSubmit = async (e) => {
   }
 
   const token = location.pathname.split("/").at(-1);
-  console.log("Token for reset:", token);
 
   try {
     await changePassword(password, confirmPassword, token);
-
+  
     toast.success("Password updated successfully!");
     navigate("/login");
   } catch (error) {
-    // Error could come from API or network
+
     console.error("Password reset failed:", error);
 
-    if (error.response?.data?.msg) {
-      toast.error(error.response.data.msg);
+    if (error) {
+      toast.error(error.message)
     } else {
       toast.error("Something went wrong. Please try again.");
     }
