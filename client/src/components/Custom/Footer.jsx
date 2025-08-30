@@ -29,7 +29,9 @@ const Footer = () => {
 
   const handleNewsletterSubmit = (e) => {
     e.preventDefault();
-    if (!email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!email || !emailRegex.test(email)) {
       showToast("Please enter a valid email address", "error");
       return;
     }
