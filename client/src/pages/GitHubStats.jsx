@@ -25,12 +25,34 @@ export default function GitHubStats() {
         const contributorsRes = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contributors?per_page=1&anon=true`, { headers });
         const contributorsCount = contributorsRes.headers.get("Link")?.match(/&page=(\d+)>; rel="last"/)?.[1] || 0;
 
+
+        const commitDate = new Date(repoData.pushed_at);
+        const today = new Date();
+        const yesterday = new Date();
+        yesterday.setDate(today.getDate() - 1);
+
+        // format as dd/mm/yy
+        const formattedDate = commitDate.toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "2-digit",
+        });
+
+        let lastCommitLabel;
+        if (commitDate.toDateString() === today.toDateString()) {
+          lastCommitLabel = `Today ${formattedDate}`;
+        } else if (commitDate.toDateString() === yesterday.toDateString()) {
+          lastCommitLabel = `Yesterday ${formattedDate}`;
+        } else {
+          lastCommitLabel = formattedDate;
+        }
+
         setStats({
           stars: repoData.stargazers_count || 0,
           forks: repoData.forks_count || 0,
           issues: repoData.open_issues_count || 0,
           contributors: contributorsCount || 0,
-          lastCommit: new Date(repoData.pushed_at).toLocaleDateString(),
+          lastCommit: lastCommitLabel,
           size: repoData.size || 0,
         });
       } catch (err) {
