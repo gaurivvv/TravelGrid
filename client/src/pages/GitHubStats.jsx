@@ -52,9 +52,8 @@ export default function GitHubStats() {
 
   return (
     <section
-      className="py-12 rounded-xl text-center"
+      className="py-12 rounded-xl bg-transparent text-center"
       style={{
-        backgroundColor: "var(--bg-secondary)",
         color: "var(--text-primary)",
       }}
     >
