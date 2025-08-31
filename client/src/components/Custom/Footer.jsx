@@ -94,11 +94,7 @@ const Footer = () => {
                     { name: "Home", path: "/" },
                     { name: "About Us", path: "/about" },
                     { name: "Trips", path: "/trips" },
-                    { name: "Destinations", path: "/destinations" },
-                    { name: "Hotels", path: "/hotels" },
                     { name: "Forums", path: "/forum" },
-                    { name: "Feedback", path: "/feedback" },
-                    { name: "Currency Converter", path: "/enhanced-currency" },
                     { name: "Leaderboard", path: "/leaderboard" },
 
                   ].map((link) => (
