@@ -1,4 +1,3 @@
-// imports
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
@@ -194,12 +193,18 @@ const Footer = () => {
                       </svg>
                     </div>
                     <div>
-                      <p className="text-gray-300 text-sm">
+                      <a
+                        href="mailto:hello@travelgrid.com"
+                        className="text-gray-300 text-sm hover:underline block"
+                      >
                         hello@travelgrid.com
-                      </p>
-                      <p className="text-gray-300 text-sm">
+                      </a>
+                      <a
+                        href="mailto:support@travelgrid.com"
+                        className="text-gray-300 text-sm hover:underline block"
+                      >
                         support@travelgrid.com
-                      </p>
+                      </a>
                     </div>
                   </div>
                 </div>
