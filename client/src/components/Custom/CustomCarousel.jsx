@@ -96,8 +96,8 @@ const CustomCarousel = ({ guides, viewprofilehandle, isHome = false }) => {
             <div
               key={index}
               className={`${position} w-[280px] sm:w-[300px] h-[400px] flex items-center justify-center text-center flex-col hover:-translate-y-[10px] backdrop-blur-md rounded-2xl p-6 ${isDarkMode
-                ? "bg-white/10 border border-white/20 hover:border-white/40"
-                : "bg-white/80 border border-gray-200 hover:border-pink-300"
+                ? "bg-black/30 border border-white/20 hover:border-white/40"
+                : "bg-white/30 border border-gray-300 hover:border-pink-300"
                 } ${position === "center" ? "scale-100" : "scale-90 opacity-80"} card`}
             >
               <div className="card-image">
@@ -154,10 +154,10 @@ const CustomCarousel = ({ guides, viewprofilehandle, isHome = false }) => {
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${currentIndex === index
-                ? "bg-pink-500 scale-110"
-                : isDarkMode
-                  ? "bg-gray-500"
-                  : "bg-gray-300"
+              ? "bg-pink-500 scale-110"
+              : isDarkMode
+                ? "bg-gray-500"
+                : "bg-gray-300"
               }`}
           />
         ))}
