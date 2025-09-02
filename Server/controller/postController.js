@@ -1,144 +1,97 @@
 const { Post } = require('../models/posts');
-//Create a post
+const { asyncHandler } = require('../utils/asyncHandler');
 
-exports.createPost = async (req, res) => {
-    try {
-        const { title, info, tag, tagColor, senderName, postType } = req.body;
+// Create a post
+exports.createPost = asyncHandler(async (req, res) => {
+  const { title, info, tag, tagColor, senderName, postType } = req.body;
 
-        if (!title || !info || !tag || !tagColor || !senderName) {
-            return res.status(400).json({ message: 'All fields are required' });
-        }
+  if (!title || !info || !tag || !tagColor || !senderName) {
+    return res.status(400).json({ message: 'All fields are required' });
+  }
 
-        const post = await Post.create({
-            title, info, tag, tagColor, senderName, postType, replies: []
-        });
+  const post = await Post.create({
+    title,
+    info,
+    tag,
+    tagColor,
+    senderName,
+    postType,
+    replies: [],
+  });
 
-        res.status(201).json({ message: 'Posted Successfully', post })
+  res.status(201).json({ message: 'Posted Successfully', post });
+});
 
-    }
-    catch (e) {
-        console.log(e);
-        res.status(500).json({ error: e.message });
+// Get all posts
+exports.getAllPosts = asyncHandler(async (req, res) => {
+  const posts = await Post.find().sort({ createdAt: -1 });
+  res.status(200).json(posts);
+});
 
-    }
-}
-//get All posts
+// Add reply to a post
+exports.addReply = asyncHandler(async (req, res) => {
+  const { postId } = req.params;
+  const { senderName, message } = req.body;
 
-exports.getAllPosts = async (req, res) => {
-    try {
-        const posts = await Post.find().sort({ createdAt: -1 });
-        res.status(200).json(posts)
+  if (!senderName || !message) {
+    return res.status(400).json({ message: 'Either message or senderName is missing' });
+  }
 
-    }
-    catch (e) {
-        console.log(e);
-        res.status(500).json({ error: e.message });
+  const post = await Post.findById(postId);
+  if (!post) {
+    return res.status(404).json({ message: 'No post of this id found' });
+  }
 
-    }
+  const reply = { senderName, message, createdAt: new Date() };
+  post.replies.push(reply);
+  await post.save();
 
-}
+  res.status(200).json({ message: 'Reply added', post });
+});
 
-//Add reply to a post
+// Get replies by post ID
+exports.getRepliesByPostId = asyncHandler(async (req, res) => {
+  const { postId } = req.params;
+  const post = await Post.findById(postId);
 
-exports.addReply = async (req, res) => {
-    const { postId } = req.params;
-    const { senderName, message } = req.body;
+  if (!post) {
+    return res.status(404).json({ message: 'No such Id found' });
+  }
 
-    if (!senderName || !message) {
-        return res.status(400).json({ message: 'eigther of message or senderName is not present' })
-    }
-    try {
-        const post = await Post.findById(postId);
-        if (!post) {
-            return res.status(404).json({ message: "No post of this id found" });
-        }
-        const reply = { senderName, message, createdAt: new Date() };
-        post.replies.push(reply);
-        await post.save();
-        res.status(200).json({ message: 'Reply added', post });
+  res.status(200).json({ replies: post.replies });
+});
 
-    }
-    catch (e) {
-        console.log(e);
-        res.status(500).json({ error: e.message });
+// Get posts by type
+exports.getPostByType = asyncHandler(async (req, res) => {
+  const { type } = req.query;
 
-    }
+  if (type && typeof type !== 'string') {
+    return res.status(400).json({ message: 'Invalid type parameter' });
+  }
 
-}
+  if (type && type.length > 50) {
+    return res.status(400).json({ message: 'Type parameter too long' });
+  }
 
-//Get replies By Id
-exports.getRepliesByPostId = async (req, res) => {
-    try {
-        const { postId } = req.params;
-        const post = await Post.findById(postId);
+  const allowedTypes = ['experience', 'question', 'review', 'tip', 'story'];
+  if (type && !allowedTypes.includes(type)) {
+    return res.status(400).json({ message: 'Invalid post type specified' });
+  }
 
-        if (!post) {
-            return res.status(404).json({ message: "No such Id found" })
-        }
-        res.status(200).json({ replies: post.replies });
+  const query = type ? { postType: type } : {};
+  const posts = await Post.find(query).sort({ createdAt: -1 });
 
-    } catch (err) {
-        console.log(e);
-        res.status(500).json({ error: e.message });
+  res.status(200).json(posts);
+});
 
+// Get post by ID
+exports.getPostById = asyncHandler(async (req, res) => {
+  const { postId } = req.params;
+  const post = await Post.findById(postId);
 
-    }
-}
+  if (!post) {
+    return res.status(404).json({ message: 'Post not found' });
+  }
 
-//get Post By Type
-
-exports.getPostByType = async (req, res) => {
-    try {
-        const { type } = req.query;
-
-        // Input validation and sanitization for query parameters
-        if (type && typeof type !== 'string') {
-            return res.status(400).json({
-                message: 'Invalid type parameter'
-            });
-        }
-
-        // Length validation to prevent injection attacks
-        if (type && type.length > 50) {
-            return res.status(400).json({
-                message: 'Type parameter too long'
-            });
-        }
-
-        // Validate against allowed post types to prevent injection
-        const allowedTypes = ['experience', 'question', 'review', 'tip', 'story'];
-        if (type && !allowedTypes.includes(type)) {
-            return res.status(400).json({
-                message: 'Invalid post type specified'
-            });
-        }
-
-        const query = type ? { postType: type } : {};
-        const posts = await Post.find(query).sort({ createdAt: -1 });
-        res.status(200).json(posts);
-
-    }
-    catch (err) {
-        res.status(500).json({ message: 'Server error', error: err.message });
-
-    }
-
-}
-//Get Post By Id
-
-exports.getPostById = async (req, res) => {
-    try {
-        const { postId } = req.params;
-        const post = await Post.findById(postId);
-        if (!post) {
-            return res.status(404).json({ message: 'Post not found' });
-        }
-        res.status(200).json(post);
-
-
-    }
-    catch (err) {
-        res.status(500).json({ message: 'Server error', error: err.message });
-    }
-
-}
+  res.status(200).json(post);
+});
