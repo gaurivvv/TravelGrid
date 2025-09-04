@@ -13,22 +13,22 @@ const ThemeToggle = () => {
       title={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
     >
       <div className="relative w-5 h-5 flex items-center justify-center">
-        {/* Sun Icon */}
+        {/* Sun Icon - Show when in dark mode (to switch to light) */}
         <Sun 
           className={`absolute transition-all duration-300 ease-in-out ${
             isDarkMode 
-              ? 'opacity-0 rotate-90 scale-0' 
-              : 'opacity-100 rotate-0 scale-100'
+              ? 'opacity-100 rotate-0 scale-100' 
+              : 'opacity-0 rotate-90 scale-0'
           }`}
           size={18}
         />
         
-        {/* Moon Icon */}
+        {/* Moon Icon - Show when in light mode (to switch to dark) */}
         <Moon 
           className={`absolute transition-all duration-300 ease-in-out ${
             isDarkMode 
-              ? 'opacity-100 rotate-0 scale-100' 
-              : 'opacity-0 -rotate-90 scale-0'
+              ? 'opacity-0 -rotate-90 scale-0' 
+              : 'opacity-100 rotate-0 scale-100'
           }`}
           size={18}
         />
@@ -37,8 +37,8 @@ const ThemeToggle = () => {
       {/* Animated background ring */}
       <div className={`absolute inset-0 rounded-lg transition-all duration-300 ${
         isDarkMode 
-          ? 'bg-gradient-to-r from-blue-500 to-purple-600' 
-          : 'bg-gradient-to-r from-yellow-400 to-orange-500'
+          ? 'bg-gradient-to-r from-yellow-400 to-orange-500' 
+          : 'bg-gradient-to-r from-blue-500 to-purple-600'
       } opacity-0 hover:opacity-20`} />
     </button>
   );
