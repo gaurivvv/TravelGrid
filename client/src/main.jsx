@@ -52,7 +52,7 @@ import LeaderBoard from './components/Leaderboard/LeaderBoard';
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 const Blog = lazy(() => import('./pages/Blog'));
-const Discover = lazy(() => import('./pages/Discover'));
+import DiscoverSection from "./components/Home/DiscoverSection";
 const Trips = lazy(() => import('./pages/Trips'));
 const Review = lazy(() => import('./pages/Review'));
 const Contributors = lazy(() => import('./pages/Contributors'));
@@ -112,7 +112,7 @@ const router = createBrowserRouter([
       { path: '/', element: <Suspense fallback={<Spinner />}><Home /></Suspense> },
       { path: '/about', element: <Suspense fallback={<Spinner />}><About /></Suspense> },
       { path: '/blog', element: <Suspense fallback={<Spinner />}><Blog /></Suspense> },
-      { path: '/discover', element: <Suspense fallback={<Spinner />}><Discover /></Suspense> },
+      { path: '/discover', element: <DiscoverSection /> },
       { path: '/currency-converter', element: <Suspense fallback={<Spinner />}><CurrencyConverter /></Suspense> },
       { path: '/enhanced-currency', element: <Suspense fallback={<Spinner />}><EnhancedCurrencyConverter /></Suspense> },
       { path: '/trips', element: <Suspense fallback={<Spinner />}><Trips /></Suspense> },
