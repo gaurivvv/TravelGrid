@@ -210,19 +210,16 @@ export default function VisaChecker() {
 
     {/* Heading */}
     {/* Full-width Hero Section */}
-<div className={`h-[50vh] w-full flex flex-col justify-center items-center ${
-
-isDarkMode 
-                    ? 'border-pink-500 bg-gray-100/10 shadow-lg  backdrop-blur-md hover:shadow-pink-500/20 hover:bg-gray-200/15 text-white ' 
-                    : 'bg-white border-gray-300 shadow-pink-500/20 text-gray-900'
+<div className={`h-[50vh] w-full flex flex-col justify-center items-center rounded-2xl border p-4 shadow-md border-pink-400 transition-colors duration-300 
+${isDarkMode  ? 'bg-white/10 shadow-lg backdrop-blur-md hover:shadow-xl hover:bg-white/15 text-white' : 'bg-white/90 border-gray-300 shadow-pink-500/20 text-gray-900'
 }`}>
-  <h1 className="text-4xl md:text-6xl font-bold text-pink-700 text-center">
+  <h1 className="px-2 md:px-0 text-3xl md:text-6xl sm:text-4xl font-bold text-pink-500 text-center leading-snug">
     Visa & Travel Requirements
   </h1>
-  <p className={`mt-6 text-sm md:text-lg  text-center max-w-full whitespace-nowrap overflow-x-auto${
+  <p className={`mt-6 text-sm md:text-lg text-center max-w-full whitespace-wrap ${
     isDarkMode
-    ?'text-white'
-    :'text-black'
+    ?'text-gray-200'
+    :'text-gray-700'
   }`}>
     Quickly check visa requirements and travel guidelines for any country with ease.
   </p>
@@ -233,21 +230,20 @@ isDarkMode
     {/* Form Card */}
     <form
       onSubmit={onCheck}
-      className={`border p-6 rounded-3xl shadow-lg backdrop-blur-sm ${isDarkMode ? 'bg-zinc-900/70 border-zinc-700' : 'bg-white border-pink-500'}`}
+      className={`border p-6 rounded-2xl shadow-lg backdrop-blur-sm ${isDarkMode ? 'bg-white/10 border-white/10' : 'bg-white/90 border-pink-400'}`}
     >
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-1 gap-6">
 
         {/* Passport */}
         <div>
-          <label className={`block text-xs font-medium mb-2 ${isDarkMode ? 'text-zinc-300' : 'text-zinc-600'}`}>
+          <label className="block text-sm font-medium mb-2 text-gray-700">
             Passport Country
           </label>
           <select
             value={passport}
             onChange={(e) => setPassport(e.target.value)}
             required
-            className={`w-full p-3 rounded-xl border ${isDarkMode ? 'bg-zinc-800/80 text-zinc-100 border-zinc-700' : 'bg-white text-zinc-900 border-zinc-300'}`}
-            style={{ appearance: "auto" }}
+            className={`w-full p-3 rounded-xl text-gray-900 border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-pink-400 transition-all duration-300 cursor-pointer`}
           >
             <option value="">Select Passport</option>
             {countries.map((c) => (
@@ -260,15 +256,15 @@ isDarkMode
 
         {/* Destination */}
         <div>
-          <label className={`block text-xs font-medium mb-2 ${isDarkMode ? 'text-zinc-300' : 'text-zinc-600'}`}>
+          <label className="block text-sm font-medium mb-2 text-gray-700">
             Destination Country
           </label>
           <select
             value={destination}
             onChange={(e) => setDestination(e.target.value)}
             required
-            className={`w-full p-3 rounded-xl border ${isDarkMode ? 'bg-zinc-800/80 text-zinc-100 border-zinc-700' : 'bg-white text-zinc-900 border-zinc-300'}`}
-            style={{ appearance: "auto" }}
+            className={`w-full p-2 rounded-md outline-none text-gray-900 border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-pink-400 transition-all duration-300 cursor-pointer`}
+           
           >
             <option value="">Select Destination</option>
             {destinationOptions.map((c) => (
@@ -280,27 +276,29 @@ isDarkMode
         </div>
 
         {/* Dates */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3">
           <div>
-            <label className={`block text-xs font-medium mb-2 ${isDarkMode ? 'text-zinc-300' : 'text-zinc-600'}`}>
+            <label className="block text-sm font-medium mb-2 text-gray-700">
               From (Optional)
             </label>
             <input
               type="date"
               value={dates.from}
               onChange={(e) => setDates((d) => ({ ...d, from: e.target.value }))}
-              className={`w-full p-2 rounded-xl border ${isDarkMode ? 'bg-zinc-800/80 text-zinc-100 border-zinc-400' : 'bg-white text-zinc-900 border-zinc-300'}`}
+              className={`w-full py-1.5 px-2 rounded-md text-gray-900 border  ${isDarkMode ? "bg-zinc-800 border-white/20"
+      : "bg-slate-100 border-black/20"} focus:outline-none  focus:ring-2 focus:ring-pink-400 transition duration-300 cursor-pointer`}
             />
           </div>
           <div>
-            <label className={`block text-xs font-medium mb-2 ${isDarkMode ? 'text-zinc-300' : 'text-zinc-600'}`}>
+            <label className="block text-sm font-medium mb-2 text-gray-700">
               To (Optional)
             </label>
             <input
               type="date"
               value={dates.to}
               onChange={(e) => setDates((d) => ({ ...d, to: e.target.value }))}
-              className={`w-full p-2 rounded-xl border ${isDarkMode ? 'bg-zinc-800/80 text-zinc-100 border-zinc-400' : 'bg-white text-zinc-900 border-zinc-300'}`}
+              className={`w-full py-1.5 px-2 rounded-md text-gray-900 border  ${isDarkMode ? "bg-zinc-800 border-white/20"
+      : "bg-slate-100 border-black/20"} focus:outline-none  focus:ring-2 focus:ring-pink-400 transition duration-300 cursor-pointer`}
             />
           </div>
         </div>
@@ -311,7 +309,7 @@ isDarkMode
         <button
           type="submit"
           disabled={loading}
-          className="w-full md:w-auto px-5 py-3 rounded-xl font-semibold bg-pink-600 hover:bg-pink-700 text-white disabled:opacity-60 transition"
+          className="w-full md:w-auto px-5 py-3 rounded-md font-semibold bg-pink-500 hover:bg-pink-700 text-white disabled:opacity-60 transition-colors duration-300 focus:outline-none focus:ring-pink-500 focus:ring-offset-2 cursor-pointer"
         >
           {loading ? "Checking..." : "Check Requirements"}
         </button>
@@ -321,7 +319,7 @@ isDarkMode
             setPassport(""); setDestination(""); setDates({ from: "", to: "" });
             setResult(null); setRestInfo(null); setAdvisory(null); setHealth(null); setVisaHint(null);
           }}
-          className={`w-full md:w-auto px-5 py-3 rounded-xl border font-medium ${isDarkMode ? 'border-zinc-500 text-zinc-100' : 'border-zinc-300 text-zinc-800'}`}
+          className={`w-full md:w-auto px-5 py-3 rounded-md border border-pink-400 font-medium ${isDarkMode ? 'bg-pink-500/10 hover:bg-pink-500/20 text-white' : 'bg-pink-100 hover:bg-pink-200 text-gray-900'} transition-colors duration-300focus:outline-none focus:ring-pink-500 focus:ring-offset-2 cursor-pointer`}
         >
           Reset
         </button>
@@ -331,59 +329,59 @@ isDarkMode
     {/* Result */}
     {result && (
       <div className="space-y-6">
-        <div className={`p-6 rounded-3xl border shadow-md ${isDarkMode ? 'bg-zinc-900/70 border-zinc-700' : 'bg-white border-zinc-200'}`}>
+        <div className={`p-6 rounded-2xl border transition-colors duration-300 shadow-md ${isDarkMode ? 'bg-white/10  border-white/20' : 'bg-white/90 border-pink-400'}`}>
           
           {/* Header */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-              <h2 className={`text-xl font-semibold ${isDarkMode ? 'text-zinc-100' : 'text-zinc-900'}`}>
+              <h2 className="text-xl font-semibold text-gray-900">
                 {result.passport.name} → {result.destination.name}
               </h2>
-              <p className={`text-sm mt-1 ${isDarkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
+              <p className={`text-sm mt-1 ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>
                 {dates.from && dates.to ? `Travel window: ${dates.from} → ${dates.to}` : "Travel window: not specified"}
               </p>
             </div>
-            <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold ${visaHint ? 'bg-amber-600 text-white' : 'bg-gray-500 text-white'}`}>
+            <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold ${visaHint ? 'bg-amber-600 text-white' : 'bg-gray-300 text-gray-800'} z-4`}>
               {visaHint || "Confirm with embassy"}
             </span>
           </div>
 
           {/* Details Cards */}
           <div className="mt-5 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className={`p-4 rounded-xl border ${isDarkMode ? 'bg-zinc-900/50 border-white/10' : 'bg-white/70 border-zinc-200'}`}>
-              <div className={`text-xs mb-1 ${isDarkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>Status</div>
-              <div className={`font-semibold ${isDarkMode ? 'text-zinc-100' : 'text-zinc-900'}`}>
+            <div className={`p-4 rounded-2xl border ${isDarkMode ? 'bg-white/10 border-white/20' : 'bg-white/70 border-gray-400'}`}>
+              <div className="text-sm mb-1 text-gray-700">Status</div>
+              <div className="font-semibold text-gray-900">
                 {visaHint ? visaHint.split("•")[0] : "Check embassy/official source"}
               </div>
             </div>
-            <div className={`p-4 rounded-xl border ${isDarkMode ? 'bg-zinc-900/50 border-white/10' : 'bg-white/70 border-zinc-200'}`}>
-              <div className={`text-xs mb-1 ${isDarkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>Currency</div>
-              <div className={`font-medium ${isDarkMode ? 'text-zinc-100' : 'text-zinc-900'}`}>{currencyDisplay}</div>
+            <div className={`p-4 rounded-2xl border ${isDarkMode ? 'bg-white/10 border-white/20' : 'bg-white/90 border-gray-400'}`}>
+              <div className="text-sm mb-1 text-gray-700">Currency</div>
+              <div className="font-mediumtext-gray-900">{currencyDisplay}</div>
             </div>
-            <div className={`p-4 rounded-xl border ${isDarkMode ? 'bg-zinc-900/50 border-white/10' : 'bg-white/70 border-zinc-200'}`}>
-              <div className={`text-xs mb-1 ${isDarkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>Languages</div>
-              <div className={`font-medium ${isDarkMode ? 'text-zinc-100' : 'text-zinc-900'}`}>{languageDisplay}</div>
+            <div className={`p-4 rounded-2xl border ${isDarkMode ? 'bg-white/10 border-white/20' : 'bg-white/90 border-gray-400'}`}>
+              <div className="text-sm mb-1 text-gray-700">Languages</div>
+              <div className="font-medium text-gray-900">{languageDisplay}</div>
             </div>
           </div>
 
           {/* Advisory & Health */}
           <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className={`p-4 rounded-xl border ${isDarkMode ? 'bg-zinc-900/50 border-white/10' : 'bg-white/60'}`}>
-              <div className={`font-semibold ${isDarkMode ? 'text-zinc-100' : 'text-zinc-900'}`}>Travel Advisory</div>
-              <div className={`mt-2 text-sm ${isDarkMode ? 'text-zinc-300' : 'text-zinc-700'}`}>{advisory?.message || "Not available from advisory API."}</div>
-              <div className={`mt-2 text-xs italic ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>{COMMON_TRAVEL_ADVISORY_NOTE}</div>
+            <div className={`p-4 rounded-2xl border border-pink-400 ${isDarkMode ? 'bg-white/10 ' : 'bg-white/90 '}`}>
+              <div className="font-semibold text-gray-900">Travel Advisory</div>
+              <div className="mt-2 text-sm text-gray-700">{advisory?.message || "Not available from advisory API."}</div>
+              <div className={`mt-2 text-xs font-medium italic ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>{COMMON_TRAVEL_ADVISORY_NOTE}</div>
             </div>
-            <div className={`p-4 rounded-xl border ${isDarkMode ? 'bg-zinc-900/50 border-white/10' : 'bg-white/60'}`}>
-              <div className={`font-semibold ${isDarkMode ? 'text-zinc-100' : 'text-zinc-900'}`}>Health & Vaccinations</div>
-              <div className={`mt-2 text-sm ${isDarkMode ? 'text-zinc-300' : 'text-zinc-700'}`}>
+            <div className={`p-4 rounded-2xl border border-pink-400 ${isDarkMode ? 'bg-white/10' : 'bg-white/90'}`}>
+              <div className="font-medium text-gray-900">Health & Vaccinations</div>
+              <div className={`mt-2 text-sm text-gray-700`}>
                 <div><strong>Recommended vaccines:</strong> {health?.vaccines?.length ? health.vaccines.join(", ") : "Not listed"}</div>
-                <div className="mt-2"><strong>Water safety:</strong> {health?.water?.short || "Not listed"}</div>
+                <div className="mt-2 text-gray-700"><strong>Water safety:</strong> {health?.water?.short || "Not listed"}</div>
               </div>
-              <div className={`mt-2 text-xs italic ${isDarkMode ? 'text-green-400' : 'text-green-600'}`}>{COMMON_HEALTH_NOTE}</div>
+              <div className={`mt-2 text-xs font-medium italic ${isDarkMode ? 'text-green-400' : 'text-green-600'}`}>{COMMON_HEALTH_NOTE}</div>
             </div>
           </div>
 
-          <p className={`mt-4 text-xs ${isDarkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
+          <p className="mt-4 text-xs font-medium text-gray-700 italic">
             ⚠️ Visa policies change frequently. Always verify with official government / embassy sources before travel.
           </p>
         </div>
