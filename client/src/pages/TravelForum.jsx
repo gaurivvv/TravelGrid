@@ -973,7 +973,7 @@ const fetchForumTopics = async () => {
                       {replyPostId === topic.id ? (
                         <button
                           onClick={() => setReplyPostId(null)}
-                          className=" mt-3 border rounded-lg text-black hover:cursor-pointer hover:scale-105 w-fit p-3 bg-gradient-to-l from-pink-600 to-purple-400"
+                          className=" mt-3 border rounded-lg text-white hover:cursor-pointer hover:scale-105 w-fit p-3 bg-gradient-to-l from-pink-600 to-purple-400"
                         >
                           Close
                         </button>
@@ -1018,7 +1018,7 @@ const fetchForumTopics = async () => {
                             </div>
                             <button
                               type="submit"
-                              className=" block mx-auto border rounded-lg text-black hover:cursor-pointer hover:scale-105 w-fit p-3 bg-gradient-to-l from-pink-600 to-purple-400"
+                              className=" block mx-auto border rounded-lg text-white hover:cursor-pointer hover:scale-105 w-fit p-3 bg-gradient-to-l from-pink-600 to-purple-400"
                             >
                               Submit
                             </button>
