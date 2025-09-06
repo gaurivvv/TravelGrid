@@ -275,18 +275,18 @@ const MusicPage = () => {
     return (
         <div className={`min-h-screen`}>
             {/* Hero Section */}
-            <div className={`relative overflow-hidden`}>
-                <div className="absolute inset-0 bg-pink-100"></div>
+            <div className={`relative overflow-hidden ${isDarkMode ? 'bg-gray-900' : 'bg-pink-100'}`}>
+                <div className={`absolute inset-0 ${isDarkMode ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' : 'bg-pink-100'}`}></div>
                 <div className="relative max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8 text-center">
                     <div className="flex justify-center mb-8">
                         <div className={`p-4 rounded-full ${isDarkMode ? 'bg-pink-800' : 'bg-pink-500'} backdrop-blur-sm`}>
                             <Music className="w-16 h-16 text-pink-200" />
                         </div>
                     </div>
-                    <h1 className="text-5xl font-bold mb-6 bg-gray-800 bg-clip-text text-transparent">
+                    <h1 className={`text-5xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'bg-gray-800 bg-clip-text text-transparent'}`}>
                         Travel <span className='text-pink-700'>Music Hub</span>
                     </h1>
-                    <p className="text-xl mb-8 max-w-3xl mx-auto text-pink-900/70">
+                    <p className={`text-xl mb-8 max-w-3xl mx-auto ${isDarkMode ? 'text-gray-300' : 'text-pink-900/70'}`}>
                         Discover and share music for every travel mood. From romantic sunsets to adventurous hikes,
                         find the perfect soundtrack for your journey.
                     </p>
