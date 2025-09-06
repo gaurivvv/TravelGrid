@@ -57,18 +57,18 @@ Input:
   return (
     <div className={`min-h-screen flex flex-col py-24 px-4`}>
       <div className="flex-grow flex items-center justify-center">
-        <div className={`w-full max-w-3xl backdrop-blur-sm text-white p-10 rounded-2xl shadow-2xl border ${
+        <div className={`w-full max-w-3xl backdrop-blur-sm p-10 rounded-2xl shadow-2xl border ${
           isDarkMode 
-            ? 'bg-black border-pink-500' 
+            ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border-pink-500 text-white' 
             : 'bg-white/90 border-pink-200 text-gray-900'
         }`}>
           <h1 className={`text-3xl font-semibold mb-2 flex items-center gap-2 ${
-            isDarkMode ? 'text-white' : 'text-gray-900'
+            isDarkMode ? 'text-pink-400' : 'text-gray-900'
           }`}>
             <span role="img" aria-label="plane">✈️</span> AI Hotel & Flight Review Analyzer
           </h1>
           <p className={`mb-6 ${
-            isDarkMode ? 'text-pink-200' : 'text-gray-600'
+            isDarkMode ? 'text-gray-300' : 'text-gray-600'
           }`}>
             Enter a hotel or flight name with brief details to generate a summarized analysis.
           </p>
@@ -76,7 +76,7 @@ Input:
           <textarea
             className={`w-full p-4 rounded-lg text-base focus:outline-none h-32 resize-none shadow-inner placeholder-gray-500 ${
               isDarkMode 
-                ? 'bg-gray-700/50 border-1 text-white focus:border-pink-400 focus:ring-1' 
+                ? 'bg-gray-700/50 border-gray-600 text-white focus:border-pink-400 focus:ring-1' 
                 : 'bg-gray-100 text-gray-900'
             }`}
             placeholder="e.g. Taj Hotel New Delhi - luxury hotel known for its service and ambience"
@@ -97,7 +97,7 @@ Input:
           {summary && (
             <div className={`mt-8 p-6 rounded-xl whitespace-pre-wrap font-sans shadow-md leading-relaxed border ${
               isDarkMode 
-                ? 'bg-[#0f1220] text-white border-pink-400' 
+                ? 'bg-gradient-to-br from-gray-800 to-gray-900 text-white border-pink-500' 
                 : 'bg-gray-50 text-gray-800 border-pink-200'
             }`}>
               {summary}

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom'; // Add this import
-import {   MapPin, Star, Calendar, Info, Sparkles, Images } from 'lucide-react';
+import {   MapPin, Star, Calendar, Info, Sparkles, Images, Heart } from 'lucide-react';
 import Navbar from '../components/Custom/Navbar';
 import ARExperience from "../components/ARExperience";
+import { useWishlist } from '../context/WishlistContext';
+import toast from 'react-hot-toast';
 
 const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
   const { locationId } = useParams(); // Get locationId from URL parameters
@@ -12,6 +14,7 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
   const navigate=useNavigate()
   const [expandDesc,setExpandDesc]=useState(false)
   const [arMode, setArMode] = useState(false);
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
 
   // Comprehensive location data with natural descriptions
   const locationData = {
@@ -544,6 +547,32 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
     }
   };
 
+  const handleWishlistToggle = () => {
+    if (!location) return;
+    
+    const locationData = {
+      id: location.id,
+      name: location.name,
+      country: location.country,
+      region: location.region,
+      rating: location.rating,
+      reviewCount: location.reviewCount,
+      priceRange: location.priceRange,
+      bestTime: location.bestTime,
+      shortDescription: location.shortDescription,
+      image: location.image,
+      coordinates: location.coordinates
+    };
+
+    if (isInWishlist(location.id)) {
+      removeFromWishlist(location.id);
+      toast.success('Removed from wishlist');
+    } else {
+      addToWishlist(locationData);
+      toast.success('Added to wishlist');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar lightBackground />
@@ -582,8 +611,18 @@ const LocationDetail = () => { // Remove locationId prop, we'll get it from URL
             </div>
             {/* Add book now and Add to wishlist button */}
             <div className="flex items-center space-x-6 text-gray-700">
-            <button className="flex mx-4 items-center mt-4 space-x-2 px-6 py-2 rounded-md whitespace-nowrap transition-all duration-300 font-medium bg-pink-50 text-black cursor-pointer" onClick={()=>navigate('/wishlist')}>Add to wishlist</button>
-          <button className="flex mx-4 items-center mt-4 space-x-2 px-6 py-2 rounded-md whitespace-nowrap transition-all duration-300 font-medium bg-pink-500 text-white cursor-pointer" onClick={()=> navigate(`/package/${locationId}`)}>Book now</button>
+              <button 
+                className={`flex mx-4 items-center mt-4 space-x-2 px-6 py-2 rounded-md whitespace-nowrap transition-all duration-300 font-medium cursor-pointer ${
+                  isInWishlist(location.id) 
+                    ? 'bg-red-500 text-white' 
+                    : 'bg-pink-50 text-black'
+                }`} 
+                onClick={handleWishlistToggle}
+              >
+                <Heart className={`w-4 h-4 ${isInWishlist(location.id) ? 'fill-current' : ''}`} />
+                <span>{isInWishlist(location.id) ? 'Remove from wishlist' : 'Add to wishlist'}</span>
+              </button>
+              <button className="flex mx-4 items-center mt-4 space-x-2 px-6 py-2 rounded-md whitespace-nowrap transition-all duration-300 font-medium bg-pink-500 text-white cursor-pointer" onClick={()=> navigate(`/package/${locationId}`)}>Book now</button>
             <button className="flex mx-4 items-center mt-4 space-x-2 px-6 py-2 rounded-md whitespace-nowrap transition-all duration-300 font-medium bg-purple-600 text-white cursor-pointer" onClick={()=> setArMode(true)}>AR Mode</button>
             </div>
            
