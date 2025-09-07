@@ -124,6 +124,13 @@ function About() {
       icon: "📱",
       path: '/'
     },
+    {
+      title: "Trending Spots",
+      description:
+        "Find the places going viral right now—from hidden gems to must-see hotspots trending across the internet.",
+      icon: "🏝️",
+      path: '/trending-spots'
+    },
 
   ];
 
