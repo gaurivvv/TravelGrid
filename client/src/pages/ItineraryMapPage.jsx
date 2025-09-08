@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { useMapContext } from "../context/MapContext";
 import ItineraryMap from "../components/Map/ItineraryMap";
+import { X } from "lucide-react";
 
 const ItineraryMapPage = () => {
   const { itineraryStops, setStops } = useMapContext();
   const [formData, setFormData] = useState({ from: "", to: "" });
   const { isDarkMode } = useTheme();
-
+  //state to show or hide the map
+  const [showMap,setShowMap]=useState(false);
   const geocodeLocation = async (place) => {
     try {
       const res = await fetch(
@@ -38,12 +40,13 @@ const ItineraryMapPage = () => {
 
     if (start && end) {
       setStops([start, end]); // Replace all stops at once
+      setShowMap(true); //show the map only when the valid start and end are given
     }
   };
 
   return (
     <div
-      className={`min-h-screen pt-24 px-6 flex flex-col items-center justify-start relative ${
+      className={`min-h-screen pt-24 px-6 flex flex-col items-center justify-start relative mt-6 ${
         isDarkMode ? "bg-gradient-to-br from-gray-900 via-gray-800 to-black" : "bg-gradient-to-br from-pink-50 via-rose-100 to-pink-200"
       }`}
     >
@@ -54,7 +57,7 @@ const ItineraryMapPage = () => {
 
       {/* Page Title */}
       <h1
-        className={`text-4xl font-extrabold mb-6 text-center relative z-10 ${
+        className={`text-4xl font-extrabold mb-8 text-center relative z-10 ${
           isDarkMode ? "bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-500" : "bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-rose-500"
         }`}
       >
@@ -94,7 +97,7 @@ const ItineraryMapPage = () => {
         />
         <button
           type="submit"
-          className={`w-full py-3 rounded-xl font-semibold shadow-md transform transition-all hover:scale-[1.02] ${
+          className={`w-full py-3 rounded-xl font-semibold shadow-md transform transition-all duration-300 hover:scale-[1.02] cursor-pointer ${
             isDarkMode
               ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:opacity-90"
               : "bg-gradient-to-r from-pink-500 to-rose-600 text-white hover:opacity-95"
@@ -105,15 +108,18 @@ const ItineraryMapPage = () => {
       </form>
 
       {/* Map */}
-      <div
-        className={`relative z-10 rounded-2xl overflow-hidden shadow-2xl w-full max-w-4xl h-[500px] ${
+      {showMap && <div
+        className={`relative z-10 rounded-2xl overflow-hidden shadow-2xl w-full max-w-4xl h-[500px] mb-6 ${
           isDarkMode
             ? "border border-gray-700"
-            : "border border-pink-300"
+            : "border border-pink-400"
         }`}
       >
+        {/* Close button */}
+        <button className={`absolute top-2 right-2.5 p-2 text-gray-900 rounded-full z-20 transition-all duration-300 ease-in-out cursor-pointer hover:shadow-xl hover:backdrop-blur-xl ${isDarkMode? "hover:bg-white/20" :"  hover:bg-black/20"}`}  aria-label="close Map" onClick={()=>setShowMap(false)}><X size={24} className="w-5 h-5"/></button>
+
         <ItineraryMap stops={itineraryStops} />
-      </div>
+      </div>}
     </div>
   );
 };
