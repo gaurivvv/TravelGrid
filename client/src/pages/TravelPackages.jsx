@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { packages } from "../data/PackageData";
 import Navbar from "../components/Custom/Navbar";
@@ -43,6 +43,7 @@ const TravelPackages = () => {
   const [selectedSeason, setSelectedSeason] = useState("All");
   const [selectedDuration, setSelectedDuration] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+  const [debounceSearch, setDebounceSearch] = useState("")
 
   const { isDarkMode } = useTheme();
   const navigate = useNavigate();
@@ -70,8 +71,8 @@ const TravelPackages = () => {
       const matchPrice = parsePrice(pkg.price) <= maxPrice;
 
       let matchSearch = true;
-      if (searchTerm) {
-        const lowerSearch = searchTerm.toLowerCase();
+      if (debounceSearch) {
+        const lowerSearch = debounceSearch.toLowerCase();
         const searchFields = [
           pkg.title,
           pkg.country,
@@ -103,8 +104,21 @@ const TravelPackages = () => {
     selectedDuration,
     minRating,
     maxPrice,
-    searchTerm,
+    debounceSearch,
   ]);
+  // debouncing logic
+  useEffect(()=> {
+    const delay = setTimeout(()=> {
+      setDebounceSearch(searchTerm)
+    },500);
+    return () => clearTimeout(delay)   // cleanup
+  },[searchTerm]);
+
+  useEffect(() => {
+  if (debounceSearch.trim() !== "") {
+    console.log("With debounce", debounceSearch);   // checking it works or not
+  }
+}, [debounceSearch]);
 
   const handlePriceChange = (e) => {
     const val = e.target.value;
