@@ -7,6 +7,8 @@ import { Heart as HeartFilled } from 'lucide-react';
 import { FaSquareWhatsapp, FaSquareXTwitter, FaFacebook } from "react-icons/fa6";
 import { SiGmail } from "react-icons/si";
 import { Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material'
+import { useWishlist } from '@/context/WishlistContext';
+import toast from 'react-hot-toast';
 
 const TrendingSpots = () => {
   const [spots, setSpots] = useState([]);
@@ -15,9 +17,12 @@ const TrendingSpots = () => {
   const [visibleCount, setVisibleCount] = useState(9);
   const [favoriteSpots, setFavoriteSpots] = useState([]);
   const [open, setOpen] = useState(false);
-
+  const { wishlist, addToWishlist } = useWishlist();
+  
   const navigate = useNavigate();
   const { isDarkMode } = useTheme();
+
+  
 
   const mockTrendingSpots = [
     {
@@ -280,6 +285,16 @@ const TrendingSpots = () => {
         : [...prev, spotId]
     );
   };
+  const AddToWishListHandler = (spot) => {
+  const inWishlist = wishlist?.some((p) => p.id === spot.id);
+
+  if (!inWishlist) {
+    addToWishlist(spot);   // ✅ save the whole spot object
+    toast.success("Added to wishlist!");
+  } else {
+    toast("Already in your wishlist");
+  }
+};
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -470,7 +485,7 @@ const TrendingSpots = () => {
                   {/* Action Buttons */}
                   <div className="absolute top-3 right-3 flex space-x-2">
                     <button
-                      onClick={() => toggleFavorite(spot.id)}
+                      onClick={() => {toggleFavorite(spot.id); AddToWishListHandler(spot)}}
                       className={`p-2 rounded-full transition-all duration-300 hover:scale-110 ${isDarkMode ? 'bg-black/50 text-white' : 'bg-white/80 text-gray-700'
                         }`}
                     >
