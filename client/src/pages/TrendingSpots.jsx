@@ -4,6 +4,9 @@ import Navbar from '../components/Custom/Navbar';
 import { useTheme } from '../context/ThemeContext';
 import { useNavigate } from 'react-router-dom';
 import { Heart as HeartFilled } from 'lucide-react';
+import { FaSquareWhatsapp, FaSquareXTwitter, FaFacebook } from "react-icons/fa6";
+import { SiGmail } from "react-icons/si";
+import { Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material'
 
 const TrendingSpots = () => {
   const [spots, setSpots] = useState([]);
@@ -11,7 +14,8 @@ const TrendingSpots = () => {
   const [loading, setLoading] = useState(true);
   const [visibleCount, setVisibleCount] = useState(9);
   const [favoriteSpots, setFavoriteSpots] = useState([]);
-  
+  const [open, setOpen] = useState(false);
+
   const navigate = useNavigate();
   const { isDarkMode } = useTheme();
 
@@ -277,6 +281,9 @@ const TrendingSpots = () => {
     );
   };
 
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const filteredSpots = filter === 'all'
     ? spots
     : spots.filter(spot => spot.category === filter);
@@ -289,6 +296,56 @@ const TrendingSpots = () => {
     { key: 'city', label: 'City', icon: Users },
     { key: 'adventure', label: 'Adventure', icon: Heart }
   ];
+
+  // option for social media sharing
+
+  const shareUrl = window.location.href; // generate url of current page
+  const options = [
+    {
+      icon: <FaSquareWhatsapp
+        color="green"
+        size={50}
+        cursor={'pointer'}
+        onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent(shareUrl)}`)}
+      />,
+      text: "WhatsApp"
+    },
+    {
+      icon: <FaFacebook
+        color="blue"
+        size={50}
+        cursor={'pointer'}
+        onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+          shareUrl
+        )}`, "_blank")}
+      />,
+      text: "Facebook"
+    },
+    {
+      icon: <FaSquareXTwitter
+        size={50}
+        cursor={'pointer'}
+        color="black"
+        onClick={() => window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(
+          shareUrl
+        )}`)}
+      />,
+      text: "Twitter"
+    },
+    {
+      icon: <SiGmail
+        size={50}
+        cursor={'pointer'}
+        color="red"
+        onClick={() => window.open(`mailto:?subject=${encodeURIComponent(
+          "Check out this food on Foodie!"
+        )}&body=${encodeURIComponent(
+          `I found this food item, thought you might like it: ${shareUrl}`
+        )}`)}
+      />,
+      text: "Mail"
+    }
+  ]
 
   const handleExploreLocation = (locationId) => {
     navigate(`/location/${locationId}`);
@@ -342,13 +399,12 @@ const TrendingSpots = () => {
               <button
                 key={category.key}
                 onClick={() => setFilter(category.key)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                  filter === category.key
-                    ? 'bg-blue-500 text-white'
-                    : isDarkMode
+                className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${filter === category.key
+                  ? 'bg-blue-500 text-white'
+                  : isDarkMode
                     ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
                     : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }`}
+                  }`}
               >
                 <category.icon className="h-4 w-4" />
                 <span>{category.label}</span>
@@ -388,11 +444,10 @@ const TrendingSpots = () => {
             {filteredSpots.slice(0, visibleCount).map((spot, index) => (
               <div
                 key={spot.id}
-                className={`backdrop-blur-md rounded-2xl border transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 overflow-hidden h-full ${
-                  isDarkMode 
-                    ? 'bg-black/20 border-white/20 hover:border-white/40' 
-                    : 'bg-white/20 border-gray-200/50 hover:border-gray-300/70'
-                }`}
+                className={`backdrop-blur-md rounded-2xl border transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20 overflow-hidden h-full ${isDarkMode
+                  ? 'bg-black/20 border-white/20 hover:border-white/40'
+                  : 'bg-white/20 border-gray-200/50 hover:border-gray-300/70'
+                  }`}
               >
                 {/* Image Container */}
                 <div className="relative h-48 md:h-64 overflow-hidden">
@@ -403,7 +458,7 @@ const TrendingSpots = () => {
                     className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                  
+
                   {/* Trending Badge */}
                   <div className="absolute top-3 left-3">
                     <div className="px-2 py-1 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white text-sm font-semibold flex items-center space-x-1">
@@ -416,9 +471,8 @@ const TrendingSpots = () => {
                   <div className="absolute top-3 right-3 flex space-x-2">
                     <button
                       onClick={() => toggleFavorite(spot.id)}
-                      className={`p-2 rounded-full transition-all duration-300 hover:scale-110 ${
-                        isDarkMode ? 'bg-black/50 text-white' : 'bg-white/80 text-gray-700'
-                      }`}
+                      className={`p-2 rounded-full transition-all duration-300 hover:scale-110 ${isDarkMode ? 'bg-black/50 text-white' : 'bg-white/80 text-gray-700'
+                        }`}
                     >
                       {favoriteSpots.includes(spot.id) ? (
                         <HeartFilled className="h-4 w-4 text-red-500" />
@@ -426,11 +480,38 @@ const TrendingSpots = () => {
                         <Heart className="h-4 w-4" />
                       )}
                     </button>
-                    <button className={`p-2 rounded-full transition-all duration-300 hover:scale-110 ${
-                      isDarkMode ? 'bg-black/50 text-white' : 'bg-white/80 text-gray-700'
-                    }`}>
+                    <button className={`p-2 rounded-full transition-all duration-300 hover:scale-110 ${isDarkMode ? 'bg-black/50 text-white' : 'bg-white/80 text-gray-700'
+                      }`}
+                      onClick={handleOpen}
+                    >
                       <Share2 className="h-4 w-4" />
                     </button>
+                    <Dialog
+                      open={open}
+                      onClose={handleClose}
+                      slotProps={{
+                        backdrop: {
+                          style: { backgroundColor: "transparent" }, // no black overlay
+                        },
+                      }}
+
+                    >
+                      <DialogTitle align="center">Share this Spot</DialogTitle>
+                      <DialogContent>
+                        <div style={{ display: "flex", alignItems: "center", gap: "1vmax" }}>
+                          {
+                            options.map((item, index) => {
+                              return (
+                                <div key={index} style={{ display: "flex", flexDirection: "column", alignItems: "center", }}>
+                                  <IconButton>{item.icon}</IconButton>
+                                  {item.text}
+                                </div>
+                              )
+                            })
+                          }
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   </div>
 
                   {/* Growth Badge */}
@@ -463,11 +544,10 @@ const TrendingSpots = () => {
                       </span>
                     </div>
                     <div
-                      className={`px-2 py-1 rounded-full text-sm font-semibold ${
-                        spot.price_range === '$' ? 'bg-green-100 text-green-800' :
+                      className={`px-2 py-1 rounded-full text-sm font-semibold ${spot.price_range === '$' ? 'bg-green-100 text-green-800' :
                         spot.price_range === '$$' ? 'bg-yellow-100 text-yellow-800' :
-                        'bg-red-100 text-red-800'
-                      }`}
+                          'bg-red-100 text-red-800'
+                        }`}
                     >
                       {spot.price_range}
                     </div>
@@ -493,21 +573,19 @@ const TrendingSpots = () => {
                       {spot.highlights.slice(0, 2).map((highlight, idx) => (
                         <span
                           key={idx}
-                          className={`px-2 py-1 rounded-full text-xs font-medium ${
-                            isDarkMode 
-                              ? 'bg-pink-500/20 text-pink-300 border border-pink-500/30' 
-                              : 'bg-pink-100 text-pink-700'
-                          }`}
+                          className={`px-2 py-1 rounded-full text-xs font-medium ${isDarkMode
+                            ? 'bg-pink-500/20 text-pink-300 border border-pink-500/30'
+                            : 'bg-pink-100 text-pink-700'
+                            }`}
                         >
                           {highlight}
                         </span>
                       ))}
                       {spot.highlights.length > 2 && (
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          isDarkMode 
-                            ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' 
-                            : 'bg-purple-100 text-purple-700'
-                        }`}>
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${isDarkMode
+                          ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
+                          : 'bg-purple-100 text-purple-700'
+                          }`}>
                           +{spot.highlights.length - 2} more
                         </span>
                       )}
