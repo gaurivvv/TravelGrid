@@ -338,9 +338,9 @@ const TrendingSpots = () => {
         cursor={'pointer'}
         color="red"
         onClick={() => window.open(`mailto:?subject=${encodeURIComponent(
-          "Check out this food on Foodie!"
+          "Check out this Trending Spot!"
         )}&body=${encodeURIComponent(
-          `I found this food item, thought you might like it: ${shareUrl}`
+          `I found this spot, thought you might like it: ${shareUrl}`
         )}`)}
       />,
       text: "Mail"
