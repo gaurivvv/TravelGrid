@@ -1,8 +1,9 @@
-const express = require("express");
+import express from 'express'
+import validator from 'validator'
+import { upload } from '../middleware/uploadMiddlware.js'
+import {User} from '../models/user.js'// ensure correct path
+
 const router = express.Router();
-const validator = require('validator');
-const upload = require('../middleware/uploadMiddlware');
-const User = require("../models/user"); // ensure correct path
 
 // Get user by ID
 router.get("/:id", async (req, res) => {
@@ -55,4 +56,4 @@ router.put("/:id", upload.single("picture"), async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router

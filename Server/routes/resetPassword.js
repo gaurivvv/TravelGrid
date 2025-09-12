@@ -1,9 +1,9 @@
-const { resetPasswordToken, changePassword } = require("../controller/forgotPasswordController")
-const { route } = require("./search")
+import { changePassword, resetPasswordToken } from '../controller/forgotPasswordController.js'
+import express from 'express'
 
-const router = require("express").Router()
+const router = express.Router()
 
 router.post('/reset-password-token',resetPasswordToken)
 router.post('/reset-password',changePassword)
 
-module.exports = router;
+export default router

@@ -1,7 +1,7 @@
-const User = require('../models/user');
-const { sendEmail } = require('../utils/emailService');
-const crypto = require('crypto');
-const { asyncHandler } = require("../utils/asyncHandler");
+import  {User} from '../models/user.js'
+import {sendEmail} from '../utils/emailService.js'
+import crypto from 'crypto'
+import { asyncHandler } from '../utils/asyncHandler.js'
 
 // Generate 6-digit verification code
 const generateVerificationCode = () => {
@@ -9,7 +9,7 @@ const generateVerificationCode = () => {
 };
 
 // Send verification email
-const sendVerificationEmail = asyncHandler(async (req, res) => {
+export const sendVerificationEmail = asyncHandler(async (req, res) => {
   const { email } = req.body;
 
   if (!email) {
@@ -82,7 +82,7 @@ const sendVerificationEmail = asyncHandler(async (req, res) => {
 });
 
 // Verify email with code
-const verifyEmailWithCode = asyncHandler(async (req, res) => {
+export const verifyEmailWithCode = asyncHandler(async (req, res) => {
   const { email, code } = req.body;
 
   if (!email || !code) {
@@ -127,7 +127,7 @@ const verifyEmailWithCode = asyncHandler(async (req, res) => {
 });
 
 // Resend verification code
-const resendVerificationCode = asyncHandler(async (req, res) => {
+export const resendVerificationCode = asyncHandler(async (req, res) => {
   const { email } = req.body;
 
   if (!email) {
@@ -194,7 +194,7 @@ const resendVerificationCode = asyncHandler(async (req, res) => {
 });
 
 // Check verification status
-const checkVerificationStatus = asyncHandler(async (req, res) => {
+export const checkVerificationStatus = asyncHandler(async (req, res) => {
   const { email } = req.query;
 
   if (!email) {
@@ -224,10 +224,3 @@ const checkVerificationStatus = asyncHandler(async (req, res) => {
     isVerified: user.isEmailVerified || false
   });
 });
-
-module.exports = {
-  sendVerificationEmail,
-  verifyEmailWithCode,
-  resendVerificationCode,
-  checkVerificationStatus
-};

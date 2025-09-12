@@ -1,8 +1,8 @@
-const Booking = require("../models/booking");
-const User = require("../models/user");
-const { asyncHandler } = require("../utils/asyncHandler");
+import Booking from '../models/booking.js'
+import  {User} from '../models/user.js'
+import { asyncHandler } from '../utils/asyncHandler.js'
 
-exports.addBooking = asyncHandler(async (req, res) => {
+export const addBooking = asyncHandler(async (req, res) => {
   const { userId } = req.user;
   const { startingDate, endingDate, noOfRooms, noOfPeople, status, destination } = req.body;
 
@@ -45,7 +45,7 @@ exports.addBooking = asyncHandler(async (req, res) => {
   });
 });
 
-exports.getAllBooking = asyncHandler(async (req, res) => {
+export const getAllBooking = asyncHandler(async (req, res) => {
   const { userId } = req.user;
 
   if (!userId) {
@@ -71,7 +71,7 @@ exports.getAllBooking = asyncHandler(async (req, res) => {
   });
 });
 
-exports.getBooking = asyncHandler(async (req, res) => {
+export const getBooking = asyncHandler(async (req, res) => {
   const { bookingId } = req.params;
   const { userId } = req.user;
 
@@ -104,7 +104,7 @@ exports.getBooking = asyncHandler(async (req, res) => {
   });
 });
 
-exports.editBooking = asyncHandler(async (req, res) => {
+export const editBooking = asyncHandler(async (req, res) => {
   const { bookingId } = req.params;
   const { userId } = req.user;
 
@@ -158,7 +158,7 @@ exports.editBooking = asyncHandler(async (req, res) => {
   });
 });
 
-exports.deleteBooking = asyncHandler(async (req, res) => {
+export const deleteBooking = asyncHandler(async (req, res) => {
   const userId = req.user;
 
   if (!userId) {
@@ -201,7 +201,7 @@ exports.deleteBooking = asyncHandler(async (req, res) => {
   });
 });
 
-exports.rebookBooking = asyncHandler(async (req, res) => {
+export const rebookBooking = asyncHandler(async (req, res) => {
   const { bookingId } = req.params;
   const { userId } = req.user;
 
