@@ -1,13 +1,8 @@
-const express = require('express');
+import express from 'express'
+import { getCurrentUser, googleAuth, loginUser, logoutUser, registerUser } from '../controller/authController.js'
+import {verifyJWT} from '../middleware/auth.js'
+
 const router = express.Router();
-const {
-  registerUser,
-  loginUser,
-  logoutUser,
-  googleAuth,
-  getCurrentUser, // /me route handler
-} = require('../controller/authController');
-const { verifyJWT } = require('../middleware/auth');
 
 router.post('/register', registerUser);
 router.post('/login', loginUser);
@@ -16,4 +11,4 @@ router.post('/google', googleAuth);
 // @access  Private (protected route)
 router.get('/me', verifyJWT, getCurrentUser);
 
-module.exports = router;
+export default router

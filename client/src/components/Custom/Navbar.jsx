@@ -161,15 +161,16 @@ const Navbar = () => {
                 <div className="relative group" key={link.name}>
                   <button
                     aria-label={link.name}
-                    className={`py-1.5 px-2 text-sm font-medium rounded-sm transition-all  duration-300 flex items-center gap-1 truncate max-w-fit ${
+                    className={`py-1.5 px-2 text-sm font-medium rounded-sm transition-all  duration-300 flex items-center gap-1 truncate max-w-fit cursor-pointer ${
                       activeParentTab === link.name
                         ? "bg-gradient-to-r from-pink-700 to-pink-500 shadow-md text-white"
                         : `hover:text-pink-500 hover:shadow-sm ${
                             isDarkMode ? "text-gray-200" : "text-gray-900"
                           }`
                     }`}
-                  >
-                    {link.name} <ChevronDown className="text-neutral-300 w-3.5 h-3.5" />
+                  >  
+                  {/* Chevron rotate on hover */}
+                    {link.name} <ChevronDown className={`w-4 h-4 transform transition-transform duration-400 group-hover:rotate-180  font-bold ${activeParentTab===link.name? "text-white": 'text-gray-900'}`} />
                   </button>
                   {/* Dropdown menu */}
                   <div

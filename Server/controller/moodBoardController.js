@@ -1,9 +1,9 @@
-const MoodBoard = require('../models/moodBoard');
-const User = require('../models/user');
-const { asyncHandler } = require("../utils/asyncHandler");
+import {MoodBoard} from '../models/moodBoard.js'
+import {User} from '../models/user.js'
+import { asyncHandler } from '../utils/asyncHandler.js'
 
 // Create a new mood board
-const createMoodBoard = asyncHandler(async (req, res) => {
+export const createMoodBoard = asyncHandler(async (req, res) => {
   const { title, description, colorPalette, themes, activities, accommodations, dining, vibe } = req.body;
 
   const newMoodBoard = new MoodBoard({
@@ -38,7 +38,7 @@ const createMoodBoard = asyncHandler(async (req, res) => {
 });
 
 // Get all mood boards for a user (owned + collaborated)
-const getUserMoodBoards = asyncHandler(async (req, res) => {
+export const getUserMoodBoards = asyncHandler(async (req, res) => {
   const userId = req.user.id;
 
   const boards = await MoodBoard.find({
@@ -58,7 +58,7 @@ const getUserMoodBoards = asyncHandler(async (req, res) => {
 });
 
 // Get a specific mood board by ID
-const getMoodBoardById = asyncHandler(async (req, res) => {
+export const getMoodBoardById = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const userId = req.user.id;
 
@@ -87,7 +87,7 @@ const getMoodBoardById = asyncHandler(async (req, res) => {
 });
 
 // Update mood board elements and properties
-const updateMoodBoard = asyncHandler(async (req, res) => {
+export const updateMoodBoard = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const { elements, title, description, colorPalette, themes, activities, accommodations, dining, vibe, settings, metadata } = req.body;
   const userId = req.user.id;
@@ -129,7 +129,7 @@ const updateMoodBoard = asyncHandler(async (req, res) => {
 });
 
 // Delete a mood board
-const deleteMoodBoard = asyncHandler(async (req, res) => {
+export const deleteMoodBoard = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const userId = req.user.id;
 
@@ -151,7 +151,7 @@ const deleteMoodBoard = asyncHandler(async (req, res) => {
 });
 
 // Add collaborator to mood board
-const addCollaborator = asyncHandler(async (req, res) => {
+export const addCollaborator = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const { email, role = 'viewer' } = req.body;
   const userId = req.user.id;
@@ -205,7 +205,7 @@ const addCollaborator = asyncHandler(async (req, res) => {
 });
 
 // Update collaborator status
-const updateCollaboratorStatus = asyncHandler(async (req, res) => {
+export const updateCollaboratorStatus = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
   const userId = req.user.id;
@@ -244,7 +244,7 @@ const updateCollaboratorStatus = asyncHandler(async (req, res) => {
 });
 
 // Remove collaborator
-const removeCollaborator = asyncHandler(async (req, res) => {
+export const removeCollaborator = asyncHandler(async (req, res) => {
   const { id, collaboratorId } = req.params;
   const userId = req.user.id;
 
@@ -280,7 +280,7 @@ const removeCollaborator = asyncHandler(async (req, res) => {
 });
 
 // Add message
-const addMessage = asyncHandler(async (req, res) => {
+export const addMessage = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const { text, type = 'text' } = req.body;
   const userId = req.user.id;
@@ -316,7 +316,7 @@ const addMessage = asyncHandler(async (req, res) => {
 });
 
 // Get public mood boards
-const getPublicMoodBoards = asyncHandler(async (req, res) => {
+export const getPublicMoodBoards = asyncHandler(async (req, res) => {
   const boards = await MoodBoard.find({ isPublic: true })
     .populate('owner', 'name email picture')
     .sort({ createdAt: -1 })
@@ -327,16 +327,3 @@ const getPublicMoodBoards = asyncHandler(async (req, res) => {
     data: boards
   });
 });
-
-module.exports = {
-  createMoodBoard,
-  getUserMoodBoards,
-  getMoodBoardById,
-  updateMoodBoard,
-  deleteMoodBoard,
-  addCollaborator,
-  updateCollaboratorStatus,
-  removeCollaborator,
-  addMessage,
-  getPublicMoodBoards
-};

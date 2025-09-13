@@ -1,5 +1,5 @@
-const multer = require('multer');
-const path = require('path');
+import multer from 'multer'
+import path from 'path'
 
 const storage = multer.diskStorage({
   destination: '../client/public/uploads/audio/',
@@ -34,12 +34,10 @@ const fileFilter = (req, file, cb) => {
   cb(new Error('Only audio files (MP3, WAV, AAC, OGG, M4A, FLAC) are allowed'));
 };
 
-const audioUpload = multer({
+export const audioUpload = multer({
   storage,
   fileFilter,
   limits: {
     fileSize: 50 * 1024 * 1024 // 50MB limit for audio files
   }
 });
-
-module.exports = audioUpload;
