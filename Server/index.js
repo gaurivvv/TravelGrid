@@ -39,6 +39,7 @@ connectDB();
 // Middleware
 const allowedOrigins = [
   "http://localhost:5173", // Vite dev
+  "http://localhost:5174", // Vite dev (alternative port)
   "http://localhost:3000", // CRA dev
   "https://travel-grid.vercel.app" // Production
 ];
