@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-
+import mongoose from 'mongoose'
 const destinationSchema = new mongoose.Schema({
   destination: { type: String, required: true, unique: true },
   avgFlight: Number,
@@ -8,5 +7,5 @@ const destinationSchema = new mongoose.Schema({
   avgTransportPerDay: Number
 });
 
-module.exports = mongoose.model("Destination", destinationSchema);
+export default Destination = mongoose.model("Destination", destinationSchema);
 

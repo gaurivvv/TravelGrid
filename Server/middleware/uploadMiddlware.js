@@ -1,5 +1,5 @@
-const multer = require('multer');
-const path = require('path');
+import multer from 'multer';
+import path from 'path'
 
 const storage = multer.diskStorage({
   destination: './uploads/',
@@ -19,9 +19,8 @@ const fileFilter = (req, file, cb) => {
   cb(new Error('Only image files are allowed'));
 };
 
-const upload = multer({
+export const upload = multer({
   storage,
   fileFilter,
   limits: { fileSize: 2 * 1024 * 1024 } // 2MB
 });
-module.exports = upload;

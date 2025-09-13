@@ -1,7 +1,7 @@
-const Place = require('../models/place');
-const { asyncHandler } = require('../utils/asyncHandler');
+import {Place} from '../models/place.js'
+import { asyncHandler } from '../utils/asyncHandler.js'
 
-exports.searchPlaces = asyncHandler(async (req, res) => {
+export const searchPlaces = asyncHandler(async (req, res) => {
   const { location, category } = req.query;
 
   if (location && typeof location !== 'string') {

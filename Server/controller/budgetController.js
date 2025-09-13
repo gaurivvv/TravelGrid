@@ -1,10 +1,10 @@
-const Destination = require("../models/destinations.js");
+import destinations from '../models/destinations'
 
-const { asyncHandler } = require("../utils/asyncHandler");
+import { asyncHandler } from '../utils/asyncHandler'
 
-const estimateBudget = asyncHandler(async (req, res) => {
+export const estimateBudget = asyncHandler(async (req, res) => {
   const { destination, days, travelers } = req.body;
-  const dest = await Destination.findOne({ destination });
+  const dest = await destinations.findOne({ destination });
 
   if (!dest) {
     return res.status(404).json({ error: "Destination not found in dataset" });
@@ -24,5 +24,3 @@ const estimateBudget = asyncHandler(async (req, res) => {
     perPerson: (total / travelers).toFixed(2),
   });
 });
-
-module.exports = { estimateBudget };

@@ -1,18 +1,7 @@
-const express = require('express');
+import express from 'express'
+import { addCollaborator, addMessage, createMoodBoard, deleteMoodBoard, getMoodBoardById, getPublicMoodBoards, getUserMoodBoards, removeCollaborator, updateCollaboratorStatus, updateMoodBoard } from '../controller/moodBoardController.js'
 const router = express.Router();
-const { verifyJWT } = require('../middleware/auth');
-const {
-    createMoodBoard,
-    getUserMoodBoards,
-    getMoodBoardById,
-    updateMoodBoard,
-    deleteMoodBoard,
-    addCollaborator,
-    updateCollaboratorStatus,
-    removeCollaborator,
-    addMessage,
-    getPublicMoodBoards
-} = require('../controller/moodBoardController');
+import {verifyJWT} from '../middleware/auth.js'
 
 // Public routes
 router.get('/public', getPublicMoodBoards);
@@ -35,4 +24,4 @@ router.delete('/:id/collaborators/:collaboratorId', removeCollaborator);
 // Messaging routes
 router.post('/:id/messages', addMessage);
 
-module.exports = router;
+export default router
