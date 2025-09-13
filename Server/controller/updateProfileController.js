@@ -1,7 +1,7 @@
-const User = require("../models/user");
-const { asyncHandler } = require('../utils/asyncHandler');
+import {User} from '../models/user'
+import { asyncHandler } from '../utils/asyncHandler'
 
-const updateProfile = asyncHandler(async (req, res) => {
+export const updateProfile = asyncHandler(async (req, res) => {
     const userId = req.params.id;
     const { name, email } = req.body;
 
@@ -42,5 +42,3 @@ const updateProfile = asyncHandler(async (req, res) => {
         user: updatedUser,
     });
 });
-
-module.exports = { updateProfile };

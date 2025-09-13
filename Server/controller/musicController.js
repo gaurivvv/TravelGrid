@@ -1,8 +1,8 @@
-const Music = require('../models/music');
-const { asyncHandler } = require('../utils/asyncHandler');
+import {Music} from '../models/music.js'
+import { asyncHandler } from '../utils/asyncHandler.js'
 
 // Get all music with optional type filter
-const getAllMusic = asyncHandler(async (req, res) => {
+export const getAllMusic = asyncHandler(async (req, res) => {
   const { type, page = 1, limit = 20, search } = req.query;
 
   // Input validation and sanitization for query parameters
@@ -89,7 +89,7 @@ const getAllMusic = asyncHandler(async (req, res) => {
 });
 
 // Get music by ID
-const getMusicById = asyncHandler(async (req, res) => {
+export const getMusicById = asyncHandler(async (req, res) => {
   const music = await Music.findById(req.params.id)
     .populate('addedBy', 'username')
     .populate('likes', 'username');
@@ -108,7 +108,7 @@ const getMusicById = asyncHandler(async (req, res) => {
 });
 
 // Upload new music (public - no authentication required)
-const uploadMusic = asyncHandler(async (req, res) => {
+export const uploadMusic = asyncHandler(async (req, res) => {
   const { title, artist, type, duration } = req.body;
 
   if (!req.file) {
@@ -146,7 +146,7 @@ const uploadMusic = asyncHandler(async (req, res) => {
 });
 
 // Update music
-const updateMusic = asyncHandler(async (req, res) => {
+export const updateMusic = asyncHandler(async (req, res) => {
   const { title, artist, type, duration } = req.body;
 
   const music = await Music.findById(req.params.id);
@@ -180,7 +180,7 @@ const updateMusic = asyncHandler(async (req, res) => {
 });
 
 // Delete music
-const deleteMusic = asyncHandler(async (req, res) => {
+export const deleteMusic = asyncHandler(async (req, res) => {
   const music = await Music.findById(req.params.id);
 
   if (!music) {
@@ -207,7 +207,7 @@ const deleteMusic = asyncHandler(async (req, res) => {
 });
 
 // Like/Unlike music
-const toggleLike = asyncHandler(async (req, res) => {
+export const toggleLike = asyncHandler(async (req, res) => {
   const music = await Music.findById(req.params.id);
 
   if (!music) {
@@ -240,7 +240,7 @@ const toggleLike = asyncHandler(async (req, res) => {
 });
 
 // Increment play count
-const incrementPlayCount = asyncHandler(async (req, res) => {
+export const incrementPlayCount = asyncHandler(async (req, res) => {
   const music = await Music.findByIdAndUpdate(
     req.params.id,
     { $inc: { playCount: 1 } },
@@ -261,7 +261,7 @@ const incrementPlayCount = asyncHandler(async (req, res) => {
 });
 
 // Get music statistics
-const getMusicStats = asyncHandler(async (req, res) => {
+export const getMusicStats = asyncHandler(async (req, res) => {
   const stats = await Music.aggregate([
     { $match: { isActive: true } },
     {
@@ -289,14 +289,3 @@ const getMusicStats = asyncHandler(async (req, res) => {
     }
   });
 });
-
-module.exports = {
-  getAllMusic,
-  getMusicById,
-  uploadMusic,
-  updateMusic,
-  deleteMusic,
-  toggleLike,
-  incrementPlayCount,
-  getMusicStats
-};

@@ -1,8 +1,8 @@
-const { Post } = require('../models/posts');
-const { asyncHandler } = require('../utils/asyncHandler');
+import {Post} from '../models/posts.js'
+import { asyncHandler } from '../utils/asyncHandler.js'
 
 // Create a post
-exports.createPost = asyncHandler(async (req, res) => {
+export const createPost = asyncHandler(async (req, res) => {
   const { title, info, tag, tagColor, senderName, postType } = req.body;
 
   if (!title || !info || !tag || !tagColor || !senderName) {
@@ -23,13 +23,13 @@ exports.createPost = asyncHandler(async (req, res) => {
 });
 
 // Get all posts
-exports.getAllPosts = asyncHandler(async (req, res) => {
+export const getAllPosts = asyncHandler(async (req, res) => {
   const posts = await Post.find().sort({ createdAt: -1 });
   res.status(200).json(posts);
 });
 
 // Add reply to a post
-exports.addReply = asyncHandler(async (req, res) => {
+export const addReply = asyncHandler(async (req, res) => {
   const { postId } = req.params;
   const { senderName, message } = req.body;
 
@@ -50,7 +50,7 @@ exports.addReply = asyncHandler(async (req, res) => {
 });
 
 // Get replies by post ID
-exports.getRepliesByPostId = asyncHandler(async (req, res) => {
+export const getRepliesByPostId = asyncHandler(async (req, res) => {
   const { postId } = req.params;
   const post = await Post.findById(postId);
 
@@ -62,7 +62,7 @@ exports.getRepliesByPostId = asyncHandler(async (req, res) => {
 });
 
 // Get posts by type
-exports.getPostByType = asyncHandler(async (req, res) => {
+export const getPostByType = asyncHandler(async (req, res) => {
   const { type } = req.query;
 
   if (type && typeof type !== 'string') {
@@ -85,7 +85,7 @@ exports.getPostByType = asyncHandler(async (req, res) => {
 });
 
 // Get post by ID
-exports.getPostById = asyncHandler(async (req, res) => {
+export const getPostById = asyncHandler(async (req, res) => {
   const { postId } = req.params;
   const post = await Post.findById(postId);
 

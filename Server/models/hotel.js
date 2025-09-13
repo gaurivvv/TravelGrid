@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const hotelSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -8,4 +8,4 @@ const hotelSchema = new mongoose.Schema({
   description: { type: String, required: true },
 }, { timestamps: true });
 
-module.exports = mongoose.model('Hotel', hotelSchema);
+export default Hotel = mongoose.model('Hotel', hotelSchema);

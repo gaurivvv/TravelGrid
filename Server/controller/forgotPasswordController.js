@@ -1,10 +1,10 @@
-const User = require('../models/user');
-const crypto = require('crypto');
-const { sendEmail } = require('../utils/emailService');
-const bcrypt = require("bcryptjs");
-const { asyncHandler } = require("../utils/asyncHandler");
+import {User} from '../models/user.js'
+import crypto from 'crypto'
+import { sendEmail } from '../utils/emailService.js'
+import bcrypt from 'bcryptjs'
+import { asyncHandler } from '../utils/asyncHandler.js'
 
-exports.resetPasswordToken = asyncHandler(async (req, res) => {
+export const resetPasswordToken = asyncHandler(async (req, res) => {
   const { email } = req.body;
   if (!email) {
     return res.status(400).json({
@@ -80,7 +80,7 @@ exports.resetPasswordToken = asyncHandler(async (req, res) => {
   });
 });
 
-exports.changePassword = asyncHandler(async (req, res) => {
+export const changePassword = asyncHandler(async (req, res) => {
   const { password, confirmPassword, token } = req.body;
 
   if (!password || !confirmPassword) {
