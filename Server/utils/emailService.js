@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer'
 
 // Create reusable transporter object using the default SMTP transport
 const createTransporter = () => {
@@ -15,9 +15,7 @@ const createTransporter = () => {
   return nodemailer.createTransport(config);
 };
 
-// Send email function with retry logic
-const sendEmail = async (to, subject, html, text = null, retries = 3) => {
-  let lastError;
+
 
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
@@ -87,7 +85,7 @@ const sendEmail = async (to, subject, html, text = null, retries = 3) => {
 };
 
 // Send verification email template
-const sendVerificationEmail = async (to, name, verificationCode) => {
+export const sendVerificationEmail = async (to, name, verificationCode) => {
   const subject = 'Verify Your Email - TravelGrid';
   const html = `
     <!DOCTYPE html>
@@ -227,7 +225,7 @@ const sendVerificationEmail = async (to, name, verificationCode) => {
 };
 
 // Test email configuration
-const testEmailConfiguration = async () => {
+export const testEmailConfiguration = async () => {
   try {
     const transporter = createTransporter();
     await transporter.verify();
@@ -237,10 +235,4 @@ const testEmailConfiguration = async () => {
     console.error('❌ Email configuration test failed:', error.message);
     return { success: false, error: error.message };
   }
-};
-
-module.exports = {
-  sendEmail,
-  sendVerificationEmail,
-  testEmailConfiguration
 };

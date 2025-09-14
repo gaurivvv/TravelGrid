@@ -1,7 +1,7 @@
-const Comment = require("../models/reviews");
-const { asyncHandler } = require('../utils/asyncHandler');
+import {Comment} from '../models/reviews.js'
+import { asyncHandler } from '../utils/asyncHandler.js'
 
-const addComment = asyncHandler(async (req, res) => {
+export const addComment = asyncHandler(async (req, res) => {
   const { comment, stars } = req.body;
   const reviews = await Comment.create({
     content: comment,
@@ -17,11 +17,11 @@ const addComment = asyncHandler(async (req, res) => {
     .json({ review: reviews, message: "Comment added successfully" });
 });
 
-const getAllComments = asyncHandler(async (req, res) => {
+export const getAllComments = asyncHandler(async (req, res) => {
   const comments = await Comment.find().sort({ createdAt: -1 }); // latest first
   res.status(200).json(comments);
 });
-const deleteComment = asyncHandler(async (req, res) => {
+export const deleteComment = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
   const deletedComment = await Comment.findByIdAndDelete(id);
@@ -32,10 +32,3 @@ const deleteComment = asyncHandler(async (req, res) => {
 
   res.status(200).json({ message: "Comment deleted successfully" });
 });
-
-
-module.exports = {
-  addComment,
-  getAllComments,
-  deleteComment,
-};

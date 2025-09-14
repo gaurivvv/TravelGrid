@@ -1,7 +1,7 @@
-const User = require('../models/user');
-const { asyncHandler } = require('../utils/asyncHandler');
+import {User} from '../models/user.js'
+import { asyncHandler } from '../utils/asyncHandler.js'
 
-const savePlace = asyncHandler(async (req, res) => {
+export const savePlace = asyncHandler(async (req, res) => {
   const userId = req.user.id;
   const { placeId, name, description, image } = req.body;
 
@@ -21,12 +21,12 @@ const savePlace = asyncHandler(async (req, res) => {
   res.status(200).json({ message: 'Place saved successfully' });
 });
 
-const getSavedPlaces = asyncHandler(async (req, res) => {
+export const getSavedPlaces = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user.id);
   res.status(200).json({ savedPlaces: user.savedPlaces });
 });
 
-const deleteSavedPlace = asyncHandler(async (req, res) => {
+export const deleteSavedPlace = asyncHandler(async (req, res) => {
   const userId = req.user._id;
   const placeId = req.params.placeId;
 
@@ -36,5 +36,3 @@ const deleteSavedPlace = asyncHandler(async (req, res) => {
 
   res.status(200).json({ message: 'Saved place removed successfully' });
 });
-
-module.exports = { savePlace, getSavedPlaces, deleteSavedPlace };

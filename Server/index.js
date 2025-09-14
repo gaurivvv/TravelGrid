@@ -1,33 +1,29 @@
-const express = require('express');
-const cors = require('cors');
-const cookieParser = require('cookie-parser'); // <-- NEW
-const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
-const mongoSanitize = require('express-mongo-sanitize');
-// const xssClean = require('xss-clean');
-const xss = require('xss-clean');
-const morgan = require('morgan');
+import express from 'express'
+import cors from 'cors'
+import cookieParser from 'cookie-parser';
+import helmet from 'helmet'
+import rateLimit from 'express-rate-limit'
+import morgan from 'morgan';
+import dotenv from 'dotenv'
 
+dotenv.config({ path: './.env' });
 
-require('dotenv').config({ path: './.env' });
-
-const connectDB = require('./config/db');
-const securityMiddleware = require('./middleware/securityMiddleware');
-
-const authRoutes = require('./routes/authRoutes');
-const emailVerificationRoutes = require('./routes/emailVerificationRoutes');
-const bookingRouter = require('./routes/bookingRoutes');
-const userRoutes = require('./routes/userRoutes');
-const postRoutes = require('./routes/postRoutes')
-const saveRoutes = require('./routes/saveRoutes');
-const tripRoutes = require('./routes/trips.js');
-const reviewsRoutes = require('./routes/reviewRoutes.js');
-const languageRoutes = require('./routes/languageRoutes');
-const moodBoardRoutes = require('./routes/moodBoardRoutes');
-const searchRoutes = require('./routes/search');
-const currencyRoutes = require('./routes/currencyRoutes');
-const musicRoutes = require('./routes/musicRoutes');
-const resetPassword = require("./routes/resetPassword")
+import { connectDB } from './config/db.js';
+import { securityMiddleware } from './middleware/securityMiddleware.js';
+import authRoutes from './routes/authRoutes.js';
+import emailVerificationRoutes from './routes/emailVerificationRoutes.js';
+import bookingRouter from './routes/bookingRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import postRoutes from './routes/postRoutes.js';
+import saveRoutes from './routes/saveRoutes.js';
+import tripRoutes from './routes/trips.js';
+import reviewsRoutes from './routes/reviewRoutes.js'
+import languageRoutes from  './routes/languageRoutes.js';
+import moodBoardRoutes from  './routes/moodBoardRoutes.js';
+import searchRoutes from  './routes/search.js';
+import currencyRoutes from  './routes/currencyRoutes.js';
+import musicRoutes from  './routes/musicRoutes.js';
+import resetPassword from  "./routes/resetPassword.js";
 
 
 const app = express();

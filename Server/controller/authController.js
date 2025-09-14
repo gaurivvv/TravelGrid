@@ -1,11 +1,3 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const validator = require('validator');
-const User = require('../models/user');
-const mongoose = require('mongoose');
-const { sendVerificationEmail } = require('../utils/emailService');
-const { asyncHandler } = require('../utils/asyncHandler');
-
 const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
 if (!JWT_SECRET) {
   console.error('JWT_SECRET not set in environment variables');
@@ -40,7 +32,7 @@ const generateVerificationCode = () => {
 };
 
 // Google Auth
-exports.googleAuth = asyncHandler(async (req, res) => {
+export const googleAuth = asyncHandler(async (req, res) => {
   const { token } = req.body;
 
   const response = await fetch(
@@ -84,7 +76,7 @@ exports.googleAuth = asyncHandler(async (req, res) => {
 });
 
 // Register User
-exports.registerUser = asyncHandler(async (req, res) => {
+export const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) {
@@ -152,7 +144,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
 });
 
 // Login User
-exports.loginUser = asyncHandler(async (req, res) => {
+export const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -203,7 +195,7 @@ exports.loginUser = asyncHandler(async (req, res) => {
 });
 
 // Logout User
-exports.logoutUser = asyncHandler(async (req, res) => {
+export const logoutUser = asyncHandler(async (req, res) => {
   return res
     .clearCookie("token", {
       httpOnly: true,
@@ -218,7 +210,7 @@ exports.logoutUser = asyncHandler(async (req, res) => {
 });
 
 // Get Current User
-exports.getCurrentUser = asyncHandler(async (req, res) => {
+export const getCurrentUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user).select("-password");
   if (!user) {
     return res.status(404).json({ success: false, error: "User not found" });
