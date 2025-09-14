@@ -8,6 +8,7 @@ import FeaturedPackages from '../components/Home/FeaturedPackages'
 import TravelGuides from '../components/Home/TravelGuides'
 import Testimonials from '../components/Home/Testimonials'
 import MoodBoard from '../components/MoodBoard/MoodBoard'
+import FeedbackReviews from '../components/Home/FeedbackReviews'
 
 
 function Home() {
@@ -55,6 +56,10 @@ function Home() {
                 {/* AI-Powered Travel Mood Board Section */}
                 <div className="w-full py-16 px-4">
                     <MoodBoard />
+                </div>
+                {/* Feedback & Reviews Section */}
+                <div className="w-full">
+                    <FeedbackReviews />
                 </div>
             </main>
         </div>
