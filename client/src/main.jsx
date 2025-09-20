@@ -1,3 +1,5 @@
+import NotFound from "./pages/NotFound";
+import { Routes, Route } from "react-router-dom"; // if not already imported
 import { StrictMode, lazy, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Toaster } from 'react-hot-toast';
